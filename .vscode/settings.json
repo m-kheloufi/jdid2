@@ -1,0 +1,8 @@
+{
+    "terminal.explorerKind": "external",
+    "terminal.integrated.bellDuration": 1500,
+    "timeline.pageSize": 1500,
+    "terminal.integrated.fontWeight": null,
+    "editor.tabSize": 6,
+    "terminal.integrated.scrollback": 2000
+}
