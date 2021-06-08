@@ -102,6 +102,8 @@ const correspondance = new Datastore('correspondance');
 correspondance.loadDatabase();
 const stations_sba = new Datastore('stations_sba');
 stations_sba.loadDatabase();
+const Result = new Datastore('Result');
+Result.loadDatabase();
 
 
 app.post('/stations_sba', (request, response) => {
@@ -188,6 +190,23 @@ app.get('/bus/:numero', (request, response) => {
     });
 })
 
+app.get('/bus/:numero', (request, response) => {
+    console.log('hi');
+    var data = request.params.numero;
+    console.log('hi');
+    console.log(data+'hi');
+    console.log(data)
+    bus.find({ numero: data.substring(0,7) }).sort({ timestamp: 1, ID: 1, }).exec(function (err, data) {
+        if (err) {
+            
+            response.end();
+            return;
+        }
+        
+        response.json(data);
+    });
+})
+
 
 app.get('/stations_sba/bus', (request, response) => {
     stations_sba.find({ type: 'bus' }).sort({ nomFr: 1 }).exec(function (err, data) {
@@ -213,7 +232,8 @@ app.get('/stations_sba/tramway', (request, response) => {
 
 app.get('/stations_sba/bus/:numero', (request, response) => {
     var data = request.params.numero;
-    console.log(data)
+    console.log(data);
+    console.log(stations_sba.length);
     stations_sba.find({ type: 'bus', numero: RegExp("^"+data)  }).sort({ nomFr: 1 }).exec(function (err, data) {
         if (err) {
             response.end();
@@ -221,6 +241,63 @@ app.get('/stations_sba/bus/:numero', (request, response) => {
         }
         response.json(data);
     });
+})
+app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
+    var x1 = request.params.x1;
+    var x2 = request.params.x2;
+    var x3 = request.params.x3;
+    var x4 = request.params.x4;
+    var ht;
+    var hs;
+    var datas=[];
+    var b=true;
+   
+    
+    Result.find({}).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+        console.log(data.length);
+        console.log(data[0].x);
+        console.log('x1'+x1)
+        for(var i=0 ;i<data.length;i++){
+            if(data[i].x==x1){
+                ht=i;
+                console.log(ht+'ht')
+                break;
+
+            }
+            
+
+        }
+        for(var i=0 ;i<data.length;i++){
+            if(data[i].x==x3 ){
+                hs=i;
+                console.log(hs+'hs')
+                break;
+
+            }
+            
+
+        }
+        datas[1]=data[1]
+        console.log('data de 0 '+data[0]);
+        console.log(data[0].x);
+       
+          console.log('wait')
+          console.log(data);
+        for(var j=ht;j <= hs;j++){
+            datas[j]=data[j];
+
+        }
+        
+          if(b=true){ 
+        response.json(datas);}
+    });
+   
+    
+  
 })
 
 app.get('/stations_sba', (request, response) => {

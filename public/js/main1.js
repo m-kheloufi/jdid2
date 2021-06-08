@@ -102,9 +102,15 @@ maps.on('click', function (e) {
     var nodeName = mapdata.allnodes.length;
     console.log(e.latlng.lat + ", " + e.latlng.lng);
 
+    for (let i = 0; i <= c.length+1; i++) {
+        setTimeout(function timer() {
+          hactho(i);
+        }, i * 3000);
+      }
+    
+
    
-    redrawNodes();
-    addNodeToSelect(nodeName);
+  
 
 });
 
