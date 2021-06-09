@@ -324,7 +324,7 @@ $('#setexample').on('change', function () {
     if (value == 1) {
        
       
-        
+        gettram();
 
         $.getJSON("mapdata/tram.json", function (datad) {
             var importedData = datad;
@@ -1063,6 +1063,9 @@ async function addBusRoute(numero) {
 
         }
 
+      
+          
+       function gettram(){
         var selector = L.control({
             position: 'topright'
           });
@@ -1075,7 +1078,7 @@ async function addBusRoute(numero) {
           };
           selector.addTo(maps);
     //create Leaflet control for selector
-    $.getJSON('stations_sba', function(data) {
+    $.getJSON('stat1', function(data) {
         $.each(data, function(i, f) {
          var stations = {
    "type": "FeatureCollection",
@@ -1135,7 +1138,6 @@ maps.fitBounds(markerLayer.getBounds());
           
              });
           
-          
-         
+       }  
           
          

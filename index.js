@@ -273,8 +273,12 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
     var a = [];
     var b = [];
     var ida = 0;
-    var ida1 = 0
-    var idatas = 0
+    var ida1 = 0;
+    var idatas = 0;
+    var aba=0;
+    var w=false;
+    var v=1;
+    var q=0;
 
 
     Result.find({}).exec(function (err, data) {
@@ -331,16 +335,7 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
 
 
 
-        for (var i = 0; i < tram.length; i++) {
-            if (data[i].x == x1) {
-                ht = i;
-                console.log(ht + 'ht')
-                break;
-
-            }
-
-
-        }
+     
         mapdata.allnodes = t.nodes;
         mapdata.paths = t.paths;
         mapdata.distances = [];
@@ -371,7 +366,7 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
 
         console.log('diji source' + source);
         console.log('diji target' + target);
-        var results = dijkstra(40, 182);
+        var results = dijkstra(source, target);
         console.log(results);
         var point = {
             x: '',
@@ -394,30 +389,72 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
 
         }
 
+        console.log('wchhhhhhhh '+results.path[0].source);
 
+        console.log('wchhhhhhhh '+results.path.length);
+        console.log('les points '+results.path[0]);
+        console.log('les points '+results.path[1]);
+        console.log('les points '+results.path[2]);
         for (var i = 0; i < results.path.length; i++) {
             var ds = {
                 x: '',
                 y: '',
                 name: ''
             };
-console.log('wchhhhhhhh '+results.path[0].source)
-            var x01 = getpoint(results.path[0].source).x;
-            var y01 = getpoint(results.path[0].source).y;
+            var diff;
+            diff=results.path[i].target-results.path[i].source;
+            var aba=0;
+            
+            aba=aba+1;
+            
+            if(diff >1){w=true;}
+            if(w===true){
+            // console.log('qqqqqqqqqq true '+q);
+            
+            if(v===1){
+                q=results.path[i].source;
+                var x01 = getpoint(q).x;
+            var y01 = getpoint(q).y;
             ds.x = x01;
             ds.y = y01;
-            ds.name = idatas;
-            datas[idatas] = ds;
-            console.log('ta9balha wela la ')
+            console.log('galba aaaaaaaa '+ idatas );
+            console.log('galba ............sss '+x01  );
+            console.log('point ')
             console.log('return te3 x01 ' + x01);
-            console.log('return te3 x02 ' + x02);
-            var name = idatas;
-            var x02 = getpoint(target).x;
-            var y02 = getpoint(target).y;
-            var name = idatas + 1;
+            console.log('return te3 x02 ' + y01);
+            ds.name=q
+            datas[idatas] = ds;
+            idatas=idatas+1;
+            v=0;
+            }else{
+            var x01 = getpoint(results.path[i].source).x;
+            var y01 = getpoint(results.path[i].source).y;
+            ds.x = x01;
+            ds.y = y01;
+            console.log('hacthooooooooooooo idatas te3 target '+ idatas );
+            ds.name=results.path[i].source;
+            
+            datas[idatas] = ds;
+            q=results.path[i].target;
+            idatas=idatas+1;
+        
+        }}
+            else{
+                q=results.path[i].source;
+                console.log('q11111111111 ',q)
+            
+            var x01 = getpoint(q).x;
+            var y01 = getpoint(q).y;
+            ds.x = x01;
+            ds.y = y01;
+            ds.name = idatas+40;
+             datas[idatas] = ds;
             idatas = idatas + 1;
-
-        }
+            console.log('point ')
+            console.log('return te3 x01 ' + x01);
+            console.log('return te3 x02 ' + y01);
+        }}
+        
 
 
 
@@ -441,6 +478,17 @@ app.get('/stations_sba', (request, response) => {
             response.end();
             return;
         }
+        response.json(data);
+    });
+})
+app.get('/stat1', (request, response) => {
+    stations_sba.find({}).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+        var t = require('./public/mapdata/stat1.json');
+        data=t;
         response.json(data);
     });
 })
