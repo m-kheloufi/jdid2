@@ -1,0 +1,86 @@
+[
+{
+      "nomFr": "Les cascades TO Gare routière Est, Ghalmi",
+      "distance": 105,
+      "id": "0"
+},{
+      "nomFr": "Gare routière Est, Ghalmi TO Frères Adnane",
+      "distance": 94,
+      "id": "1"
+},{
+      "nomFr": "Frères Adnane TO Benhamouda",
+      "distance": 98,
+      "id": "2"
+},{
+      "nomFr": "Benhamouda TO Environnement",
+      "distance": 224,
+      "id": "3"
+},{
+      "nomFr": "Environnement TO Fac de droit",
+      "distance": 100,
+      "id": "4"
+},{
+      "nomFr": "Fac de droit TO Centre Niaâma",
+      "distance": 100,
+      "id": "5"
+},{
+      "nomFr": "Centre Niaâma TO Campus",
+      "distance": 95,
+      "id": "6"
+},{
+      "nomFr": "Campus TO Gare ferroviaire",
+      "distance": 200,
+      "id": "7"
+},{
+      "nomFr": "Gare ferroviaire TO Gare routière Nord, Sogral",
+      "distance": 120,
+      "id": "8"
+},{
+      "nomFr": "Gare routière Nord, Sogral TO AADL Benhamouda",
+      "distance": 110,
+      "id": "9"
+},{
+      "nomFr": "AADL Benhamouda TO Sidi Djilali",
+      "distance": 150,
+      "id": "10"
+},{
+      "nomFr": "Sidi Djilali TO Wiam",
+      "distance": 145,
+      "id": "11"
+},{
+      "nomFr": "Wiam TO Daira",
+      "distance": 120,
+      "id": "12"
+},{
+      "nomFr": "Daira TO Houari Boumediene",
+      "distance": 122,
+      "id": "13"
+},{
+      "nomFr": "Houari Boumediene TO La Radio",
+      "distance": 85,
+      "id": "14"
+},{
+      "nomFr": "La Radio TO  La Maternité",
+      "distance": 103,
+      "id": "15"
+},{
+      "nomFr": " La Maternité TO Salle Adda Boudjelal",
+      "distance": 78,
+      "id": "16"
+},{
+      "nomFr": "Salle Adda Boudjelal TO Amir Abdelkader",
+      "distance": 87,
+      "id": "17"
+},{
+      "nomFr": "Amir Abdelkader TO 4 Horloges",
+      "distance": 110,
+      "id": "18"
+},{
+      "nomFr": "4 Horloges TO Jardin Public",
+      "distance": 130,
+      "id": "19"
+},{
+      "nomFr": "Jardin Public TO Gare Routière Sud",
+      "distance": 130,
+      "id": "20"
+}]

@@ -1,0 +1,176 @@
+[
+      {
+            "latitude": 35.209029131097836,
+            "longitude": -0.6163117086223125,
+            "nomFr": "Les cascades",
+            "type": "tramway",
+            "numero": "0",
+            "_id": "gQ6mHYgwJaBciFqb"
+      },
+      {
+            "latitude": 35.21332,
+            "longitude": -0.61591,
+            "nomFr": "Gare routière Est, Ghalmi",
+            "type": "tramway",
+            "numero": "1",
+            "_id": "uE0NIMyLwBxqAWoH"
+      },
+      {
+            "latitude": 35.21682176572645,
+            "longitude": -0.6148463640563451,
+            "nomFr": "Frères Adnane",
+            "type": "tramway",
+            "numero": "2",
+            "_id": "R65QosQHSoqQaJAS"
+      }, {
+            "latitude": 35.21742656210421,
+            "longitude": -0.6211027024035133,
+            "nomFr": "Benhamouda",
+            "type": "tramway",
+            "numero": "3",
+            "_id": "K358N3ukBMd9ybOU"
+      },
+      {
+            "latitude": 35.216098633707595,
+            "longitude": -0.6244667584452457,
+            "nomFr": "Environnement",
+            "type": "tramway",
+            "numero": "4",
+            "_id": "bJPhA7Ld8hAmd2yB"
+      },
+      {
+            "latitude": 35.21542370467783,
+            "longitude": -0.6329327359438253,
+            "nomFr": "Fac de droit",
+            "type": "tramway",
+            "numero": "5",
+            "_id": "7EShRsrTGMwKnrQg"
+      },
+      {
+            "latitude": 35.216808617929075,
+            "longitude": -0.6386000502345435,
+            "nomFr": "Centre Niaâma",
+            "type": "tramway",
+            "numero": "6",
+            "_id": "tpGFhURjj12pSENc"
+      },
+      {
+            "latitude": 35.22182215689623,
+            "longitude": -0.6374732553768637,
+            "nomFr": "Campus",
+            "type": "tramway",
+            "numero": "7",
+            "_id": "l86i8HPykNk3oEdJ"
+      },
+      {
+            "latitude": 35.22736,
+            "longitude": -0.62714,
+            "nomFr": "Gare ferroviaire",
+            "type": "tramway",
+            "numero": "8",
+            "_id": "Ctlzjf5shHzPslDc"
+      },
+      {
+            "latitude": 35.22313684488049,
+            "longitude": -0.6295642286139547,
+            "nomFr": "Gare routière Nord, Sogral",
+            "type": "tramway",
+            "numero": "9",
+            "_id": "DC1WhVFdtUtL9KIp"
+      },  {
+            "latitude": 35.218355660804185,
+            "longitude": -0.627566269094726,
+            "nomFr": "AADL Benhamouda",
+            "type": "tramway",
+            "numero": "10",
+            "_id": "UOqRIgwrCuvioyWA"
+      },{
+            "latitude": 35.21593647594638,
+            "longitude": -0.6235956586438741,
+            "nomFr": "Sidi Djilali",
+            "type": "tramway",
+            "numero": "11",
+            "_id": "BQsgZp0vTWzaW3ai"
+      },
+      {
+            "latitude": 35.21141345868157,
+            "longitude": -0.627985039622121,
+            "nomFr": "Wiam",
+            "type": "tramway",
+            "numero": "12",
+            "_id": "PHyBYxh4qHrjfKAl"
+      },
+      {
+            "latitude": 35.205987258605845,
+            "longitude": -0.6265255719969477,
+            "nomFr": "La Daira",
+            "type": "tramway",
+            "numero": "13",
+            "_id": "GxBxIssL1HdBUGM6"
+      },
+      {
+            "latitude": 35.199710297011464,
+            "longitude": -0.6247978198818506,
+            "nomFr": "Houari Boumediene",
+            "type": "tramway",
+            "numero": "14",
+            "_id": "sERdJp7NeEsGlWPz"
+      },
+      {
+            "latitude": 35.19637875161953,
+            "longitude": -0.6209458319895347,
+            "nomFr": "La Radio",
+            "type": "tramway",
+            "numero": "15",
+            "_id": "hY054YSx6ZTvtJep"
+      },
+      {
+            "latitude": 35.19249469857292,
+            "longitude": -0.6191751543560576,
+            "nomFr": " La Maternité",
+            "type": "tramway",
+            "numero": "16",
+            "_id": "zfjFfGuMlvaMDvME"
+      },
+      {
+            "latitude": 35.191766965947394,
+            "longitude": -0.6252383838282949,
+            "nomFr": "Salle Adda Boudjelal",
+            "type": "tramway",
+            "numero": "17",
+            "_id": "IjGkfVjpCle7IJJP"
+      },
+      {
+            "latitude": 35.1911795143745,
+            "longitude": -0.6301426243040776,
+            "nomFr": "Amir Abdelkader",
+            "type": "tramway",
+            "numero": "18",
+            "_id": "Mi4REWSUtDFvYw98"
+      },
+      {
+            "latitude": 35.19067097077694,
+            "longitude": -0.6345210271795977,
+            "nomFr": "4 Horloges",
+            "type": "tramway",
+            "numero": "19",
+            "_id": "LBTOpTMmIkwOAqCP"
+      },
+     
+      {
+            "latitude": 35.18829480247692,
+            "longitude": -0.643878790188095,
+            "nomFr": "Jardin Public",
+            "type": "tramway",
+            "numero": "20",
+            "_id": "1szsG5wfpPbBHsbM"
+      }, 
+      {
+            "latitude": 35.18526092202943,
+            "longitude": -0.6506717534729091,
+            "nomFr": "Gare Routière Sud",
+            "type": "tramway",
+            "numero": "21",
+            "_id": "DiL5bQk8j0eeg6mZ"
+      }
+]
