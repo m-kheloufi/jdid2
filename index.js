@@ -12,7 +12,7 @@ var path = require('path');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'wawa.sba47',
+    password: '',
     database: 'nodelogin'
 });
 var app = express();
@@ -88,7 +88,7 @@ app.get('/home', function (request, response) {
     response.end();
 });
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 3000)
 
 
 
