@@ -1,54 +1,29 @@
-var k = require('./khrabus.json');
-var fs = require('fs');
-var sortJsonArray = require('sort-json-array');
-const sortJson = require('sort-json');
-
-var c = k.nodes;
-
-var i = 0, j = 0;
+const fs = require('fs');
+const t = require("./nodes6.json");
 
 
-console.log(c.length)
-function hactho(zp) {
-    
-    for (var i = 0; i < c.length; i++) {
-        if (c[i].name === zp ) {
+var times=[105, 94, 98, 224, 100, 100, 95, 200, 120, 110, 150, 145, 120, 122, 85, 103, 78, 87, 110, 130, 130]
 
-            var js = {
-                "name":i,
-                "x": c[i].x,
-                "y": c[i].y,
-                "_id":i,
-                
-            };    
-         console.log(js);
-            fs.appendFile('nodes4.json', JSON.stringify(js), (err) => {
-                if (err) {
-                    throw err;
-                }
-            });
 
-        }
-      
-    }
-   
-   
-}
-for (let i = 0; i < c.length; i++) {
+for (let i = 0; i <21; i++) {
     setTimeout(function timer() {
-      hactho(i);
-    }, i * 1000);
-  }
+      
+    
+    var k = t[i];
+    var js = {
+        "nomFr":t[i].nomFr+' TO '+t[i+1].nomFr,
+        "distance": times[i],
+        "id":t[i].numero
+       
+    }
+    const data = JSON.stringify(js);
 
+    // write JSON string to a file
+    fs.appendFile('nodes7.json', data, (err) => {
+        if (err) {
+            throw err;
+        }
 
-
-
-
-
-
-
-
-
-
-
-
+    });
+}, i * 10);
+}

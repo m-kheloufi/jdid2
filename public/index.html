@@ -81,6 +81,9 @@
             <button id="A03" type="button" onclick="addBusRoute('A03'); addBusStationsByNumero('A03');"
     style="background-color: red; color: black;">Ligne A03
 </button>
+<button id="clearAllTheMap" type="button" onclick="clearAllTheMap()"
+        style="background-color: white; color: black">Reset the map
+    </button>
            
             <div class="col-auto" style="margin-top: 5px;">
 
@@ -181,7 +184,10 @@
  
 </body>
 <script>
-
+ function clearAllTheMap() {
+        chemin.clearLayers();
+        markers.clearLayers();
+    }
 
   
 </script>

@@ -262,24 +262,37 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
     var x2 = request.params.x2;
     var x3 = request.params.x3;
     var x4 = request.params.x4;
-    var ht;
-    var hs;
-    var datas = [];
-    var b = true;
-    var change;
-    var indice;
-    var source;
-    var target;
-    var a = [];
-    var b = [];
-    var ida = 0;
-    var ida1 = 0;
-    var idatas = 0;
-    var aba=0;
-    var w=false;
-    var v=1;
-    var q=0;
+    var datas = [],
+    b = true,
+    source,
+    target,
+    a = [],
+    b = [],
+    ida = 0,
+    ida1 = 0,
+    idatas = 0,
+    w=false,
+    v=1,
+    q=0,
+    change;
+    var dtt=0;
+    var dtt2=0
+    var v2=1;
+    var v3=1;
+    var v8=1
+    var v9=1
+    var op=0;
+    var op1=0;
+    var targetname;
+    var sourcename;
+    var test=0;
+    var test1=0;
+    var bb=true;
+    var bb1=true;
+    var isource,itarget;
+   
 
+    var times=[105, 94, 98, 224, 100, 100, 95, 200, 120, 110, 150, 145, 120, 122, 85, 103, 78, 87, 110, 130, 130]
 
     Result.find({}).exec(function (err, data) {
         if (err) {
@@ -306,6 +319,7 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
                 if (d == Math.min.apply(null, a)) {
                     console.log('source ' + tram[i].nomFr);
                     source = i;
+                    sourcename=tram[i].nomFr;
                     console.log('source' + source);
 
                 }
@@ -321,11 +335,18 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
             }
         }
 
+
+     
+        
+
+
+
         for (var i = 0; i < tram.length; i++) {
             if (!(tram[i].nomFr === undefined)) {
                 var d = distance(x3, x4, tram[i].x, tram[i].y);
                 if (d == Math.min.apply(null, b)) {
                     console.log('target ' + tram[i].nomFr);
+                    targetname=tram[i].nomFr;
                     target = i;
                     console.log('target' + target);
 
@@ -333,9 +354,24 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
             }
         }
 
+        var nd6 = require('./nodes6.json');
+        for (var i=0;i<nd6.length;i++){
+            if(nd6[i].nomFr===targetname){
+                itarget=nd6[i].numero-1;
+               
+            }
+           
+        }
+      
 
-
-     
+        for (var i=0;i<nd6.length;i++){
+            if(nd6[i].nomFr===sourcename){
+                isource=nd6[i].numero;
+            }
+        }
+        console.log('indice source  '+isource);
+        console.log('indice target  '+itarget);
+        
         mapdata.allnodes = t.nodes;
         mapdata.paths = t.paths;
         mapdata.distances = [];
@@ -366,6 +402,9 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
 
         console.log('diji source' + source);
         console.log('diji target' + target);
+        if(source<target){
+            change=source;
+        }else{change=target}
         var results = dijkstra(source, target);
         console.log(results);
         var point = {
@@ -388,13 +427,6 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
 
 
         }
-
-        console.log('wchhhhhhhh '+results.path[0].source);
-
-        console.log('wchhhhhhhh '+results.path.length);
-        console.log('les points '+results.path[0]);
-        console.log('les points '+results.path[1]);
-        console.log('les points '+results.path[2]);
         for (var i = 0; i < results.path.length; i++) {
             var ds = {
                 x: '',
@@ -407,65 +439,105 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
             
             aba=aba+1;
             
-            if(diff >1){w=true;}
+            if(diff >1){w=true;
+                
+            corr=true;}
             if(w===true){
-            // console.log('qqqqqqqqqq true '+q);
-            
+                if(v9===1){
+                    var tr2 = require('./nodes7.json');
+                  
+                   
+                       
+                         
+                    
+                    for(var iw=isource;iw<=itarget;iw++){
+                        console.log(' jjjjj '+tr2[iw].id)
+                        console.log(' jjjjj '+tr2[iw].distance)
+                        dtt2=dtt2+tr2[iw].distance;
+                            
+                    }
+                         dtt2=dtt2-875;
+                         console.log('duréé with corrsp  '+dtt2);
+                        
+
+
+
+
+
+                    v9=2
+                }
+             
+
+
+
+              
+
+             
             if(v===1){
                 q=results.path[i].source;
                 var x01 = getpoint(q).x;
             var y01 = getpoint(q).y;
             ds.x = x01;
             ds.y = y01;
-            console.log('galba aaaaaaaa '+ idatas );
-            console.log('galba ............sss '+x01  );
-            console.log('point ')
-            console.log('return te3 x01 ' + x01);
-            console.log('return te3 x02 ' + y01);
             ds.name=q
             datas[idatas] = ds;
             idatas=idatas+1;
             v=0;
-            }else{
+            }else{ 
+            
+               
+        
+           
             var x01 = getpoint(results.path[i].source).x;
             var y01 = getpoint(results.path[i].source).y;
             ds.x = x01;
             ds.y = y01;
-            console.log('hacthooooooooooooo idatas te3 target '+ idatas );
             ds.name=results.path[i].source;
             
             datas[idatas] = ds;
             q=results.path[i].target;
             idatas=idatas+1;
         
-        }}
+        }
+    }
             else{
+
+                if(v8===1){
+                     var tr3 = require('./nodes7.json');
+                  
+                   
+                       
+                        
+                        for(var z=isource;z<=itarget;z++){ 
+                            dtt=dtt+tr3[z].distance;
+
+                  console.log('ssssssssss '+tr3[z].distance);}
+                         
+                         console.log('duréé without corrsp  '+dtt);
+                         v8=2
+                         
+                }
+               
                 q=results.path[i].source;
-                console.log('q11111111111 ',q)
+                
             
             var x01 = getpoint(q).x;
             var y01 = getpoint(q).y;
             ds.x = x01;
             ds.y = y01;
-            ds.name = idatas+40;
+            ds.name = idatas+change;
              datas[idatas] = ds;
             idatas = idatas + 1;
-            console.log('point ')
-            console.log('return te3 x01 ' + x01);
-            console.log('return te3 x02 ' + y01);
+           
         }}
-        
-
-
-
-
-
-
-
-
-
-
-        response.json(datas);
+        var datass = {
+            datas: '',
+            duréé_total: ''
+        };
+       datass.datas=datas;
+       datass.duréé_total=dtt2;
+        console.log(datass);
+        response.json(datass);
     });
 
 

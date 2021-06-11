@@ -41,7 +41,17 @@ function redrawmapwhenviewchanges() {
 
 
 
-
+var selector = L.control({
+    position: 'topright'
+  });
+selector.onAdd = function(maps) {
+    //create div container
+    var div = L.DomUtil.create('div', 'mySelector');
+    //create select element within container (with id, so it can be populated later)
+    div.innerHTML = '<select id="marker_select"><option value="init">(select station)</option></select>';
+    return div;
+  };
+  selector.addTo(maps);
 
 
 function dragNode() {
@@ -134,7 +144,7 @@ for (var i=0;i<tram.length;i++){
 
  console.log('indice '+target);
  
- var results = dijkstra(40, target);
+ var results = dijkstra(0, target);
  console.log('a7777777777777777 '+results.path);
   
  console.log(results);
@@ -324,7 +334,7 @@ $('#setexample').on('change', function () {
     if (value == 1) {
        
       
-        gettram();
+        gettram('stat1');
 
         $.getJSON("mapdata/tram.json", function (datad) {
             var importedData = datad;
@@ -364,8 +374,8 @@ $('#setexample').on('change', function () {
     }
     else if (value == 2) {
         
- 
-        
+ var file='stations_sba/bus/A03'
+        gettram(file);
 
         $.getJSON("mapdata/A03.json", function (datad) {
             var importedData = datad;
@@ -1065,20 +1075,10 @@ async function addBusRoute(numero) {
 
       
           
-       function gettram(){
-        var selector = L.control({
-            position: 'topright'
-          });
-        selector.onAdd = function(maps) {
-            //create div container
-            var div = L.DomUtil.create('div', 'mySelector');
-            //create select element within container (with id, so it can be populated later)
-            div.innerHTML = '<select id="marker_select"><option value="init">(select station)</option></select>';
-            return div;
-          };
-          selector.addTo(maps);
+       function gettram(file){
+       
     //create Leaflet control for selector
-    $.getJSON('stat1', function(data) {
+    $.getJSON(file, function(data) {
         $.each(data, function(i, f) {
          var stations = {
    "type": "FeatureCollection",
@@ -1102,7 +1102,7 @@ async function addBusRoute(numero) {
     "Station Code: " + feature.properties.NUMERO);
     }
 }).addTo(maps);
-maps.fitBounds(markerLayer.getBounds());
+
 
 
       
@@ -1140,4 +1140,4 @@ maps.fitBounds(markerLayer.getBounds());
           
        }  
           
-         
+      

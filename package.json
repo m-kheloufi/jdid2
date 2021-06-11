@@ -25,6 +25,7 @@
     "nedb": "^1.8.0",
     "node-localstorage": "^2.1.6",
     "nodemon": "^2.0.7",
+    "openrouteservice-js": "^0.1.19",
     "requirejs": "^2.3.6",
     "sort-json": "^2.0.0",
     "sort-json-array": "^0.1.7"
