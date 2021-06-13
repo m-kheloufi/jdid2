@@ -246,15 +246,54 @@ app.get('/stations_sba/tramway', (request, response) => {
 })
 
 app.get('/stations_sba/bus/:numero', (request, response) => {
-    var data = request.params.numero;
-    console.log(data);
+    var x = request.params.numero;
+    var datas=[];
+    var idatas=0;
+    
+    var c=0;
+    console.log(x);
     console.log(stations_sba.length);
-    stations_sba.find({ type: 'bus', numero: RegExp("^" + data) }).sort({ nomFr: 1 }).exec(function (err, data) {
+    stations_sba.find({ type: 'bus', numero: RegExp("^" + x) }).sort({ nomFr: 1 }).exec(function (err, data) {
         if (err) {
             response.end();
             return;
         }
-        response.json(data);
+        console.log(data.length);
+        for(var i=0;i<data.length;i++){
+            var ds = {
+                latitude:'',
+                longitude:'',
+                nomFr:'',
+                type:'',
+                numero:'',
+                _id:''
+            };
+           if(!(x.includes('bis'))&&!(data[i].numero.includes('bis'))){
+               console.log('trueeeeeeeeeeeeeeeeee')
+                ds.latitude=data[i].latitude
+                ds.longitude=data[i].longitude
+                ds.nomFr=data[i].nomFr
+                ds.type=data[i].type
+                ds.numero=data[i].numero
+                ds._id=data[i]._id
+                datas[idatas]=ds
+                idatas=idatas+1;
+        }else if(x.includes('bis')) {
+            ds.latitude=data[i].latitude
+                ds.longitude=data[i].longitude
+                ds.nomFr=data[i].nomFr
+                ds.type=data[i].type
+                ds.numero=data[i].numero
+                ds._id=data[i]._id
+                datas[idatas]=ds
+                idatas=idatas+1;
+
+            }
+            
+        }
+       
+       
+        response.json(datas);
     });
 })
 app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
@@ -349,6 +388,7 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
                     targetname=tram[i].nomFr;
                     target = i;
                     console.log('target' + target);
+                    console.log('target name ' + target);
 
                 }
             }
@@ -530,12 +570,26 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
             idatas = idatas + 1;
            
         }}
+        var x011 = getpoint(target).x;
+        console.log('point te3 '+x011);
+        var y011 = getpoint(target).y;
+        console.log('point te3 '+y011);
+        console.log('point te3 idatas '+idatas);
+        var ds11 = {
+            x: '',
+            y: '',
+            name: ''
+        };
+        ds11.x=x011;
+        ds11.y=y011;
+        ds11.name=target;
+        datas[idatas]=ds11;
         var datass = {
             datas: '',
-            duréé_total: ''
+            duration: ''
         };
        datass.datas=datas;
-       datass.duréé_total=dtt2;
+       datass.duration=dtt2;
         console.log(datass);
         response.json(datass);
     });

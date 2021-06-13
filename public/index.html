@@ -81,19 +81,28 @@
             <button id="A03" type="button" onclick="addBusRoute('A03'); addBusStationsByNumero('A03');"
     style="background-color: red; color: black;">Ligne A03
 </button>
-<button id="clearAllTheMap" type="button" onclick="clearAllTheMap()"
+<button id="clearAllTheMap" type="button" 
         style="background-color: white; color: black">Reset the map
+    </button>
+    <button id="clearAllTheMap1" type="button" 
+        style="background-color: white; color: black">Reset the map111
     </button>
            
             <div class="col-auto" style="margin-top: 5px;">
 
               <label class="mr-sm-2" for="inlineFormCustomSelect">Load Examples</label>
               <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="setexample">
-                <option value="0">Ex:</option>
+                <option value="0">Lines :</option>
                 <option value="1">tram</option>
                 <option value="2">A03</option>
                 <option value="3">A03bis</option>
+                <option value="9">A11</option>
+                <option value="7">A16</option>
+                <option value="5">A17</option>
+                <option value="6">A22</option>
+                <option value="8">A25</option>
                 <option value="4">A27</option>
+                
                 <option value="999">all</option>
                
               </select>
@@ -184,10 +193,6 @@
  
 </body>
 <script>
- function clearAllTheMap() {
-        chemin.clearLayers();
-        markers.clearLayers();
-    }
 
   
 </script>

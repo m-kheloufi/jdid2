@@ -1,5 +1,5 @@
 var graphmap, svg, maps, g;
-
+var markers = L.layerGroup();
 var mapdata = {
     allnodes: [],
     paths: [],
@@ -145,7 +145,7 @@ for (var i=0;i<tram.length;i++){
  console.log('indice '+target);
  
  var results = dijkstra(0, target);
- console.log('a7777777777777777 '+results.path);
+ console.log('7777777777777777 '+results.path);
   
  console.log(results);
  if (results.path) {
@@ -332,8 +332,8 @@ var dragManager = d3.behavior.drag()
 $('#setexample').on('change', function () {
     var value = $(this).val();
     if (value == 1) {
-       
-      
+        maps.setView(new L.LatLng(35.19971906404343, -0.6247837572740723), 14);
+      clear();
         gettram('stat1');
 
         $.getJSON("mapdata/tram.json", function (datad) {
@@ -375,8 +375,9 @@ $('#setexample').on('change', function () {
     else if (value == 2) {
         
  var file='stations_sba/bus/A03'
+        clear();
         gettram(file);
-
+        maps.setView(new L.LatLng(35.20777265583833, -0.615674942808335), 14);
         $.getJSON("mapdata/A03.json", function (datad) {
             var importedData = datad;
 
@@ -404,9 +405,12 @@ $('#setexample').on('change', function () {
             redrawNodes();
         });
     }else if(value == 3) {
+        var file='stations_sba/bus/A03bis'
+        clear();
+        gettram(file);
         
  
-        maps.setView(new L.LatLng(35.20118, -0.6343), 18);
+        maps.setView(new L.LatLng(35.202124120749275, -0.64303643623008), 14);
 
         $.getJSON("mapdata/A03bis.json", function (datad) {
             var importedData = datad;
@@ -436,11 +440,178 @@ $('#setexample').on('change', function () {
         });
     }
     else if(value == 4) {
-        
+        var file='stations_sba/bus/A27'
+        clear();
+        gettram(file);
  
-        maps.setView(new L.LatLng(35.20118, -0.6343), 14);
+        maps.setView(new L.LatLng(35.15556500491665, -0.600728988647460), 13);
 
         $.getJSON("mapdata/A27.json", function (datad) {
+            var importedData = datad;
+
+            if (importedData.nodes === undefined
+                || importedData.paths === undefined
+                || Object.keys(importedData).length !== 2) {
+                console.log("** JSON format error:");
+                console.log(importedData);
+                return;
+            }
+
+            mapdata.allnodes = importedData.nodes;
+            mapdata.paths = importedData.paths;
+            mapdata.distances = [];
+            mapdata.getstate.selectedNode = null;
+            mapdata.getstate.fromNode = null;
+            mapdata.getstate.toNode = null;
+
+            mapdata.allnodes.forEach(function (node) {
+                addNodeToSelect(node);
+            });
+
+            calculateDistancesbetweennodes();
+            redrawLines();
+            redrawNodes();
+        });
+    }  else if(value == 5) {
+        var file='stations_sba/bus/A17'
+        clear();
+        gettram(file);
+ 
+        maps.setView(new L.LatLng(35.21001968745649, -0.6392197608988681), 14);
+
+        $.getJSON("mapdata/A17.json", function (datad) {
+            var importedData = datad;
+
+            if (importedData.nodes === undefined
+                || importedData.paths === undefined
+                || Object.keys(importedData).length !== 2) {
+                console.log("** JSON format error:");
+                console.log(importedData);
+                return;
+            }
+
+            mapdata.allnodes = importedData.nodes;
+            mapdata.paths = importedData.paths;
+            mapdata.distances = [];
+            mapdata.getstate.selectedNode = null;
+            mapdata.getstate.fromNode = null;
+            mapdata.getstate.toNode = null;
+
+            mapdata.allnodes.forEach(function (node) {
+                addNodeToSelect(node);
+            });
+
+            calculateDistancesbetweennodes();
+            redrawLines();
+            redrawNodes();
+        });
+    } else if(value == 6) {
+        var file='stations_sba/bus/A22'
+        clear();
+        gettram(file);
+ 
+        maps.setView(new L.LatLng(35.236716325352084, -0.6007361407682765), 12);
+
+        $.getJSON("mapdata/A22.json", function (datad) {
+            var importedData = datad;
+
+            if (importedData.nodes === undefined
+                || importedData.paths === undefined
+                || Object.keys(importedData).length !== 2) {
+                console.log("** JSON format error:");
+                console.log(importedData);
+                return;
+            }
+
+            mapdata.allnodes = importedData.nodes;
+            mapdata.paths = importedData.paths;
+            mapdata.distances = [];
+            mapdata.getstate.selectedNode = null;
+            mapdata.getstate.fromNode = null;
+            mapdata.getstate.toNode = null;
+
+            mapdata.allnodes.forEach(function (node) {
+                addNodeToSelect(node);
+            });
+
+            calculateDistancesbetweennodes();
+            redrawLines();
+            redrawNodes();
+        });
+    } else if(value == 7) {
+        var file='stations_sba/bus/A16'
+        clear();
+        gettram(file);
+ 
+        maps.setView(new L.LatLng(35.20458462765031, -0.6138194597613668), 14);
+
+        $.getJSON("mapdata/A16.json", function (datad) {
+            var importedData = datad;
+
+            if (importedData.nodes === undefined
+                || importedData.paths === undefined
+                || Object.keys(importedData).length !== 2) {
+                console.log("** JSON format error:");
+                console.log(importedData);
+                return;
+            }
+
+            mapdata.allnodes = importedData.nodes;
+            mapdata.paths = importedData.paths;
+            mapdata.distances = [];
+            mapdata.getstate.selectedNode = null;
+            mapdata.getstate.fromNode = null;
+            mapdata.getstate.toNode = null;
+
+            mapdata.allnodes.forEach(function (node) {
+                addNodeToSelect(node);
+            });
+
+            calculateDistancesbetweennodes();
+            redrawLines();
+            redrawNodes();
+        });
+    } else if(value == 8) {
+        var file='stations_sba/bus/A25'
+        clear();
+        gettram(file);
+ 
+        maps.setView(new L.LatLng(35.18273786282256, -0.609065067133654), 13);
+
+        $.getJSON("mapdata/A25.json", function (datad) {
+            var importedData = datad;
+
+            if (importedData.nodes === undefined
+                || importedData.paths === undefined
+                || Object.keys(importedData).length !== 2) {
+                console.log("** JSON format error:");
+                console.log(importedData);
+                return;
+            }
+
+            mapdata.allnodes = importedData.nodes;
+            mapdata.paths = importedData.paths;
+            mapdata.distances = [];
+            mapdata.getstate.selectedNode = null;
+            mapdata.getstate.fromNode = null;
+            mapdata.getstate.toNode = null;
+
+            mapdata.allnodes.forEach(function (node) {
+                addNodeToSelect(node);
+            });
+
+            calculateDistancesbetweennodes();
+            redrawLines();
+            redrawNodes();
+        });
+    } else if(value == 9) {
+        var file='stations_sba/bus/A11'
+        clear();
+        gettram(file);
+ 
+        maps.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
+
+        $.getJSON("mapdata/A11.json", function (datad) {
             var importedData = datad;
 
             if (importedData.nodes === undefined
@@ -1101,7 +1272,8 @@ async function addBusRoute(numero) {
         layer.bindPopup("<b>" + feature.properties.STATION + "</b><br>" +
     "Station Code: " + feature.properties.NUMERO);
     }
-}).addTo(maps);
+}).addTo(markers);
+markers.addTo(maps);
 
 
 
@@ -1139,5 +1311,17 @@ async function addBusRoute(numero) {
              });
           
        }  
-          
+
+
+       function clear (){
       
+        var select = document.getElementById("marker_select");
+        var length = select.options.length;
+        for (i = length-1; i > 0; i--) {
+          select.options[i] = null;
+        }
+        
+        markers.clearLayers();
+           
+       
+    }
