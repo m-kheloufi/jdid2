@@ -14,7 +14,7 @@ var mapdata = {
         toNode: null
     }
 };
- maps =  L.map('svg-map').setView([35.20118, -0.6343], 18);
+ maps =  L.map('svg-map').setView([35.20118, -0.6343], 14);
  mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
   attribution: '&copy; '+mapLink+ 'contributors'
@@ -639,9 +639,11 @@ $('#setexample').on('change', function () {
         });
     }
     else if(value == 999) {
-        
+        var file='stations_sba'
+        clear();
+        gettram(file);
  
-        maps.setView(new L.LatLng(35.20118, -0.6343), 18);
+        maps.setView(new L.LatLng(35.20118, -0.6343), 13);
 
         $.getJSON("mapdata/all.json", function (datad) {
             var importedData = datad;

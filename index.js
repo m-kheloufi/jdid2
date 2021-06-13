@@ -586,12 +586,23 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
         datas[idatas]=ds11;
         var datass = {
             datas: '',
-            duration: ''
+            duration:''
         };
        datass.datas=datas;
        datass.duration=dtt2;
-        console.log(datass);
-        response.json(datass);
+       var duration ={
+        duration:''
+       }
+        duration.duration=dtt2;
+        var d7 =duration
+       var d5={
+           datas: [],
+           duration:[]
+       }
+       d5.datas=datas;
+       d5.duration[0]=d7
+        console.log(d5);
+        response.json(d5);
     });
 
 
