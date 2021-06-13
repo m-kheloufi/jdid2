@@ -489,13 +489,17 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
                    
                        
                          
+                    var chn;
+                   
+                        for(var iw=itarget;iw>=isource;iw--){
+                            console.log(' jjjjj '+tr2[iw].id)
+                            console.log(' jjjjj '+tr2[iw].distance)
+                            dtt2=dtt2+tr2[iw].distance;
+                                
+                        }
+                        
                     
-                    for(var iw=isource;iw<=itarget;iw++){
-                        console.log(' jjjjj '+tr2[iw].id)
-                        console.log(' jjjjj '+tr2[iw].distance)
-                        dtt2=dtt2+tr2[iw].distance;
-                            
-                    }
+                   
                          dtt2=dtt2-875;
                          console.log('duréé with corrsp  '+dtt2);
                         
@@ -591,16 +595,16 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
        datass.datas=datas;
        datass.duration=dtt2;
        var duration ={
-        duration:''
+        duration:dtt2
        }
-        duration.duration=dtt2;
-        var d7 =duration
+       
+        
        var d5={
            datas: [],
-           duration:[]
+           duration
        }
        d5.datas=datas;
-       d5.duration[0]=d7
+      
         console.log(d5);
         response.json(d5);
     });

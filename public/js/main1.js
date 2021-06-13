@@ -110,68 +110,68 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     if (unit=="N") { dist = dist * 0.8684 }
     return dist
 }
-maps.on('click', function (e) {
-    var a=[];
-    var nodeName = mapdata.allnodes.length;
-    console.log(e.latlng.lat + ", " + e.latlng.lng);
-var tram;
-var indice;
-var source;
-var target ;
-var ida=0;
+// maps.on('click', function (e) {
+//     var a=[];
+//     var nodeName = mapdata.allnodes.length;
+//     console.log(e.latlng.lat + ", " + e.latlng.lng);
+// var tram;
+// var indice;
+// var source;
+// var target ;
+// var ida=0;
 
-     $.getJSON("mapdata/all.json", function (datad) {
-             tram = datad.nodes;
-    console.log('tram '+tram.length);
+//      $.getJSON("mapdata/all.json", function (datad) {
+//              tram = datad.nodes;
+//     console.log('tram '+tram.length);
 
-    for (var i=0;i<tram.length;i++){
-        if(!(tram[i].nomFr===undefined)){
-       var d= distance(e.latlng.lat,e.latlng.lng,tram[i].x,tram[i].y);
-       a[ida]=d;
-       ida=ida+1;
+//     for (var i=0;i<tram.length;i++){
+//         if(!(tram[i].nomFr===undefined)){
+//        var d= distance(e.latlng.lat,e.latlng.lng,tram[i].x,tram[i].y);
+//        a[ida]=d;
+//        ida=ida+1;
       
-    }}
-console.log('array '+ a);
-console.log('min '+Math.min.apply(null, a))
+//     }}
+// console.log('array '+ a);
+// console.log('min '+Math.min.apply(null, a))
 
-for (var i=0;i<tram.length;i++){
-    if(!(tram[i].nomFr===undefined)){
-    var d= distance(e.latlng.lat,e.latlng.lng,tram[i].x,tram[i].y);
-   if(d==Math.min.apply(null, a)){
-    target=i;
-   }}
- }
+// for (var i=0;i<tram.length;i++){
+//     if(!(tram[i].nomFr===undefined)){
+//     var d= distance(e.latlng.lat,e.latlng.lng,tram[i].x,tram[i].y);
+//    if(d==Math.min.apply(null, a)){
+//     target=i;
+//    }}
+//  }
 
- console.log('indice '+target);
+//  console.log('indice '+target);
  
- var results = dijkstra(0, target);
- console.log('7777777777777777 '+results.path);
+//  var results = dijkstra(0, target);
+//  console.log('7777777777777777 '+results.path);
   
- console.log(results);
- if (results.path) {
-     results.path.forEach(function (step) {
-console.log(step);
-         var dist = mapdata.distances[step.source][step.target]
-         stepLine = d3.select(
-             "line.from" + step.source + "to" + step.target + ","
-             + "line.from" + step.target + "to" + step.source
-         );
-         stepLine.classed({ "shortest": true });
+//  console.log(results);
+//  if (results.path) {
+//      results.path.forEach(function (step) {
+// console.log(step);
+//          var dist = mapdata.distances[step.source][step.target]
+//          stepLine = d3.select(
+//              "line.from" + step.source + "to" + step.target + ","
+//              + "line.from" + step.target + "to" + step.source
+//          );
+//          stepLine.classed({ "shortest": true });
 
-     });
- }
+//      });
+//  }
 
     
 
 
 
 
-});
+// });
       
    
   
 
-});
+// });
 
 function redrawNodes() {
 
@@ -193,7 +193,7 @@ function redrawNodes() {
 
     nodesEnter.append("circle")
         .attr("nodeId", function (d, i) { return i; })
-        .attr("r", '14')
+        .attr("r", '15')
         .attr("class", "node")
         .style("cursor", "pointer")
         .on('click', nodeClick)
@@ -205,8 +205,8 @@ function redrawNodes() {
         nodesEnter
         .append("text")
         .attr("nodeLabelId", function (d, i) { return i; })
-        .attr("dx", "-5")
-        .attr("dy", "5")
+        .attr("dx", "-7")
+        .attr("dy", "7")
         .attr("class", "label")
         .on('contextmenu', function (d, i) { startEndPath(i); })
         .call(dragManager)
@@ -333,6 +333,7 @@ $('#setexample').on('change', function () {
     var value = $(this).val();
     if (value == 1) {
         maps.setView(new L.LatLng(35.19971906404343, -0.6247837572740723), 14);
+        clearGraph();
       clear();
         gettram('stat1');
 
@@ -357,8 +358,8 @@ $('#setexample').on('change', function () {
             mapdata.allnodes.forEach(function (node) {
                 var b=false;
                 if (node.nomFr === undefined){b=true};
-               
-                addNodeToSelect(node);
+               if(!b){
+                addNodeToSelect(node);}
             });
 
             calculateDistancesbetweennodes();
@@ -375,6 +376,7 @@ $('#setexample').on('change', function () {
     else if (value == 2) {
         
  var file='stations_sba/bus/A03'
+ clearGraph();
         clear();
         gettram(file);
         maps.setView(new L.LatLng(35.20777265583833, -0.615674942808335), 14);
@@ -397,7 +399,11 @@ $('#setexample').on('change', function () {
             mapdata.getstate.toNode = null;
 
             mapdata.allnodes.forEach(function (node) {
-                addNodeToSelect(node);
+                
+                var b=false;
+                if (node.nomFr === undefined){b=true};
+               if(!b){
+                addNodeToSelect(node);}
             });
 
             calculateDistancesbetweennodes();
@@ -406,6 +412,7 @@ $('#setexample').on('change', function () {
         });
     }else if(value == 3) {
         var file='stations_sba/bus/A03bis'
+        clearGraph();
         clear();
         gettram(file);
         
@@ -431,7 +438,10 @@ $('#setexample').on('change', function () {
             mapdata.getstate.toNode = null;
 
             mapdata.allnodes.forEach(function (node) {
-                addNodeToSelect(node);
+                var b=false;
+                if (node.nomFr === undefined){b=true};
+               if(!b){
+                addNodeToSelect(node);}
             });
 
             calculateDistancesbetweennodes();
@@ -441,6 +451,7 @@ $('#setexample').on('change', function () {
     }
     else if(value == 4) {
         var file='stations_sba/bus/A27'
+        clearGraph();
         clear();
         gettram(file);
  
@@ -474,6 +485,7 @@ $('#setexample').on('change', function () {
         });
     }  else if(value == 5) {
         var file='stations_sba/bus/A17'
+        clearGraph();
         clear();
         gettram(file);
  
@@ -507,6 +519,7 @@ $('#setexample').on('change', function () {
         });
     } else if(value == 6) {
         var file='stations_sba/bus/A22'
+        clearGraph();
         clear();
         gettram(file);
  
@@ -540,6 +553,7 @@ $('#setexample').on('change', function () {
         });
     } else if(value == 7) {
         var file='stations_sba/bus/A16'
+        clearGraph();
         clear();
         gettram(file);
  
@@ -573,6 +587,7 @@ $('#setexample').on('change', function () {
         });
     } else if(value == 8) {
         var file='stations_sba/bus/A25'
+        clearGraph();
         clear();
         gettram(file);
  
@@ -606,6 +621,7 @@ $('#setexample').on('change', function () {
         });
     } else if(value == 9) {
         var file='stations_sba/bus/A11'
+        clearGraph();
         clear();
         gettram(file);
  
@@ -640,6 +656,7 @@ $('#setexample').on('change', function () {
     }
     else if(value == 999) {
         var file='stations_sba'
+        clearGraph();
         clear();
         gettram(file);
  
@@ -825,6 +842,7 @@ $('#getshortestroute1').on('click', function () {
 
 });
 $('#clearmap').on('click', function () {
+    clear();
     clearGraph();
 
 });
@@ -837,8 +855,8 @@ $('#clearmap').on('click', function () {
 
 
 function addNodeToSelect(node) {
-    $(mapdata.getui.htmlSelectStartingNode).append($("<option></option>").attr("value", node.name).text(node.name));
-    $(mapdata.getui.htmlSelectEndNode).append($("<option></option>").attr("value", node.name).text(node.name));
+    $(mapdata.getui.htmlSelectStartingNode).append($("<option></option>").attr("value", node.name).text(node.nomFr));
+    $(mapdata.getui.htmlSelectEndNode).append($("<option></option>").attr("value", node.name).text(node.nomFr));
 };
 
 function clearGraph() {
@@ -1305,6 +1323,7 @@ markers.addTo(maps);
           maps.closePopup();
         } else {
           markerLayer.getLayer(e.target.value).openPopup();
+          
         }
       }
       
@@ -1327,3 +1346,10 @@ markers.addTo(maps);
            
        
     }
+    document.getElementById('clr').onclick = function(){
+        clear();
+        mapdata.allnodes = null
+        mapdata.paths = null;
+    }
+
+    

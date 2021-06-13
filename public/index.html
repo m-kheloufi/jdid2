@@ -4,9 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Dijkstra's algorithm In Action with realmap">
-  <meta name="author" content="Fatih Şennik">
-
+  <meta name="description" content="22-NAVIGATOR">
+  <meta name="author" content="kheloufi mehadji">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
   <title>22-NAVIGATOR</title>
 
@@ -29,12 +31,12 @@
 
 <body>
 
-  <div class="container">
+  <div class="container-login100" style="background-image: url('c/images/bg-01.jpg');">
 
     
 
    
-    </div>
+   
 
     <!-- Main Map Canvas -->
     <div class="row">
@@ -48,50 +50,30 @@
 
           <div class="form-row align-items-center">
             <div class="col-auto">
-              <label class="mr-sm-2" for="from">From</label>
+              <span class="label label-default" style="font-size: larger;" for="from">Station Source</span>
               <select id="from-starting" class="custom-select mb-2 mr-sm-2 mb-sm-0"></select>
             </div>
             <div class="col-auto">
-              <label class="mr-sm-2" for="to">To</label>
+              <span class="label label-default" for="to" style="font-size: larger;" for="from">Station Target</span>
               <select id="to-end" class="custom-select mb-2 mr-sm-2 mb-sm-0"></select>
 
             </div>
 
-            <div class="col-auto">
-              <button type="button" id="clearmap" class="btn btn-danger">Clear Map</button>
-            </div>
+           
             <div class="col-auto">
               <button type="button" id="getshortestroute" class="btn btn-success" title="find shortest path between nodes"> Start Route</button>
             </div>
             <div class="col-auto">
-              <button type="button" id="getshortestroute1" class="btn btn-success" title="find shortest path between nodes"> Route</button>
+              <button type="button" id="clearmap"  class="btn btn-danger"  > Clear Map</button>
             </div>
-            <div class="col-auto">
-              <label class="sr-only" for="inlineFormInput">Latitude</label>
-              <input type="text" class="form-control mb-2 mb-sm-0" id="latitude" placeholder="Enter Latitude">
-            </div>
-            <div class="col-auto">
-              <label class="sr-only" for="inlineFormInput">Longitude</label>
-              <input type="text" class="form-control mb-2 mb-sm-0" id="longitude" placeholder="Enter Longitude">
-            </div>
-            
-            <div class="col-auto">
-              <button type="button" id= "getmethere"class="btn btn-primary">Get Me There</button>
-            </div>
-            <button id="A03" type="button" onclick="addBusRoute('A03'); addBusStationsByNumero('A03');"
-    style="background-color: red; color: black;">Ligne A03
-</button>
-<button id="clearAllTheMap" type="button" 
-        style="background-color: white; color: black">Reset the map
-    </button>
-    <button id="clearAllTheMap1" type="button" 
-        style="background-color: white; color: black">Reset the map111
-    </button>
+           
+     
            
             <div class="col-auto" style="margin-top: 5px;">
 
-              <label class="mr-sm-2" for="inlineFormCustomSelect">Load Examples</label>
-              <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="setexample">
+             
+              <span class="label label-default" style="font-size: larger;"for="inlineFormCustomSelect" >Choose line</span>
+              <select style="margin-left: 5px;margin-bottom: 20px;" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="setexample">
                 <option value="0">Lines :</option>
                 <option value="1">tram</option>
                 <option value="2">A03</option>
@@ -122,7 +104,7 @@
       <div class="col-lg-12">
 
 
-        <div id="svg-map" style="width: 1110px; height: 800px" class="card">
+        <div id="svg-map" style="opacity: 80%;;width: 1300px; height: 800px ;margin-left: 120px; margin-right: 120px;" class="card">
 
         </div>
         <form style="margin-top:5px;">
@@ -130,7 +112,7 @@
 
           <div class="form-row align-items-center">
 
-            <div class="col-auto">
+            <div class="col-auto" style="margin-left: 120px;">
               <button type="button" class="btn btn-success" id="data-export"> Export Data</button>
             </div>
             <div class="col-auto">
@@ -158,13 +140,7 @@
 
     <!-- Site footer -->
     <footer class="footer">
-      <p>&copy; Senniksoft 2017 | Fatih Şennik |
-        <script type="text/javascript">
-          emailE = 'senniksoft.com'
-          emailE = ('freelancer' + '@' + emailE)
-          document.write('<A href="mailto:' + emailE + '">' + emailE + '</a>')
-        </script>
-      </p>
+      
     </footer>
 
   </div>
@@ -190,11 +166,39 @@
   <script src="js/main1.js"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="js/ie10-viewport-bug-workaround.js"></script>
- 
+</div>
 </body>
-<script>
+<style>
+  .container-login100 {
+  width: 100%;  
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
 
-  
-</script>
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 1;  
+}
+.container-login100::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(32, 24, 24, 0.9);
+}
+</style>
 
 </html>

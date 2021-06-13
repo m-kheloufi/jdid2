@@ -4,25 +4,26 @@
 	<title>22-NAVIGATOR</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="icon" type="image/png" href="./c/images/icons/nv.png"/>
+	<link rel="stylesheet" type="text/css" href="c/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="c/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="c/fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="c/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="c/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="c/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="c/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="c/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="c/css/util.css">
+	<link rel="stylesheet" type="text/css" href="c/css/main.css">
 </head>
 <body>
 	
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-login100" style="background-image: url('c/images/sba.jpg');">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" action="auth" method="POST">
 					<span class="login100-form-logo">
-						<i class="zmdi zmdi-landscape"></i>
+						<img id="img1" class ="login100-form validate-form1" src="/c/images/nv.png">
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27">
@@ -61,90 +62,21 @@
 	
 
 	<div id="dropDownSelect1"></div>
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="vendor/select2/select2.min.js"></script>
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-	<script  src="js/main.js"></script>
+	<script src="c/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="c/vendor/animsition/js/animsition.min.js"></script>
+	<script src="c/vendor/bootstrap/js/popper.js"></script>
+	<script src="c/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="c/vendor/select2/select2.min.js"></script>
+	<script src="c/vendor/daterangepicker/moment.min.js"></script>
+	<script src="c/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="c/vendor/countdowntime/countdowntime.js"></script>
+	<script  src="c/js/main.js"></script>
 	
 	
-	<script>
-
-    $(function() {
 
 
-		
-  $.getJSON('stations_sba', function(data) {
-      $.each(data, function(i1, f1) {
-       $.getJSON('stations_sba', function(data) {
-      $.each(data, function(i1, f2) {
-		var items = [
-  [f1.lenght,f2.lenght] ];
-  
-       data  =getDistanceFromLatLonInKm(f1.latitude,f1.longitude,f2.latitude,f2.longitude);
-	   
-  
-  });
-  
-  });
-  
-  });
-  
-  });
-  function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-  var R = 6371; // Radius of the earth in km
-  var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1); 
-  var a = 
-   Math.sin(dLat/2) * Math.sin(dLat/2) +
-   Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-   Math.sin(dLon/2) * Math.sin(dLon/2)
-   ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-  var d = R * c*1000; // Distance in km
-  return d;
-  }
-  
-  function deg2rad(deg) {
-  return deg * (Math.PI/180)
-  }
-  
 
-
-   $.getJSON('stations_sba', function(data) {
-       $.each(data, function(i, f) {
-        var stations = {
-  "type": "FeatureCollection",
-  "features": [{
-    "type": "Feature",
-    "properties": {
-      "STATION": f.nomFr,
-      "NUMERO": f.numero,
-    },
-    "geometry": {
-      "type": "Point",
-      "coordinates": [f.longitude, f.latitude]
-    }
-  }]} 
-
-
-  
- });
-
-   });
-
-});
-</script>
-<script>
-
-
-</script>
-
-<script src="public/js/tt.js"></script>
+<script src="c/js/tt.js"></script>
 
 </body>
 </html>
