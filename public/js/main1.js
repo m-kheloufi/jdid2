@@ -476,7 +476,10 @@ $('#setexample').on('change', function () {
             mapdata.getstate.toNode = null;
 
             mapdata.allnodes.forEach(function (node) {
-                addNodeToSelect(node);
+                var b=false;
+                if (node.nomFr === undefined){b=true};
+               if(!b){
+                addNodeToSelect(node);}
             });
 
             calculateDistancesbetweennodes();
@@ -510,7 +513,10 @@ $('#setexample').on('change', function () {
             mapdata.getstate.toNode = null;
 
             mapdata.allnodes.forEach(function (node) {
-                addNodeToSelect(node);
+                var b=false;
+                if (node.nomFr === undefined){b=true};
+               if(!b){
+                addNodeToSelect(node);}
             });
 
             calculateDistancesbetweennodes();
@@ -544,7 +550,10 @@ $('#setexample').on('change', function () {
             mapdata.getstate.toNode = null;
 
             mapdata.allnodes.forEach(function (node) {
-                addNodeToSelect(node);
+                var b=false;
+                if (node.nomFr === undefined){b=true};
+               if(!b){
+                addNodeToSelect(node);}
             });
 
             calculateDistancesbetweennodes();
@@ -578,7 +587,10 @@ $('#setexample').on('change', function () {
             mapdata.getstate.toNode = null;
 
             mapdata.allnodes.forEach(function (node) {
-                addNodeToSelect(node);
+                var b=false;
+                if (node.nomFr === undefined){b=true};
+               if(!b){
+                addNodeToSelect(node);}
             });
 
             calculateDistancesbetweennodes();
@@ -612,7 +624,10 @@ $('#setexample').on('change', function () {
             mapdata.getstate.toNode = null;
 
             mapdata.allnodes.forEach(function (node) {
-                addNodeToSelect(node);
+                var b=false;
+                if (node.nomFr === undefined){b=true};
+               if(!b){
+                addNodeToSelect(node);}
             });
 
             calculateDistancesbetweennodes();
@@ -646,7 +661,10 @@ $('#setexample').on('change', function () {
             mapdata.getstate.toNode = null;
 
             mapdata.allnodes.forEach(function (node) {
-                addNodeToSelect(node);
+                var b=false;
+                if (node.nomFr === undefined){b=true};
+               if(!b){
+                addNodeToSelect(node);}
             });
 
             calculateDistancesbetweennodes();

@@ -1,1 +1,58 @@
-786
+[
+      {
+            "latitude": 35.1299911688703,
+            "longitude": -0.580878370558431,
+            "nomFr": "Amarna",
+            "type": "bus",
+            "numero": "A27_05",
+            "_id": "H50bYFtdW8dWIv2c"
+      },
+      {
+            "latitude": 35.132456783965985,
+            "longitude": -0.5602973802289536,
+            "nomFr": "Bouaîch, Terminus A27",
+            "type": "bus",
+            "numero": "A27_06",
+            "_id": "9dpDb9jAbKhqYqM3"
+      },
+      {
+            "latitude": 35.177517875617035,
+            "longitude": -0.6198775522839585,
+            "nomFr": "Clos",
+            "type": "bus",
+            "numero": "A27_04",
+            "_id": "kWpT2A2qRfySTyY7"
+      },
+      {
+            "latitude": 35.18564,
+            "longitude": -0.63126,
+            "nomFr": "Lycée Ennajah",
+            "type": "bus",
+            "numero": "A27_02",
+            "_id": "qSaPDEuHqYJtil7k"
+      },
+      {
+            "latitude": 35.18384624158673,
+            "longitude": -0.6284809111457436,
+            "nomFr": "Parc de la Commune",
+            "type": "bus",
+            "numero": "A27_03",
+            "_id": "NFwsD6GtQqe2yJo7"
+      },
+      {
+            "latitude": 35.18922569561231,
+            "longitude": -0.6338998675346376,
+            "nomFr": "Prado",
+            "type": "bus",
+            "numero": "A27_01",
+            "_id": "KCHKQ1g2C1uYmgPZ"
+      },
+      {
+            "latitude": 35.19918,
+            "longitude": -0.63096,
+            "nomFr": "Station Amir Abdelkader",
+            "type": "bus",
+            "numero": "A27_00",
+            "_id": "czzlkh3V354O8dCD"
+      }
+]
