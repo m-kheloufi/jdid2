@@ -193,7 +193,7 @@ function redrawNodes() {
 
     nodesEnter.append("circle")
         .attr("nodeId", function (d, i) { return i; })
-        .attr("r", '15')
+        .attr("b", '15')
         .attr("class", "node")
         .style("cursor", "pointer")
         .on('click', nodeClick)
@@ -699,7 +699,10 @@ $('#setexample').on('change', function () {
             mapdata.getstate.toNode = null;
 
             mapdata.allnodes.forEach(function (node) {
-                addNodeToSelect(node);
+                var b=false;
+                if (node.nomFr === undefined){b=true};
+               if(!b){
+                addNodeToSelect(node);}
             });
 
             calculateDistancesbetweennodes();
