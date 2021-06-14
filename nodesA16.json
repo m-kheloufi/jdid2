@@ -1,0 +1,130 @@
+[
+      {
+            "latitude": 35.217413414404774,
+            "longitude": -0.6221226432095862,
+            "nomFr": "Benhamouda",
+            "type": "bus",
+            "numero": "A16_15",
+            "_id": "AmeDp3j3bl74GbhL"
+      },
+      {
+            "latitude": 35.1932399601684,
+            "longitude": -0.6126033709131252,
+            "nomFr": "CNAS",
+            "type": "bus",
+            "numero": "A16_04",
+            "_id": "p8S7fOJjS3opavYB"
+      },
+      {
+            "latitude": 35.21527907629851,
+            "longitude": -0.6142250396684258,
+            "nomFr": "Cité 600, ECOBAT Rocher",
+            "type": "bus",
+            "numero": "A16_13",
+            "_id": "mqYAL9B4tCTCaXgC"
+      },
+      {
+            "latitude": 35.20609756862548,
+            "longitude": -0.614850364845685,
+            "nomFr": "Cité Universitaire 2000",
+            "type": "bus",
+            "numero": "A16_10",
+            "_id": "CwqCEiS1NEo0iAzj"
+      },
+      {
+            "latitude": 35.21329807983371,
+            "longitude": -0.6159036567568354,
+            "nomFr": "Gare routière Est, Ghalmi",
+            "type": "bus",
+            "numero": "A16_12",
+            "_id": "1suLM2zBoobLQn1O"
+      },
+      {
+            "latitude": 35.19957002417161,
+            "longitude": -0.6145994075181461,
+            "nomFr": "L'Abattoire",
+            "type": "bus",
+            "numero": "A16_07",
+            "_id": "FZcwxwb6XDUnbkfU"
+      },
+      {
+            "latitude": 35.19344161801317,
+            "longitude": -0.6330018670955485,
+            "nomFr": "La Coupole, 8 Mai 1945",
+            "type": "bus",
+            "numero": "A16_00",
+            "_id": "l6OIizW5PpeTgfmW"
+      },
+      {
+            "latitude": 35.1924333237839,
+            "longitude": -0.6200938738717411,
+            "nomFr": "La Materrnité",
+            "type": "bus",
+            "numero": "A16_02",
+            "_id": "SoqLqtA9dk3ScayL"
+      },
+      {
+            "latitude": 35.20955918247701,
+            "longitude": -0.6165619982414028,
+            "nomFr": "La Poste CPR, les Cascades",
+            "type": "bus",
+            "numero": "A16_11",
+            "_id": "omjm4EGeYxkBLsFd"
+      },
+      {
+            "latitude": 35.19292432079783,
+            "longitude": -0.6156296199594414,
+            "nomFr": "La Poste Sidi Yacine, La Briemer",
+            "type": "bus",
+            "numero": "A16_03",
+            "_id": "WGgz9BoPJMlmfF3c"
+      },
+      {
+            "latitude": 35.21678670492869,
+            "longitude": -0.6151652516324903,
+            "nomFr": "Les Impôts, Rocher",
+            "type": "bus",
+            "numero": "A16_14",
+            "_id": "QaVGw9pPHmtFrkIO"
+      },
+      {
+            "latitude": 35.20069220010743,
+            "longitude": -0.6121097274516575,
+            "nomFr": "Lycée Inal",
+            "type": "bus",
+            "numero": "A16_08",
+            "_id": "zMI2anZzRJ4oIW06"
+      },
+      {
+            "latitude": 35.191451320854114,
+            "longitude": -0.628581755433244,
+            "nomFr": "Petit Vichy",
+            "type": "bus",
+            "numero": "A16_01",
+            "_id": "DoQPX8r786SC0cRk"
+      },
+      {
+            "latitude": 35.20441806358956,
+            "longitude": -0.6135284900665284,
+            "nomFr": "Protection Civile, CPR",
+            "type": "bus",
+            "numero": "A16_09",
+            "_id": "hxx5gjGouxL4mwHB"
+      },
+      {
+            "latitude": 35.197290556570906,
+            "longitude": -0.6124745943579458,
+            "nomFr": "Soricor Cité militaire",
+            "type": "bus",
+            "numero": "A16_06",
+            "_id": "70s7vQQDb1VVC8G9"
+      },
+      {
+            "latitude": 35.19562475133261,
+            "longitude": -0.6124745943579458,
+            "nomFr": "Soricor Stade",
+            "type": "bus",
+            "numero": "A16_05",
+            "_id": "NNtrxWE5oYAheTgo"
+      }
+]

@@ -296,11 +296,12 @@ app.get('/stations_sba/bus/:numero', (request, response) => {
         response.json(datas);
     });
 })
-app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
+app.get('/result/:type/:x1/:x2/:x3/:x4', (request, response) => {
     var x1 = request.params.x1;
     var x2 = request.params.x2;
     var x3 = request.params.x3;
     var x4 = request.params.x4;
+    var type = request.params.type;
     var datas = [],
     b = true,
     source,
@@ -329,7 +330,7 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
     var bb=true;
     var bb1=true;
     var isource,itarget;
-   
+   var t
 
     var times=[105, 94, 98, 224, 100, 100, 95, 200, 120, 110, 150, 145, 120, 122, 85, 103, 78, 87, 110, 130, 130]
 
@@ -338,8 +339,26 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
             response.end();
             return;
         }
-
-        var t = require('./public/mapdata/all.json');
+if(type==='tram'){
+         t = require('./public/mapdata/tram.json');
+}else if (type.includes('A03')){
+         t = require('./public/mapdata/A03.json');
+}else if (type.includes('A03bis')){
+    t = require('./public/mapdata/A03bis.json');
+}else if (type.includes('A11')){
+    t = require('./public/mapdata/A11.json');
+}else if (type.includes('A16')){
+    t = require('./public/mapdata/A16.json');
+}else if (type.includes('A17')){
+    t = require('./public/mapdata/A17.json');
+}else if (type.includes('A22')){
+    t = require('./public/mapdata/A22.json');
+}else if (type.includes('A25')){
+    t = require('./public/mapdata/A25.json');
+}
+else if (type.includes('A27')){
+    t = require('./public/mapdata/A27.json');
+}
         var tram = t.nodes;
         console.log('length ' + tram.length);
         for (var i = 0; i < tram.length; i++) {
@@ -605,8 +624,8 @@ app.get('/result/:x1/:x2/:x3/:x4', (request, response) => {
        }
        d5.datas=datas;
       
-        console.log(d5);
-        response.json(d5);
+        console.log(datas);
+        response.json(datas);
     });
 
 

@@ -193,7 +193,7 @@ function redrawNodes() {
 
     nodesEnter.append("circle")
         .attr("nodeId", function (d, i) { return i; })
-        .attr("b", '15')
+        .attr("r", '15')
         .attr("class", "node")
         .style("cursor", "pointer")
         .on('click', nodeClick)
@@ -643,6 +643,43 @@ $('#setexample').on('change', function () {
         maps.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
 
         $.getJSON("mapdata/A11.json", function (datad) {
+            var importedData = datad;
+
+            if (importedData.nodes === undefined
+                || importedData.paths === undefined
+                || Object.keys(importedData).length !== 2) {
+                console.log("** JSON format error:");
+                console.log(importedData);
+                return;
+            }
+
+            mapdata.allnodes = importedData.nodes;
+            mapdata.paths = importedData.paths;
+            mapdata.distances = [];
+            mapdata.getstate.selectedNode = null;
+            mapdata.getstate.fromNode = null;
+            mapdata.getstate.toNode = null;
+
+            mapdata.allnodes.forEach(function (node) {
+                var b=false;
+                if (node.nomFr === undefined){b=true};
+               if(!b){
+                addNodeToSelect(node);}
+            });
+
+            calculateDistancesbetweennodes();
+            redrawLines();
+            redrawNodes();
+        });
+    } else if(value == 10) {
+        var file='stations_sba'
+        clearGraph();
+        clear();
+        gettram(file);
+ 
+        maps.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
+
+        $.getJSON("mapdata/tes03_16.json", function (datad) {
             var importedData = datad;
 
             if (importedData.nodes === undefined
