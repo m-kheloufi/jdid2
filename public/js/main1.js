@@ -192,7 +192,7 @@ function redrawNodes() {
 
     nodesEnter.append("circle")
         .attr("nodeId", function (d, i) { return i; })
-        .attr("r", '15')
+        .attr("b", '15')
         .attr("class", "node")
         .style("cursor", "pointer")
         .on('click', nodeClick)
@@ -201,15 +201,15 @@ function redrawNodes() {
         .on('contextmenu', function (d, i) { startEndPath(i); })
         .call(dragManager)
 
-        nodesEnter
-        .append("text")
-        .attr("nodeLabelId", function (d, i) { return i; })
-        .attr("dx", "-7")
-        .attr("dy", "7")
-        .attr("class", "label")
-        .on('contextmenu', function (d, i) { startEndPath(i); })
-        .call(dragManager)
-        .text(function (d, i) { return d.name });
+        // nodesEnter
+        // .append("text")
+        // .attr("nodeLabelId", function (d, i) { return i; })
+        // .attr("dx", "-7")
+        // .attr("dy", "7")
+        // .attr("class", "label")
+        // .on('contextmenu', function (d, i) { startEndPath(i); })
+        // .call(dragManager)
+        // .text(function (d, i) { return d.name });
     
 
     elements.exit().remove();

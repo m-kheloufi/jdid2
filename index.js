@@ -44,7 +44,9 @@ app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/index.html'));
 });
 app.get('/admin', function (request, response) {
-    response.sendFile(path.join(__dirname + '/index1.html'));
+    if (request.session.loggedin) {
+    
+    response.sendFile(path.join(__dirname + '/index1.html'));}
 });
 
 app.post('/auth', function (request, response) {
@@ -80,7 +82,7 @@ app.post('/auth', function (request, response) {
 
 app.get('/home', function (request, response) {
     if (request.session.loggedin) {
-        response.redirect('index.html')
+        response.redirect('admin')
 
 
 
