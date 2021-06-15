@@ -12,7 +12,7 @@ var path = require('path');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: 'wawa.sba47',
     database: 'nodelogin'
 });
 var app = express();
@@ -42,6 +42,9 @@ app.use(bodyParser.json());
 
 app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/index.html'));
+});
+app.get('/admin', function (request, response) {
+    response.sendFile(path.join(__dirname + '/index1.html'));
 });
 
 app.post('/auth', function (request, response) {
@@ -100,7 +103,7 @@ app.listen(process.env.PORT || 3000)
 const Datastore = require('nedb');
 const { type } = require('os');
 
-app.listen(3001, () => console.log('listening at 3000'));
+
 app.use(express.static('public'));
 app.use(express.static('static'));
 app.use(express.json())
@@ -244,7 +247,26 @@ app.get('/stations_sba/tramway', (request, response) => {
         response.json(data);
     });
 })
-
+app.get('/stations_sba/bus1/:numero', (request, response) => {
+    var x = request.params.numero;
+    var datas=[];
+    var idatas=0;
+    
+    var c=0;
+    console.log(x);
+    console.log(stations_sba.length);
+    stations_sba.find({ type: 'bus', numero: RegExp("^" + x) }).sort({ nomFr: 1 }).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+     
+          
+       
+       
+        response.json(data);
+    });
+})
 app.get('/stations_sba/bus/:numero', (request, response) => {
     var x = request.params.numero;
     var datas=[];

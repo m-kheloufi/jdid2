@@ -93,14 +93,7 @@ function myFunction1() {
     
 
 }
-function myFunction2() {
-    
-    location.href = "/index.html";
-    var vis="true";
-    localStorage.setItem("viss",vis);
-    
 
-}
 
 
 	

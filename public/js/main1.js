@@ -14,12 +14,11 @@ var mapdata = {
         toNode: null
     }
 };
- maps =  L.map('svg-map').setView([35.20118, -0.6343], 14);
+ maps =  L.map('svg-map',{drawControl: true}).setView([35.20118, -0.6343], 14);
  mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
   attribution: '&copy; '+mapLink+ 'contributors'
 }).addTo(maps);
-
 
 
 maps._initPathRoot()
@@ -680,6 +679,43 @@ $('#setexample').on('change', function () {
         maps.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
 
         $.getJSON("mapdata/tes03_16.json", function (datad) {
+            var importedData = datad;
+
+            if (importedData.nodes === undefined
+                || importedData.paths === undefined
+                || Object.keys(importedData).length !== 2) {
+                console.log("** JSON format error:");
+                console.log(importedData);
+                return;
+            }
+
+            mapdata.allnodes = importedData.nodes;
+            mapdata.paths = importedData.paths;
+            mapdata.distances = [];
+            mapdata.getstate.selectedNode = null;
+            mapdata.getstate.fromNode = null;
+            mapdata.getstate.toNode = null;
+
+            mapdata.allnodes.forEach(function (node) {
+                var b=false;
+                if (node.nomFr === undefined){b=true};
+               if(!b){
+                addNodeToSelect(node);}
+            });
+
+            calculateDistancesbetweennodes();
+            redrawLines();
+            redrawNodes();
+        });
+    }  else if(value == 11) {
+        var file='stations_sba/bus1/A03'
+        clearGraph();
+        clear();
+        gettram(file);
+ 
+        maps.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
+
+        $.getJSON("mapdata/A03_A03bis.json", function (datad) {
             var importedData = datad;
 
             if (importedData.nodes === undefined
@@ -1410,4 +1446,6 @@ markers.addTo(maps);
         mapdata.paths = null;
     }
 
+
+    
     

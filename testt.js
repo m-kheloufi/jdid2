@@ -1,63 +1,60 @@
 var c03 = require('./nodesA03.json');
-var tt = require('./testtttt.json');
+var tt = require('./nd.json');
 var c16 = require('./nodesA16.json');
 var test = require('./testA03_A16.json');
-var request = require('request');
+// var request = require('request');
 var t=tt.nodes;
 var fs = require('fs');
 var k=0;
 
 
-for (let i = 0; i < 232; i++) {
+// for (let i = 0; i < 232; i++) {
     
-    var j=i+1
+//     var j=i+1
 
-         var js = {
-             "id":i,
-             "from": i,
-             "to": j,
+//          var js = {
+//              "id":i,
+//              "from": i,
+//              "to": j,
             
-         };   
-      console.log(js);
-         fs.appendFile('tes03.json', JSON.stringify(js), (err) => {
-             if (err) {
-                 throw err;
-             }
-         });
+//          };   
+//       console.log(js);
+//          fs.appendFile('tes03.json', JSON.stringify(js), (err) => {
+//              if (err) {
+//                  throw err;
+//              }
+//          });
       
    
- }
-// function hactho(zp) {
-    
-//     for (var i = 0; i < t.length; i++) {
-        
-//         if (t[i].FROM_TO === zp ) {
+//  }
 
-//             var js = {
-//                 "name":i,
-//                 "FROM_TO":zp,
-//                 "x": t[i].x,
-//                 "y": t[i].y
+    
+    for (let i = 0; i < t.length; i++) {
+        
+        setTimeout(function timer() {
+
+            var js = {
+                "name":i,
+                "nomFr": t[i].nomFr,
+                "x": t[i].x,
+                "y": t[i].y,
+                "line": t[i].line
                 
-//             };    
-//             zp=zp+1;
-//          console.log(js);
-//             fs.appendFile('tes03.json', JSON.stringify(js), (err) => {
-//                 if (err) {
-//                     throw err;
-//                 }
-//             });
-//         } 
+            };    
+         
+         console.log(js);
+            fs.appendFile('tes0311.json', JSON.stringify(js), (err) => {
+                if (err) {
+                    throw err;
+                }
+            });
+        }, i * 1000);
+        
       
-//     }
+    }
    
    
-// }
-// for (let i = 0; i < test.length; i++) {
-//     setTimeout(function timer() {
-//       hactho(test[i].name);
-//     }, i * 1000);
-//   }
+
 // for (let i = 0; i < test.length; i++) {
 //     var zp=0;
 //         setTimeout(function timer() {
