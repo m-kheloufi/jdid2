@@ -13,6 +13,7 @@
 {"latitude":35.21542370467783,"longitude":-0.6329327359438253,"nomFr":"Fac de droit","type":"tramway","numero":"5","_id":"7EShRsrTGMwKnrQg"}
 {"latitude":35.16930488052399,"longitude":-0.6912473581912805,"nomFr":"INSFP Chaouti, Sidi Lahcene","type":"bus","numero":"A11_10","_id":"7QPxwBoNzeHvyDPb"}
 {"latitude":35.199710297011464,"longitude":-0.6149206634227445,"nomFr":"Lycée Dar Abid","type":"bus","numero":"A03_05","_id":"80bsE87YbELP7plF"}
+{"latitude":35.2163133826766,"longitude":-0.6329743738612392,"nomFr":"test","type":"bus","numero":"A11","_id":"8I9m1LMYP6Ao8Osf"}
 {"latitude":35.21081738335004,"longitude":-0.6392823704571461,"nomFr":"Sheraton","type":"bus","numero":"A17_07","_id":"8kbxnyvAVrYnAqDV"}
 {"latitude":35.132456783965985,"longitude":-0.5602973802289536,"nomFr":"Bouaîch, Terminus A27","type":"bus","numero":"A27_06","_id":"9dpDb9jAbKhqYqM3"}
 {"latitude":35.187198760470636,"longitude":-0.6397672181709037,"nomFr":"Brandt","type":"bus","numero":"A11_02","_id":"ASGMoBh99Tj7vaKX"}

@@ -47,6 +47,9 @@ app.get('/admin', function (request, response) {
     if (request.session.loggedin) {
     
     response.sendFile(path.join(__dirname + '/index1.html'));}
+    else {
+        response.send('Please login to view this page!');
+    }
 });
 
 app.post('/auth', function (request, response) {

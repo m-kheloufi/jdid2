@@ -192,7 +192,7 @@ function redrawNodes() {
 
     nodesEnter.append("circle")
         .attr("nodeId", function (d, i) { return i; })
-        .attr("b", '15')
+        .attr("r", '15')
         .attr("class", "node")
         .style("cursor", "pointer")
         .on('click', nodeClick)
