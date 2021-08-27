@@ -16,6 +16,7 @@ var connection = mysql.createConnection({
     database: 'nodelogin'
 });
 var app = express();
+let app2 = express();
 var mapdata = {
     allnodes: [],
     paths: [],
@@ -37,22 +38,32 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+app2.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app2.use(bodyParser.urlencoded({ extended: true }));
+app2.use(bodyParser.json());
 
 app.get('/', function (request, response) {
+    response.sendFile(path.join(__dirname + '/index3.html'));
+});
+app2.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/index.html'));
 });
-app.get('/admin', function (request, response) {
+app2.get('/admin', function (request, response) {
     if (request.session.loggedin) {
     
-    response.sendFile(path.join(__dirname + '/index1.html'));}
+    response.sendFile(path.join(__dirname + '/index4.html'));}
     else {
         response.send('Please login to view this page!');
     }
 });
 
-app.post('/auth', function (request, response) {
+app2.post('/auth', function (request, response) {
     var username = request.body.username;
     var password = request.body.password;
     if (username && password) {
@@ -83,7 +94,7 @@ app.post('/auth', function (request, response) {
 });
 
 
-app.get('/home', function (request, response) {
+app2.get('/home', function (request, response) {
     if (request.session.loggedin) {
         response.redirect('admin')
 
@@ -96,7 +107,10 @@ app.get('/home', function (request, response) {
     response.end();
 });
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3002|| 3001)
+app2.listen(3000, () => {
+    console.log("Started server on 3002");   
+  });
 
 
 
@@ -112,6 +126,10 @@ const { type } = require('os');
 app.use(express.static('public'));
 app.use(express.static('static'));
 app.use(express.json())
+app2.use(express.static('public'));
+app2.use(express.static('static'));
+app2.use(express.json())
+
 
 const subway = new Datastore('polyline.db')
 subway.loadDatabase();
@@ -229,6 +247,172 @@ app.get('/bus/:numero', (request, response) => {
         response.json(data);
     });
 })
+//-----------------------------------------------
+
+app2.post('/stations_sba', (request, response) => {
+    console.log(request.body)
+   var t = require('./public/mapdata/tram.json');
+   
+    var m=t.nodes.length
+    
+    // create a JSON object
+    const fs = require('fs');
+const nodes = {
+    "name":m,
+            "nomFr": request.body.nomFr,
+            "x": request.body.longitude,
+            "y": request.body.latitude
+};
+console.log('hi user ' +nodes);
+// convert JSON object to string
+const node = JSON.stringify(nodes);
+
+// write JSON string to a file
+fs.appendFile('public/mapdata/tram.json', node, (err) => {
+    if (err) {
+        throw err;
+    }
+    console.log("JSON data is saved.");
+});
+    const data = request.body;
+    stations_sba.insert(data)
+    response.json({
+        status: 'success',
+        latitude: data.lat,
+        longitude: data.lon
+    })
+});
+
+
+app2.post('/subway', (request, response) => {
+    console.log(request.body)
+    const data = request.body;
+    subway.insert(data)
+    response.json({
+        status: 'success',
+        latitude: data.lat,
+        longitude: data.lon
+    })
+});
+
+app2.post('/bus', (request, response) => {
+    console.log(request.body)
+    const data = request.body;
+    bus.insert(data)
+    response.json({
+        status: 'success',
+        latitude: data.lat,
+        longitude: data.lon
+    })
+});
+
+
+app2.post('/correspondance', (request, response) => {
+    console.log(request.body)
+    const data = request.body;
+    correspondance.insert(data)
+    response.json({
+        status: 'success',
+        latitude: data.lat,
+        longitude: data.lng
+    })
+})
+
+
+app2.get('/subway', (request, response) => {
+    subway.find({}).sort({ timestamp: 1, ID: 1, }).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+        response.json(data);
+    });
+})
+
+app2.get('/bus', (request, response) => {
+    bus.find({}).sort({ timestamp: 1, ID: 1, }).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+        response.json(data);
+    });
+})
+
+app2.get('/bus/:numero', (request, response) => {
+    console.log('hi');
+    var data = request.params.numero;
+    console.log('hi');
+    console.log(data + 'hi');
+    console.log(data)
+    bus.find({ numero: data.substring(0, 7) }).sort({ timestamp: 1, ID: 1, }).exec(function (err, data) {
+        if (err) {
+
+            response.end();
+            return;
+        }
+
+        response.json(data);
+    });
+})
+
+app2.get('/bus/:numero', (request, response) => {
+    console.log('hi');
+    var data = request.params.numero;
+    console.log('hi');
+    console.log(data + 'hi');
+    console.log(data)
+    bus.find({ numero: data.substring(0, 7) }).sort({ timestamp: 1, ID: 1, }).exec(function (err, data) {
+        if (err) {
+
+            response.end();
+            return;
+        }
+
+        response.json(data);
+    });
+})
+app2.get('/stations_sba/bus', (request, response) => {
+    stations_sba.find({ type: 'bus' }).sort({ nomFr: 1 }).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+        response.json(data);
+    });
+})
+app2.get('/stations_sba/tramway', (request, response) => {
+    var data = request.params.type;
+    console.log(data)
+    stations_sba.find({ type: 'tramway' }).sort({ numero: 1 }).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+        response.json(data);
+    });
+})
+app2.get('/stations_sba/bus1/:numero', (request, response) => {
+    var x = request.params.numero;
+    var datas=[];
+    var idatas=0;
+    
+    var c=0;
+    console.log(x);
+    console.log(stations_sba.length);
+    stations_sba.find({ type: 'bus', numero: RegExp("^" + x) }).sort({ nomFr: 1 }).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+     
+          
+       
+       
+        response.json(data);
+    });
+})
+//----------------------------------------
 
 
 app.get('/stations_sba/bus', (request, response) => {
@@ -273,6 +457,57 @@ app.get('/stations_sba/bus1/:numero', (request, response) => {
     });
 })
 app.get('/stations_sba/bus/:numero', (request, response) => {
+    var x = request.params.numero;
+    var datas=[];
+    var idatas=0;
+    
+    var c=0;
+    console.log(x);
+    console.log(stations_sba.length);
+    stations_sba.find({ type: 'bus', numero: RegExp("^" + x) }).sort({ nomFr: 1 }).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+        console.log(data.length);
+        for(var i=0;i<data.length;i++){
+            var ds = {
+                latitude:'',
+                longitude:'',
+                nomFr:'',
+                type:'',
+                numero:'',
+                _id:''
+            };
+           if(!(x.includes('bis'))&&!(data[i].numero.includes('bis'))){
+               console.log('trueeeeeeeeeeeeeeeeee')
+                ds.latitude=data[i].latitude
+                ds.longitude=data[i].longitude
+                ds.nomFr=data[i].nomFr
+                ds.type=data[i].type
+                ds.numero=data[i].numero
+                ds._id=data[i]._id
+                datas[idatas]=ds
+                idatas=idatas+1;
+        }else if(x.includes('bis')) {
+            ds.latitude=data[i].latitude
+                ds.longitude=data[i].longitude
+                ds.nomFr=data[i].nomFr
+                ds.type=data[i].type
+                ds.numero=data[i].numero
+                ds._id=data[i]._id
+                datas[idatas]=ds
+                idatas=idatas+1;
+
+            }
+            
+        }
+       
+       
+        response.json(datas);
+    });
+})
+app2.get('/stations_sba/bus/:numero', (request, response) => {
     var x = request.params.numero;
     var datas=[];
     var idatas=0;
@@ -679,6 +914,17 @@ app.get('/stat1', (request, response) => {
         response.json(data);
     });
 })
+app2.get('/stat1', (request, response) => {
+    stations_sba.find({}).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+        var t = require('./public/mapdata/stat1.json');
+        data=t;
+        response.json(data);
+    });
+})
 
 app.get('/correspondance', (request, response) => {
     correspondance.find({}).sort({ ID: 1 }).exec(function (err, data) {
@@ -689,6 +935,16 @@ app.get('/correspondance', (request, response) => {
         response.json(data);
     });
 })
+app2.get('/correspondance', (request, response) => {
+    correspondance.find({}).sort({ ID: 1 }).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+        response.json(data);
+    });
+})
+
 
 
 function distance(lat1, lon1, lat2, lon2, unit) {

@@ -1,3 +1,4 @@
+
 var graphmap, svg, maps, g;
 var markers = L.layerGroup();
 var mapdata = {
@@ -51,6 +52,7 @@ selector.onAdd = function(maps) {
     return div;
   };
   selector.addTo(maps);
+  
 
 
 function dragNode() {
@@ -109,6 +111,24 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     if (unit=="N") { dist = dist * 0.8684 }
     return dist
 }
+maps.on('click', function (e) {
+
+
+    var nodeName = mapdata.allnodes.length;
+    console.log(e.latlng.lat + ", " + e.latlng.lng);
+
+    mapdata.allnodes.push({
+        name: nodeName, x: e.latlng.lat, y: e.latlng.lng
+    });
+    redrawNodes();
+    addNodeToSelect(nodeName);
+
+
+
+
+
+
+});
 // maps.on('click', function (e) {
 //     var a=[];
 //     var nodeName = mapdata.allnodes.length;
@@ -192,7 +212,7 @@ function redrawNodes() {
 
     nodesEnter.append("circle")
         .attr("nodeId", function (d, i) { return i; })
-        .attr("r", '15')
+        .attr("p", '24')
         .attr("class", "node")
         .style("cursor", "pointer")
         .on('click', nodeClick)
@@ -1445,6 +1465,7 @@ markers.addTo(maps);
         mapdata.allnodes = null
         mapdata.paths = null;
     }
+   
 
 
     

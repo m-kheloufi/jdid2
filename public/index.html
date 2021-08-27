@@ -10,6 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
   <title>22-NAVIGATOR</title>
 
   
@@ -23,92 +24,50 @@
   <!-- Custom styles for this template -->
   <link href="style/justified-nav.css" rel="stylesheet">
 </head>
-
 <body>
-
-  <div class="container-login100" style="background-image: url('c/images/bg-01.jpg');">
-
-    
-
-   
-   
-
-    <!-- Main Map Canvas -->
-    <div class="row">
-
-      <div class="col-lg-12">
-
-
-
-        <form>
-
-
-          <div class="form-row align-items-center">
-            <div class="col-auto">
-              <span class="label label-default" style="font-size: larger;" for="from">Station Source</span>
-              <select id="from-starting" class="custom-select mb-2 mr-sm-2 mb-sm-0"></select>
-            </div>
-            <div class="col-auto">
-              <span class="label label-default" for="to" style="font-size: larger;" for="from">Station Target</span>
-              <select id="to-end" class="custom-select mb-2 mr-sm-2 mb-sm-0"></select>
-
-            </div>
-
-           
-            <div class="col-auto">
-              <button type="button" id="getshortestroute" class="btn btn-success" title="find shortest path between nodes"> Start Route</button>
-            </div>
-            <div class="col-auto">
-              <button type="button" id="clearmap"  class="btn btn-danger"  > Clear Map</button>
-            </div>
-           
-     
-           
-            <div class="col-auto" style="margin-top: 5px;">
-
-             
-              <span class="label label-default" style="font-size: larger;"for="inlineFormCustomSelect" >Choose line</span>
-              <select style="margin-left: 5px;margin-bottom: 20px;" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="setexample">
-                <option value="0">Lines :</option>
-                <option value="1">tram</option>
-                <option value="2">A03</option>
-                <option value="3">A03bis</option>
-                <option value="11">A03_A03bis</option>
-                <option value="9">A11</option>
-                <option value="7">A16</option>
-                <option value="5">A17</option>
-                <option value="6">A22</option>
-                <option value="8">A25</option>
-                <option value="4">A27</option>
-                <option value="10">A03_A16</option>
-                
-                <option value="999">all</option>
-               
-              </select>
-            </div>
-
-
-
-          </div>
-
-
-        </form>
+  <form>
+    <div >
+      <div class="col-auto">
+        <span class="label label-default" style="font-size: larger;"for="inlineFormCustomSelect" >Choose line</span>
+        <select style="margin: bottom 5px;;" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="setexample">
+          <option value="0">Lines :</option>
+          <option value="1">tram</option>
+          <option value="2">A03</option>
+          <option value="3">A03bis</option>
+          <option value="11">A03_A03bis</option>
+          <option value="9">A11</option>
+          <option value="7">A16</option>
+          <option value="5">A17</option>
+          <option value="6">A22</option>
+          <option value="8">A25</option>
+          <option value="4">A27</option>
+          <option value="10">A03_A16</option>
+          <option value="999">all</option>  
+        </select>
+      </div>
+      <div class="col-auto">
+        <span class="label label-default" style="font-size: larger;" for="from">Station Source</span>
+        <select id="from-starting" class="custom-select mb-2 mr-sm-2 mb-sm-0"></select>
+      </div>
+      <div class="col-auto">
+        <span class="label label-default" for="to" style="font-size: larger;" for="from">Station Target</span>
+        <select id="to-end" class="custom-select mb-2 mr-sm-2 mb-sm-0"></select>
+      </div>
+      <div class="col-auto">
+        <button style="margin-bottom:5px" type="button" id="getshortestroute" class="btn btn-success" title="find shortest path between nodes"> Start Route</button>
+      </div>
+      <div class="col-auto">
+        <button type="button" id="clearmap"  class="btn btn-danger"  > Clear Map</button>
       </div>
     </div>
-
-
-    <div class="row">
+  </form>
+  <div class="container-login100" style="background-image: url('c/images/bg-01.jpg');">
+    <div id="id7" class="row">
       <div class="col-lg-12">
-
-
         <div id="svg-map" style="opacity: 80%;;width: 1300px; height: 800px ;margin-left: 120px; margin-right: 120px;" class="card">
-
         </div>
         <form style="margin-top:5px;">
-
-
           <div class="form-row align-items-center">
-
             <div class="col-auto" style="margin-left: 120px;">
               <button type="button" class="btn btn-success" id="data-export"> Export Data</button>
             </div>
@@ -117,29 +76,19 @@
                 <input type="file" id="data-import" class="custom-file-input">
                 <span class="custom-file-control">Import Data</span>
               </label>
-
-
-            </div>
-
-
-
-
-
-
+           </div>
           </div>
-
-
-
         </form>
       </div>
     </div>
-
+     <!-- Main Map Canvas -->
+     
+       
+     
 
     <!-- Site footer -->
-    <footer class="footer">
-      
+    <footer class="footer">  
     </footer>
-
   </div>
   <!-- /container -->
 
@@ -153,14 +102,14 @@
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
     crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3@3.3.0/d3.min.js"></script>
+    
     
   
   <script
   src="https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.js">
 </script>
 
-  <script src="js/main1.js"></script>
+  
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="js/ie10-viewport-bug-workaround.js"></script>
 </div>
@@ -173,9 +122,9 @@
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
-  display: flex;
+  
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   padding: 15px;
 
@@ -183,11 +132,11 @@
   background-position: center;
   background-size: cover;
   position: relative;
-  z-index: 1;  
+  z-index: 0;  
 }
 .container-login100::before {
   content: "";
-  display: block;
+  
   position: absolute;
   z-index: -1;
   width: 100%;
@@ -196,10 +145,32 @@
   left: 0;
   background-color: rgba(32, 24, 24, 0.9);
 }
-</style>
-<script>
-  
 
-</script>
+#id7{
+  
+ 
+ margin-left: 40px;
+
+
+}
+#ids{
+  position:relative;
+  
+  
+  
+}
+form{
+  position:absolute;
+  margin-top: 67px;
+  z-index: 1;
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/d3@3.3.0/d3.min.js"></script>
+<script type="text/javascript" src="js/d3.v3.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="js/main1.js"></script>
+
 
 </html>

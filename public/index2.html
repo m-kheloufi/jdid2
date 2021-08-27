@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="22-NAVIGATOR">
+    <meta name="author" content="kheloufi mehadji">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+    <title>22-NAVIGATOR</title>
+  
+    
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+      crossorigin="anonymous">
+      <link 
+      rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.css"
+      />
+    <!-- Custom styles for this template -->
+    <link href="style/justified-nav.css" rel="stylesheet">
+</head>
+<!-- https://router.hereapi.com/v8/routes?transportMode=pedestrian&return=summary&origin=35.20650,-0.61903&destination=35.2275,-0.6271&apiKey=wZKh2gt07q2EsQoCHRUIkGP6bQfgdq577hRfEIJITOc -->
+
+<body>
+    <div class="row">
+        <div class="col-lg-12">
+  
+  
+          <div id="svg-map" style="opacity: 80%;;width: 1300px; height: 800px ;margin-left: 120px; margin-right: 120px;" class="card">
+  
+          </div>
+          <form style="margin-top:5px;">
+  
+  
+            <div class="form-row align-items-center">
+  
+              <div class="col-auto" style="margin-left: 120px;">
+                <button type="button" class="btn btn-success" id="data-export"> Export Data</button>
+              </div>
+              <div class="col-auto">
+                <label class="custom-file">
+                  <input type="file" id="data-import" class="custom-file-input">
+                  <span class="custom-file-control">Import Data</span>
+                </label>
+  
+  
+              </div>
+  
+  
+  
+  
+  
+  
+            </div>
+  
+  
+  
+          </form>
+        </div>
+      </div>
+    
+    <button id="A03" type="button" onclick="addBusRoute('A03'); addBusStationsByNumero('A03');"
+        style="background-color: red; color: black;">Ligne A03
+    </button>
+    <button id="A03 bis" type="button" onclick="addBusRoute('A03 bis'); addBusStationsByNumero('A03 bis')"
+        style="background-color: red; color: black;">Ligne
+        A03 bis
+    </button>
+    <button id="A11" type="button" onclick="addBusRoute('A11'); addBusStationsByNumero('A11')"
+        style="background-color: black; color: white;">Ligne A11
+    </button>
+    <button id="A16" type="button" onclick="addBusRoute('A16') ; addBusStationsByNumero('A16')"
+        style="background-color: blue; color: white;">Ligne A16
+    </button>
+    <button id="A17" type="button" onclick="addBusRoute('A17'); addBusStationsByNumero('A17')"
+        style="background-color: green; color: white;">Ligne A17
+    </button>
+    <button id="A22" type="button" onclick="addBusRoute('A22'); addBusStationsByNumero('A22')"
+        style="background-color: rgb(6, 170, 108); color: white;">Ligne
+        A22
+    </button>
+    <button id="A25" type="button" onclick="addBusRoute('A25'); addBusStationsByNumero('A25')"
+        style="background-color: rgb(255,0,255);">Ligne
+        A25
+    </button>
+    <button id="A27" type="button" onclick="addBusRoute('A27'); addBusStationsByNumero('A27')"
+        style="background-color: rgb(0,255,255);">Ligne
+        A27
+    </button>
+
+    <button id="tramway" type="button" onclick="addSubway(); " style="background-color: #FD7F2C;">
+        Tramway
+    </button>
+    <button id="stationsSubway" type="button" onclick="addSubwayStations(); " style="background-color: #FD7F2C;">
+        Add subway stations
+    </button>
+    <button id="stations" type="button" onclick="addBusStations(); " style="background-color: #076AB0; color: white">
+        Add bus stations
+    </button>
+    <button id="clearAllTheMap" type="button" onclick="clearAllTheMap()"
+        style="background-color: white; color: black">Reset the map
+    </button>
+    <button id="clearTheRoutes" type="button" onclick="clearTheMapRoutes()"
+        style="background-color: white; color: black">Remove the routes
+    </button>
+    <button id="clearTheMarkers" type="button" onclick="clearTheMapMarkers()"
+        style="background-color: white; color: black">Remove the markers
+    </button>
+    <!-- <script type="module" src="http://127.0.0.1:8887/leaflet.js"></script> -->
+    <script>
+        function clearAllTheMap() {
+            chemin.clearLayers();
+            markers.clearLayers();
+        }
+
+        function clearTheMapRoutes() {
+            chemin.clearLayers();
+        }
+
+        function clearTheMapMarkers() {
+            markers.clearLayers();
+        }
+
+        var chemin = L.layerGroup();
+        var markers = L.layerGroup();
+        var sequence = 1;
+        var id = 0;
+        var graphmap, svg, g;
+
+        var map = L.map('svg-map', {
+            center: [35.20118653849822, -0.6343081902114373],
+            // center: [35.217417796971496, -0.6221218677165964],
+            zoom: 14,
+            maxZoom: 19
+        });
+
+
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            subdomains: ['a', 'b', 'c']
+        }).addTo(map);
+
+        let lat, lon;
+        var selector = L.control({
+    position: 'topright'
+  });
+selector.onAdd = function(map) {
+    //create div container
+    var div = L.DomUtil.create('div', 'mySelector');
+    //create select element within container (with id, so it can be populated later)
+    div.innerHTML = '<select id="marker_select"><option value="init">(select station)</option></select>';
+    return div;
+  };
+  selector.addTo(map);
+
+
+ 
+        var featureGroup = L.featureGroup().addTo(map);
+
+        var drawControl = new L.Control.Draw({
+            position: 'topright',
+            draw: {
+                polygon: false,
+                rectangle: false,
+                circle: false,
+                circlemarker: false,
+            },
+            edit: {
+                featureGroup: featureGroup
+            }
+        }).addTo(map);
+
+        map.on('draw:created', function (e) {
+            featureGroup.addLayer(e.layer);
+        }
+        );
+
+        function getLatLngs(layer) {
+            var lng, lat, chemin = [];
+            if (layer instanceof L.Polyline) {
+                var current = new Date;
+                var latlngs = layer.getLatLngs();
+                var type = prompt("Saisir le type du polyline", "Correspondance");
+                console.log("Test56 " + latlngs);
+
+                for (var i = 0; i < latlngs.length; i++) {
+                    var latlngs1 = latlngs[i];
+                    chemin.push("{\"latitude\": " + latlngs[i].lat + "," + "\"longitude\": " + latlngs[i].lng + ","
+                        + "\"ID\": " + (sequence + 1)
+                        + "," + "\"type\": \"" + type + "\"" + "}");
+                    sequence += 1;
+                    if (i === 0) {
+                        lng = latlngs[i].lng;
+                        lat = latlngs[i].lat;
+                    }
+                }
+                ;
+
+
+                const data = "[" + chemin.join(",") + "]"
+                const optionsPost = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: data
+                };
+                const response = fetch('/correspondance', optionsPost);
+                console.log(data)
+                return "[" + chemin.join(",") + "]";
+            } else if (layer instanceof L.Marker) {
+
+                var nomFr = prompt("Saisir le nom de la station en Français", "");
+                var type = prompt("Saisir le type de la station", "bus");
+
+                if (nomFr != null && type != null) {
+                    layer.bindTooltip(nomFr + " " + type,
+                        {
+                            permanent: true,
+                            direction: 'right'
+                        })
+                    if (type === 'tramway') {
+                        var numero = prompt("Saisir le numero de la station", "");
+                        const data = "{\"latitude\": " + layer.getLatLng().lat + ", " + "\"longitude\" :" + layer.getLatLng().lng
+                            + ", " + "\"nomFr\": \"" + nomFr + "\"" + ", " + "\"type\": \"" + type + "\"" + ", " + "\"numero\": \"" + numero + "\"" + "}";
+                        console.log(data);
+                        id = id + 1;
+                        const optionsPost = {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: data
+                        };
+                        const response = fetch('/stations_sba', optionsPost);
+                        return "{\"latitude\": " + layer.getLatLng().lat + ", " + "\"longitude\" :" + layer.getLatLng().lng + "}";
+                    } else if (type === 'bus') {
+                        var nomligne = prompt("Saisir le numéro de la ligne", "A27");
+                        const data = "{\"latitude\": " + layer.getLatLng().lat + ", " + "\"longitude\" :" + layer.getLatLng().lng
+                            + ", " + "\"nomFr\": \"" + nomFr + "\"" + ", " + "\"type\": \"" + type + "\"" + ", " + "\"numero\": \"" + nomligne + "\"" + "}";
+                        const optionsPost = {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: data
+                        };
+                        const response = fetch('/stations_sba', optionsPost);
+                        return "{\"latitude\": " + layer.getLatLng().lat + ", " + "\"longitude\" :" + layer.getLatLng().lng + "}";
+                    }
+                }
+
+                return "{\"latitude\": " + layer.getLatLng().lat + ", " + "\"longitude\" :" + layer.getLatLng().lng + "}";
+            }
+        }
+        ;
+
+        map.on('draw:created', function (e) {
+            var layer = e.layer;
+            getLatLngs(layer)
+        });
+
+
+        async function addSubwayStations() {
+            const response = await fetch('/stations_sba/tramway');
+            const data = await response.json();
+            var subway_station = L.icon({
+                iconUrl: 'pin_subway.png',
+                iconSize: [35, 35], // size of the icon
+                iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
+                popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
+            });
+
+            for (item of data) {
+                var station = L.marker([item.latitude, item.longitude], { icon: subway_station }).bindPopup(
+                    "<b>" + item.nomFr + "</b>"
+                ).addTo(markers);
+                markers.addTo(map);
+            }
+
+        }
+
+        async function addBusStations() {
+            const response = await fetch('/stations_sba/bus');
+            const data = await response.json();
+            var bus_stop_icon = L.icon({
+                iconUrl: 'pin_bus.png',
+
+
+                iconSize: [35, 35], // size of the icon
+                iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
+                popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
+            });
+
+            for (item of data) {
+                var station = L.marker([item.latitude, item.longitude], { icon: bus_stop_icon }).bindPopup(
+                    "<b>" + item.nomFr + "</b>" + "<br>" + " <b> " + item.numero + "</b>"
+                ).addTo(markers);
+                markers.addTo(map)
+            }
+
+        }
+
+        async function addBusStationsByNumero(numero) {
+            console.log("add stations by bus number");
+            const response = await fetch('/stations_sba/bus/' + numero);
+            const data = await response.json();
+            if (numero === 'A03' || numero === 'A03 bis') {
+                var bus_stop_icon = L.icon({
+                    iconUrl: 'pin_bus_3.png',
+
+
+                    iconSize: [35, 35], // size of the icon
+                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
+                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
+                });
+            } else if (numero === 'A11') {
+                var bus_stop_icon = L.icon({
+                    iconUrl: 'pin_bus_11.png',
+
+
+                    iconSize: [35, 35], // size of the icon
+                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
+                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
+                });
+            }
+            else if (numero === 'A16') {
+                var bus_stop_icon = L.icon({
+                    iconUrl: 'pin_bus_16.png',
+
+
+                    iconSize: [35, 35], // size of the icon
+                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
+                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
+                });
+            }
+            else if (numero === 'A17') {
+                var bus_stop_icon = L.icon({
+                    iconUrl: 'pin_bus_17.png',
+
+
+                    iconSize: [35, 35], // size of the icon
+                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
+                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
+                });
+            }
+            else if (numero === 'A22') {
+                var bus_stop_icon = L.icon({
+                    iconUrl: 'pin_bus_22.png',
+
+
+                    iconSize: [35, 35], // size of the icon
+                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
+                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
+                });
+            }
+            else if (numero === 'A25') {
+                var bus_stop_icon = L.icon({
+                    iconUrl: 'pin_bus_25.png',
+
+
+                    iconSize: [35, 35], // size of the icon
+                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
+                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
+                });
+            }
+            else if (numero === 'A27') {
+                var bus_stop_icon = L.icon({
+                    iconUrl: 'pin_bus_27.png',
+
+
+                    iconSize: [35, 35], // size of the icon
+                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
+                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
+                });
+            }
+
+            for (item of data) {
+                var station = L.marker([item.latitude, item.longitude], { icon: bus_stop_icon }).bindPopup(
+                    "<b>" + item.nomFr + "</b>" + "<br>" + " <b> " + item.numero + "</b>"
+                ).addTo(markers);
+                markers.addTo(map)
+            }
+
+        }
+
+        async function addBusRoute(numero) {
+            const response = await fetch('/bus/' + numero);
+            const data = await response.json();
+            for (var i = 0; i < data.length; i += 1) {
+                if ((i + 1) == data.length) {
+                } else {
+                    var pointA = new L.LatLng(data[i].latitude, data[i].longitude)
+                    var pointB = new L.LatLng(data[i + 1].latitude, data[i + 1].longitude)
+                    var pointList = [pointA, pointB];
+                    // console.log("|" + pointList + "|")
+                    if (numero === "A03") {
+                        var firstpolyline = new L.Polyline(pointList, {
+                            color: 'red',
+                            weight: 5,
+                            opacity: 0.8,
+                            dashArray: "2,5",
+                            smoothFactor: 1
+                        });
+                        firstpolyline.addTo(chemin)
+                    } else if (numero === "A03 bis") {
+                        var firstpolyline = new L.Polyline(pointList, {
+                            color: 'red',
+                            weight: 5,
+                            opacity: 0.8,
+                            dashArray: "2,5",
+                            smoothFactor: 1
+                        });
+                        firstpolyline.addTo(chemin)
+                    } else if (numero === "A11") {
+                        var firstpolyline = new L.Polyline(pointList, {
+                            color: 'black',
+                            weight: 5,
+                            opacity: 0.8,
+                            dashArray: "2,5",
+                            smoothFactor: 1
+                        });
+                        firstpolyline.addTo(chemin)
+                    } else if (numero === "A16") {
+                        var firstpolyline = new L.Polyline(pointList, {
+                            color: 'blue',
+                            weight: 5,
+                            opacity: 0.8,
+                            dashArray: "2,5",
+                            smoothFactor: 1
+                        });
+                        firstpolyline.addTo(chemin)
+                    } else if (numero === "A17") {
+                        var firstpolyline = new L.Polyline(pointList, {
+                            color: 'green',
+                            weight: 5,
+                            opacity: 0.8,
+                            dashArray: "1,5",
+                            smoothFactor: 1
+                        });
+                        firstpolyline.addTo(chemin)
+                    } else if (numero === "A25") {
+                        var firstpolyline = new L.Polyline(pointList, {
+                            color: 'rgb(255,0,255)',
+                            weight: 5,
+                            opacity: 0.8,
+                            dashArray: "2,5",
+                            smoothFactor: 1
+                        });
+                        firstpolyline.addTo(chemin)
+                    } else if (numero === "A27") {
+                        var firstpolyline = new L.Polyline(pointList, {
+                            color: 'rgb(0,255,255)',
+                            weight: 5,
+                            opacity: 0.8,
+                            dashArray: "2,5",
+                            smoothFactor: 1
+                        });
+                        firstpolyline.addTo(chemin)
+                    } else if (numero === "A22") {
+                        var firstpolyline = new L.Polyline(pointList, {
+                            color: 'rgb(6, 170, 108)',
+                            weight: 5,
+                            opacity: 0.8,
+                            dashArray: "2,5",
+                            smoothFactor: 1
+                        });
+                        firstpolyline.addTo(chemin)
+                    }
+                }
+                ;
+                chemin.addTo(map);
+                // console.log("last :"+i);
+            }
+
+        }
+
+        async function addSubway() {
+            const response = await fetch('/subway');
+            const data = await response.json();
+            for (var i = 0; i < data.length; i += 1) {
+                if ((i + 1) == data.length) {
+                } else {
+                    var pointA = new L.LatLng(data[i].latitude, data[i].longitude)
+                    var pointB = new L.LatLng(data[i + 1].latitude, data[i + 1].longitude)
+                    var pointList = [pointA, pointB];
+                    // console.log("|" + pointList + "|")
+                    var firstpolyline = new L.Polyline(pointList, {
+                        color: '#FD7F2C',
+                        weight: 5,
+                        opacity: 1,
+
+                        smoothFactor: 1
+                    });
+                    firstpolyline.addTo(chemin)
+                }
+                ;
+                // console.log("last :"+i);
+            }
+            chemin.addTo(map);
+        }
+
+        addCorrespondance();
+        async function addCorrespondance() {
+            const response = await fetch('/correspondance');
+            const data = await response.json();
+            for (var i = 0; i < data.length; i += 1) {
+                if ((i + 1) == data.length) {
+                } else {
+                    var pointA = new L.LatLng(data[i].latitude, data[i].longitude)
+                    var pointB = new L.LatLng(data[i + 1].latitude, data[i + 1].longitude)
+                    var pointList = [pointA, pointB];
+                    // console.log("|" + pointList + "|")
+                    var firstpolyline = new L.Polyline(pointList, {
+                        color: 'orange',
+                        weight: 5,
+                        opacity: 1,
+                        dashArray: "2,5",
+                        smoothFactor: 1
+                    });
+                    firstpolyline.addTo(chemin)
+                }
+                ;
+                // console.log("last :"+i);
+            }
+            chemin.addTo(map);
+        }
+       
+
+    </script>
+    <script src="js/main3.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@3.3.0/d3.min.js"></script>
+    
+  
+  <script
+  src="https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.js">
+</script>
+
+  
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="js/ie10-viewport-bug-workaround.js"></script>
+    
+</body>
+
+</html>
