@@ -85,19 +85,19 @@
 
 
 })(jQuery);
-function myFunction1() {
+// function myFunction1() {
     
-    location.href = "/index.html";
-    var vis="false";
-    localStorage.setItem("viss",vis);
-    
-
-}
-function myFunction2() {
-    
-    location.href = "/index.html";
-    var vis="true";
-    localStorage.setItem("viss",vis);
+//     location.href = "/images/test/index.html";
+//     var vis="false";
+//     localStorage.setItem("viss",vis);
     
 
-}
+// }
+// function myFunction2() {
+    
+//     location.href = "/index.html";
+//     var vis="true";
+//     localStorage.setItem("viss",vis);
+    
+
+// }

@@ -4,11 +4,13 @@
 {"latitude":35.16002534664128,"longitude":-0.6963340321201873,"nomFr":"Sidi Lahcene, Terminus A11","type":"bus","numero":"A11_13","_id":"27oLa3AQyFyz10Lb"}
 {"latitude":35.20609756862548,"longitude":-0.614850364845685,"nomFr":"Cité Universitaire 2000","type":"bus","numero":"A03_08","_id":"2YtBfSUKbgONdkRb"}
 {"latitude":35.20350633875064,"longitude":-0.6387243387181085,"nomFr":"Ibn Rochd","type":"bus","numero":"A17_04","_id":"4005k5lif6XyuCMw"}
+{"latitude":35.222669694856535,"longitude":-0.6120586395263673,"nomFr":"test a3-1","type":"bus","numero":"A03","_id":"427bF9UzJkqHqPWB"}
 {"latitude":35.19344161801317,"longitude":-0.6330018670955485,"nomFr":"La Coupole, 8 Mai 1945","type":"bus","numero":"A03bis_00","_id":"4Bzm5fOcVU3R3jwx"}
 {"latitude":35.217246876694404,"longitude":-0.6131913241403497,"nomFr":"Rond Point, Rocher","type":"bus","numero":"A22_04","_id":"5DI9XCzlFy19PTdC"}
 {"latitude":35.19918,"longitude":-0.63096,"nomFr":"Station Amir Abdelkader","type":"bus","numero":"A11_00","_id":"5YVljHD4lOMnzMxG"}
 {"latitude":35.22105962810679,"longitude":-0.6376082218257406,"nomFr":"Campus","type":"bus","numero":"A17_10","_id":"6Jn3sMv0jKQyCPb3"}
 {"latitude":35.209712879256735,"longitude":-0.6486322458585759,"nomFr":"Cité AADL 1","type":"bus","numero":"A03bis_07","_id":"6q7gZ5ge1KJo5fQV"}
+{"latitude":35.2175124603522,"longitude":-0.6226673124911032,"nomFr":"test-a99","type":"bus","numero":"a99","_id":"6x75QbIfuAM71EsT"}
 {"latitude":35.197290556570906,"longitude":-0.6124745943579458,"nomFr":"Soricor Cité militaire","type":"bus","numero":"A16_06","_id":"70s7vQQDb1VVC8G9"}
 {"latitude":35.21542370467783,"longitude":-0.6329327359438253,"nomFr":"Fac de droit","type":"tramway","numero":"5","_id":"7EShRsrTGMwKnrQg"}
 {"latitude":35.16930488052399,"longitude":-0.6912473581912805,"nomFr":"INSFP Chaouti, Sidi Lahcene","type":"bus","numero":"A11_10","_id":"7QPxwBoNzeHvyDPb"}
@@ -28,6 +30,7 @@
 {"latitude":35.18526092202943,"longitude":-0.6506717534729091,"nomFr":"Gare routière Sud","type":"tramway","numero":"21","_id":"DiL5bQk8j0eeg6mZ"}
 {"latitude":35.21408697802359,"longitude":-0.6386814131997288,"nomFr":"Centre El Niaâma","type":"bus","numero":"A17_08","_id":"DkgDoMH4dDwCRbBh"}
 {"latitude":35.191451320854114,"longitude":-0.628581755433244,"nomFr":"Petit Vichy","type":"bus","numero":"A16_01","_id":"DoQPX8r786SC0cRk"}
+{"latitude":35.22588096787835,"longitude":-0.6363744738337119,"nomFr":"test6-a99","type":"bus","numero":"a99","_id":"EGmpFdiTfx8vPP9Q"}
 {"latitude":35.18276621582162,"longitude":-0.6233751617417572,"nomFr":"Palais de Justice","type":"bus","numero":"A25_04","_id":"ExcSODsel4HdTXHR"}
 {"latitude":35.20157,"longitude":-0.61173,"nomFr":"Campo","type":"bus","numero":"A03_06","_id":"F2jEEXCuik9UNRUh"}
 {"latitude":35.22511321779137,"longitude":-0.590154648089083,"nomFr":"we2","type":"tramway","numero":"11111","_id":"FAqGmt7jHNZnoYik"}
@@ -51,6 +54,7 @@
 {"latitude":35.2071882420508,"longitude":-0.6392501763183512,"nomFr":"Maison de retraite","type":"bus","numero":"A17_06","_id":"OBnMHIdYYu4Z2ZIP"}
 {"latitude":35.196396286426655,"longitude":-0.621936420521716,"nomFr":"Aissat Idir 2","type":"bus","numero":"A03_03","_id":"OZTef6deEX9FevTU"}
 {"latitude":35.21141345868157,"longitude":-0.627985039622121,"nomFr":"Wiam","type":"tramway","numero":"12","_id":"PHyBYxh4qHrjfKAl"}
+{"latitude":35.22707639856901,"longitude":-0.6256198856863193,"nomFr":"test4-a99","type":"bus","numero":"a99","_id":"Pe5dzaBxQThrUkSs"}
 {"latitude":35.21985008498701,"longitude":-0.6084405354665723,"nomFr":"Rocher, Terminus A03","type":"bus","numero":"A03_14","_id":"QJbDCTezOp49CEzb"}
 {"latitude":35.21678670492869,"longitude":-0.6151652516324903,"nomFr":"Les Impôts, Rocher","type":"bus","numero":"A16_14","_id":"QaVGw9pPHmtFrkIO"}
 {"latitude":35.217588716888685,"longitude":-0.6068308285270297,"nomFr":"Lycée Miloua Maachou","type":"bus","numero":"A03_13","_id":"QgdLgxeYlbY6FO8K"}
@@ -60,6 +64,7 @@
 {"latitude":35.202498169449115,"longitude":-0.6385633680241544,"nomFr":"Fac Centrale","type":"bus","numero":"A17_03","_id":"T7MAAg7ZeUH4u94y"}
 {"latitude":35.20901,"longitude":-0.61641,"nomFr":"La Poste CPR, Les Cascades","type":"bus","numero":"A03_09","_id":"U90Y4YMhF1vFfDZ9"}
 {"latitude":35.218355660804185,"longitude":-0.627566269094726,"nomFr":"AADL Benhamouda","type":"tramway","numero":"10","_id":"UOqRIgwrCuvioyWA"}
+{"latitude":35.22784763483015,"longitude":-0.6309413883718662,"nomFr":"test5-a99","type":"bus","numero":"a99","_id":"Ufqt9vCorf24OLpq"}
 {"latitude":35.19841860890055,"longitude":-0.6354296208519373,"nomFr":"Bibliothèque Qabbati","type":"bus","numero":"A17_02","_id":"UjkgroPWrwDuhn3q"}
 {"latitude":35.18922569561231,"longitude":-0.6338998675346376,"nomFr":"Prado","type":"bus","numero":"A25_01","_id":"UqECKwhLQt4lcdU7"}
 {"latitude":35.20973479416658,"longitude":-0.6190399260206481,"nomFr":"Cadastre","type":"bus","numero":"A22_02","_id":"VA2WFFRwhu3BdMR9"}
@@ -67,6 +72,7 @@
 {"latitude":35.1724051315168,"longitude":-0.552314716691127,"nomFr":"Telmouni 1","type":"bus","numero":"A25_08","_id":"VzO8sEnSlVFwgVMm"}
 {"latitude":35.21921024691649,"longitude":-0.6124186648093733,"nomFr":"Batiments Citroen","type":"bus","numero":"A22_05","_id":"W1orW5B3qCZ3jL8j"}
 {"latitude":35.19292432079783,"longitude":-0.6156296199594414,"nomFr":"La Poste Sidi Yacine, La Briemer","type":"bus","numero":"A16_03","_id":"WGgz9BoPJMlmfF3c"}
+{"latitude":35.22216835970073,"longitude":-0.6293964359792881,"nomFr":"test3-a99","type":"bus","numero":"a99","_id":"WcvShcfHQ6gpUauQ"}
 {"latitude":35.1930163824076,"longitude":-0.6323621999796725,"nomFr":"Coupole, Didouche Mourad","type":"bus","numero":"A17_00","_id":"Xn6hBL4dihQ6SXnh"}
 {"latitude":35.222295447024074,"longitude":-0.6299030912751858,"nomFr":"Gare routière Nord, Sogral","type":"bus","numero":"A17_11","_id":"YQhM6ZTScL53IVQB"}
 {"latitude":35.25721926719096,"longitude":-0.5663467887063823,"nomFr":"Sidi Brahim,Terminus A22","type":"bus","numero":"A22_07","_id":"YVDCeQUZeMIGJHNg"}
@@ -74,7 +80,9 @@
 {"latitude":35.18001712750268,"longitude":-0.6444031741567625,"nomFr":"Fac de Médecine","type":"bus","numero":"A11_04","_id":"ZNgh1yYG5pr66uJp"}
 {"latitude":35.19215275272939,"longitude":-0.6280533068919382,"nomFr":"Aissat Idir 1","type":"bus","numero":"A03_01","_id":"aMO2mGXNn0mj9LK1"}
 {"latitude":35.19841860890055,"longitude":-0.6354296208519373,"nomFr":"Bibliothèque Qabbati","type":"bus","numero":"A03bis_02","_id":"aRhCA28HM2x0USID"}
+{"latitude":35.22254173209152,"longitude":-0.6091618537902833,"nomFr":"test a03","type":"bus","numero":"A03","_id":"aWdRQZqCB3oePHOG"}
 {"latitude":35.201402319056804,"longitude":-0.6390101026899542,"nomFr":"Fac Centrale","type":"bus","numero":"A03bis_03","_id":"aqUuLryJ4z0DElrr"}
+{"latitude":35.205591017832624,"longitude":-0.6259288779983764,"nomFr":"test2-a99","type":"bus","numero":"a99","_id":"awhT5xm6K9BwCeHg"}
 {"latitude":35.216098633707595,"longitude":-0.6244667584452457,"nomFr":"Environnement","type":"tramway","numero":"4","_id":"bJPhA7Ld8hAmd2yB"}
 {"latitude":35.22348654829907,"longitude":-0.6019992830988486,"nomFr":"hi","type":"tramway","numero":"1001","_id":"bhOwTLxWM9j03PV0"}
 {"latitude":35.183717633022226,"longitude":-0.6515717357274698,"nomFr":"Sakia El Hamra","type":"bus","numero":"A11_07","_id":"bsk8k6pdOib5uhVu"}
@@ -104,6 +112,7 @@
 {"latitude":35.199710297011464,"longitude":-0.6247978198818506,"nomFr":"Houari Boumediene","type":"tramway","numero":"14","_id":"sERdJp7NeEsGlWPz"}
 {"latitude":35.178342198766764,"longitude":-0.646281165586209,"nomFr":"Cité Universitaire 1500","type":"bus","numero":"A11_05","_id":"teyxqYuisDYjzMFt"}
 {"latitude":35.216808617929075,"longitude":-0.6386000502345435,"nomFr":"Centre Niaâma","type":"tramway","numero":"6","_id":"tpGFhURjj12pSENc"}
+{"latitude":35.22174415097729,"longitude":-0.637447357439669,"nomFr":"test7-a99","type":"bus","numero":"a99","_id":"uCGyKBftXeUsXK3M"}
 {"latitude":35.21332,"longitude":-0.61591,"nomFr":"Gare routière Est, Ghalmi","type":"tramway","numero":"1","_id":"uE0NIMyLwBxqAWoH"}
 {"latitude":35.22509919619059,"longitude":-0.5928153994318565,"nomFr":"we","type":"tramway","numero":"207","_id":"v5It0T5FLZIfGs12"}
 {"latitude":35.22068186693859,"longitude":-0.589382171892794,"nomFr":"we4","type":"tramway","numero":"25678","_id":"xnXfWXM9tDgdYGfv"}

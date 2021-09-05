@@ -1,0 +1,53 @@
+{
+      "lines": [
+            {
+                  "name": "tram",
+                  "value": "0"
+            },
+            {
+                  "name": "A03",
+                  "value": "1"
+            },
+            {
+                  "name": "A03bis",
+                  "value": "2"
+            },
+            {
+                  "name": "A03_A03bis",
+                  "value": "3"
+            },
+            {
+                  "name": "A11",
+                  "value": "4"
+            },
+            {
+                  "name": "A16",
+                  "value": "5"
+            },
+            {
+                  "name": "A17",
+                  "value": "6"
+            },
+            {
+                  "name": "A22",
+                  "value": "7"
+            },
+            {
+                  "name": "A25",
+                  "value": "8"
+            },
+            {
+                  "name": "A27",
+                  "value": "9"
+            },
+            {
+                  "name": "A03_A16",
+                  "value": "10"
+            },
+          
+            {
+                  "name": "a99",
+                  "value": "16"
+            }
+      ]
+}

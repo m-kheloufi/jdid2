@@ -43,6 +43,8 @@ app2.use(session({
     resave: true,
     saveUninitialized: true
 }));
+app.use('/images',express.static(__dirname+'/images'))
+app2.use('/images',express.static(__dirname+'/images'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app2.use(bodyParser.urlencoded({ extended: true }));
@@ -50,6 +52,9 @@ app2.use(bodyParser.json());
 
 app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/index3.html'));
+});
+app.get('/enter', function (request, response) {
+    response.sendFile(path.join(__dirname + '/public/test/index.html'));
 });
 app2.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/index.html'));
@@ -59,10 +64,31 @@ app2.get('/admin', function (request, response) {
     
     response.sendFile(path.join(__dirname + '/index4.html'));}
     else {
-        response.send('Please login to view this page!');
+        response.sendFile(path.join(__dirname + '/plsLogin.html'));
     }
 });
-
+app2.get('/station', function (request, response) {
+    if (request.session.loggedin) {
+    
+    response.sendFile(path.join(__dirname + '/index5.html'));}
+    else {
+        response.sendFile(path.join(__dirname + '/plsLogin.html'));
+    }
+});
+app2.get('/polyline', function (request, response) {
+    if (request.session.loggedin) {
+    
+    response.sendFile(path.join(__dirname + '/index6.html'));}
+    else {
+        response.sendFile(path.join(__dirname + '/plsLogin.html'));
+    }
+});
+app2.get('/wrong', function (request, response) {
+    
+    
+    response.sendFile(path.join(__dirname + '/psswr.html'));
+   
+});
 app2.post('/auth', function (request, response) {
     var username = request.body.username;
     var password = request.body.password;
@@ -83,7 +109,7 @@ app2.post('/auth', function (request, response) {
                 localStorage.setItem("viss", vis);
                 response.redirect('/home');
             } else {
-                response.send('Incorrect Username and/or Password!');
+                response.redirect('/wrong');
             }
             response.end();
         });
@@ -102,7 +128,7 @@ app2.get('/home', function (request, response) {
 
 
     } else {
-        response.send('Please login to view this page!');
+        response.sendFile(path.join(__dirname + '/plsLogin.html'));
     }
     response.end();
 });
@@ -129,6 +155,8 @@ app.use(express.json())
 app2.use(express.static('public'));
 app2.use(express.static('static'));
 app2.use(express.json())
+app.use(express.static(__dirname + '/public/test'));
+app2.use(express.static(__dirname + '/public/test'));
 
 
 const subway = new Datastore('polyline.db')
@@ -157,12 +185,163 @@ app.post('/stations_sba', (request, response) => {
         longitude: data.lon
     })
 });
+app2.post('/addline/:name', (request, response) => {
+    var name = request.params.name;
+    var tr3 = require('./lines.json');
+    var t=tr3.lines;
+    console.log('chouf body '+request.body)
+    const datas = request.body;
+    const fs = require('fs');
+  
+    
+    // convert JSON object to string
+    
+    console.log('datas !!!!!! '+datas)
+    t.push(datas)
+    console.log('push !!!!!! '+t)
+    // write JSON string to a file
+    var js={"lines":t}
+    var dat=JSON.stringify(js)
+    fs.writeFile('lines.json', dat, (err) => {
+        if (err) {
+            throw err;
+        }
+        console.log("JSON data is saved.");
+    });
+    var datT=JSON.stringify(datas)
+    console.log('name ta3eh ---- '+name)
+ 
+    console.log('name ta3eh ---- '+datT)
+    // var file='';
+    // var dat1=JSON.stringify(file)
+    // fs.writeFile('public/mapdata/'+name+'.json', dat1, (err) => {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     console.log("JSON data is saved.");
+    // });
+    response.json({
+        status: 'success',
+       
+    })
+   
+});
+app.post('/addline', (request, response) => {
+    
+
+    console.log(request.body)
+    const data = request.body;
+    const fs = require('fs');
+  
+    
+    // convert JSON object to string
+    const datas = JSON.stringify(data);
+   
+    // write JSON string to a file
+    fs.appendFile('lines.json', datas, (err) => {
+        if (err) {
+            throw err;
+        }
+        console.log("JSON data is saved.");
+    });
+
+    response.json({
+        status: 'success',
+       
+    })
+   
+});
+app.post('/mapdata/:type', (request, response) => {
+    var type = request.params.type;
+
+    console.log(request.body)
+    const data = request.body;
+    const fs = require('fs');
+  
+    
+    // convert JSON object to string
+    const datas = JSON.stringify(data);
+    if(type=='tram'){
+    // write JSON string to a file
+    fs.writeFile('public/mapdata/'+type+'.json', datas, (err) => {
+        if (err) {
+            throw err;
+        }
+        console.log("JSON data is saved.");
+    });}else if(type=='A03'){
+
+         fs.writeFile('A03.json', datas, (err) => {
+        if (err) {
+            throw err;
+        }
+        console.log("JSON data is saved.");
+    });
+
+    }
+
+    response.json({
+        status: 'success',
+       
+    })
+   
+});
+app.post('/mapdata1/:type', (request, response) => {
+    var type = request.params.type;
+
+    console.log(request.body)
+    const data = request.body;
+    const fs = require('fs');
+  
+    
+    // convert JSON object to string
+    const datas = JSON.stringify(data);
+    
+    // write JSON string to a file
+    fs.writeFile('public/mapdata/'+type+'point.json', datas, (err) => {
+        if (err) {
+            throw err;
+        }
+        console.log("JSON data is saved.");
+    });
+
+    response.json({
+        status: 'success',
+       
+    })
+   
+});
+app2.post('/mapdata/:type', (request, response) => {
+    var type = request.params.type;
+
+    console.log(request.body)
+    const data = request.body;
+    const fs = require('fs');
+  
+    
+    // convert JSON object to string
+    const datas = JSON.stringify(data);
+    
+    // write JSON string to a file
+    fs.writeFile('public/mapdata/'+type+'.json', datas, (err) => {
+        if (err) {
+            throw err;
+        }
+        console.log("JSON data is saved.");
+    });
+
+    response.json({
+        status: 'success',
+       
+    })
+   
+});
 
 
 app.post('/subway', (request, response) => {
     console.log(request.body)
     const data = request.body;
     subway.insert(data)
+    
     response.json({
         status: 'success',
         latitude: data.lat,
@@ -251,29 +430,29 @@ app.get('/bus/:numero', (request, response) => {
 
 app2.post('/stations_sba', (request, response) => {
     console.log(request.body)
-   var t = require('./public/mapdata/tram.json');
+//    var t = require('./public/mapdata/tram.json');
    
-    var m=t.nodes.length
+//     var m=t.nodes.length
     
-    // create a JSON object
-    const fs = require('fs');
-const nodes = {
-    "name":m,
-            "nomFr": request.body.nomFr,
-            "x": request.body.longitude,
-            "y": request.body.latitude
-};
-console.log('hi user ' +nodes);
-// convert JSON object to string
-const node = JSON.stringify(nodes);
+//     // create a JSON object
+//     const fs = require('fs');
+// const nodes = {
+//     "name":m,
+//             "nomFr": request.body.nomFr,
+//             "x": request.body.longitude,
+//             "y": request.body.latitude
+// };
+// console.log('hi user ' +nodes);
+// // convert JSON object to string
+// const node = JSON.stringify(nodes);
 
-// write JSON string to a file
-fs.appendFile('public/mapdata/tram.json', node, (err) => {
-    if (err) {
-        throw err;
-    }
-    console.log("JSON data is saved.");
-});
+// // write JSON string to a file
+// fs.appendFile('public/mapdata/tram.json', node, (err) => {
+//     if (err) {
+//         throw err;
+//     }
+//     console.log("JSON data is saved.");
+// });
     const data = request.body;
     stations_sba.insert(data)
     response.json({
@@ -380,6 +559,24 @@ app2.get('/stations_sba/bus', (request, response) => {
         }
         response.json(data);
     });
+})
+app2.get('/lines', (request, response) => {
+    t = require('./lines.json');
+    lines=t.lines;
+       var data= JSON.stringify(t);
+        response.json(lines);
+        console.log('hado lines 111: '+ lines[0].name)
+        console.log('hado lines : '+ JSON.stringify(t).name)
+    
+})
+app.get('/lines', (request, response) => {
+    t = require('./lines.json');
+    lines=t.lines;
+       var data= JSON.stringify(t);
+        response.json(lines);
+        console.log('hado lines 111: '+ lines[0].name)
+        console.log('hado lines : '+ JSON.stringify(t).name)
+    
 })
 app2.get('/stations_sba/tramway', (request, response) => {
     var data = request.params.type;
@@ -888,6 +1085,404 @@ else if (type.includes('A27')){
       
         console.log(datas);
         response.json(datas);
+    });
+
+
+
+})
+app.get('/draw/:type/:len1/:len2', (request, response) => {
+    var mapdata = request.params.mapdata;
+    var path = require('./public/mapdata/'+type+'point.json');
+    var type = request.params.type;
+    var t = require('./public/mapdata/'+type+'.json');
+    
+         var len1 =request.params.len1;
+         var len2=request.params.len2;    
+         console.log('len1 === '+len1)   
+         console.log('len2 === '+len2)   
+                    for(var j=0;j<1;j++){
+                         jj=j+1;
+                        var uu=JSON.stringify(path.coordinates[j])
+                        var Y1=uu.substring(1,uu.indexOf(','))
+                        var tabId = uu.split(",").pop(); 
+                        var  X1=tabId.replace(']','')
+                        t.nodes.push({"name":len1+j,"x":X1,"y":Y1});
+                        if(jj<path.coordinates.length){
+                        t.paths.push({"id":len2+j,"from":len1+j,"to":len1+jj})}        
+                    }
+                    console.log(t)
+                    response.json(t);
+
+})
+app.get('/indice/:type/:x1/:x2', (request, response) => {
+    var x1 = request.params.x1;
+    var x2 = request.params.x2;
+    var type = request.params.type;
+  var  a = [],
+  
+    ida = 0;
+var source;
+    var t = require('./public/mapdata/'+type+'.json');
+    var tram = t.nodes;
+    // console.log('length ' + tram.length);
+    for (var i = 0; i < tram.length; i++) {
+        if (!(tram[i].nomFr === undefined)) {
+            var d = distance(x1, x2, tram[i].x, tram[i].y);
+            a[ida] = d;
+            ida = ida + 1;
+
+        }
+    }
+    // console.log('array ' + a);
+    // console.log('min ' + Math.min.apply(null, a));
+    for (var i = 0; i < tram.length; i++) {
+        if (!(tram[i].nomFr === undefined)) {
+            var d = distance(x1, x2, tram[i].x, tram[i].y);
+            if (d == Math.min.apply(null, a)) {
+                // console.log('source ' + tram[i].nomFr);
+                source = i;
+                sourcename=tram[i].nomFr;
+                console.log('source' + source);
+                console.log('point '+x1+' '+x2)
+
+            }
+        }
+    }
+    response.json(source);
+
+
+})
+app.get('/result1/:type/:x1/:x2/:x3/:x4', (request, response) => {
+    var x1 = request.params.x1;
+    var x2 = request.params.x2;
+    var x3 = request.params.x3;
+    var x4 = request.params.x4;
+    var type = request.params.type;
+    var datas = [],
+    b = true,
+    source,
+    target,
+    a = [],
+    b = [],
+    ida = 0,
+    ida1 = 0,
+    idatas = 0,
+    w=false,
+    v=1,
+    q=0,
+    change;
+    var dtt=0;
+    var dtt2=0
+    var v2=1;
+    var v3=1;
+    var v8=1
+    var v9=1
+    var op=0;
+    var op1=0;
+    var targetname;
+    var sourcename;
+    var test=0;
+    var test1=0;
+    var bb=true;
+    var bb1=true;
+    var isource,itarget;
+   var t
+
+    var times=[105, 94, 98, 224, 100, 100, 95, 200, 120, 110, 150, 145, 120, 122, 85, 103, 78, 87, 110, 130, 130]
+
+    Result.find({}).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+if(type==='tram'){
+         t = require('./public/mapdata/tram.json');
+}else if (type.includes('A03')){
+         t = require('./public/mapdata/A03.json');
+}else if (type.includes('A03bis')){
+    t = require('./public/mapdata/A03bis.json');
+}else if (type.includes('A11')){
+    t = require('./public/mapdata/A11.json');
+}else if (type.includes('A16')){
+    t = require('./public/mapdata/A16.json');
+}else if (type.includes('A17')){
+    t = require('./public/mapdata/A17.json');
+}else if (type.includes('A22')){
+    t = require('./public/mapdata/A22.json');
+}else if (type.includes('A25')){
+    t = require('./public/mapdata/A25.json');
+}
+else if (type.includes('A27')){
+    t = require('./public/mapdata/A27.json');
+}
+        var tram = t.nodes;
+        console.log('length ' + tram.length);
+        for (var i = 0; i < tram.length; i++) {
+            if (!(tram[i].nomFr === undefined)) {
+                var d = distance(x1, x2, tram[i].x, tram[i].y);
+                a[ida] = d;
+                ida = ida + 1;
+
+            }
+        }
+        console.log('array ' + a);
+        console.log('min ' + Math.min.apply(null, a));
+        for (var i = 0; i < tram.length; i++) {
+            if (!(tram[i].nomFr === undefined)) {
+                var d = distance(x1, x2, tram[i].x, tram[i].y);
+                if (d == Math.min.apply(null, a)) {
+                    console.log('source ' + tram[i].nomFr);
+                    source = i;
+                    sourcename=tram[i].nomFr;
+                    console.log('source' + source);
+
+                }
+            }
+        }
+
+        for (var i = 0; i < tram.length; i++) {
+            if (!(tram[i].nomFr === undefined)) {
+                var d = distance(x3, x4, tram[i].x, tram[i].y);
+                b[ida1] = d;
+                ida1 = ida1 + 1;
+
+            }
+        }
+
+
+     
+        
+
+
+
+        for (var i = 0; i < tram.length; i++) {
+            if (!(tram[i].nomFr === undefined)) {
+                var d = distance(x3, x4, tram[i].x, tram[i].y);
+                if (d == Math.min.apply(null, b)) {
+                    console.log('target ' + tram[i].nomFr);
+                    targetname=tram[i].nomFr;
+                    target = i;
+                    console.log('target' + target);
+                    console.log('target name ' + target);
+
+                }
+            }
+        }
+
+        var nd6 = require('./nodes6.json');
+        for (var i=0;i<nd6.length;i++){
+            if(nd6[i].nomFr===targetname){
+                itarget=nd6[i].numero-1;
+               
+            }
+           
+        }
+      
+
+        for (var i=0;i<nd6.length;i++){
+            if(nd6[i].nomFr===sourcename){
+                isource=nd6[i].numero;
+            }
+        }
+        console.log('indice source  '+isource);
+        console.log('indice target  '+itarget);
+        
+        mapdata.allnodes = t.nodes;
+        mapdata.paths = t.paths;
+        mapdata.distances = [];
+        mapdata.getstate.selectedNode = null;
+        mapdata.getstate.fromNode = null;
+        mapdata.getstate.toNode = null;
+        function calculateDistancesbetweennodes() {
+            mapdata.distances = [];
+            for (var i = 0; i < mapdata.allnodes.length; i++) {
+                mapdata.distances[i] = [];
+                for (var j = 0; j < mapdata.allnodes.length; j++)
+                    mapdata.distances[i][j] = 'x';
+            }
+            for (var i = 0; i < mapdata.paths.length; i++) {
+                var sourceNodeId = parseInt(mapdata.paths[i].from);
+                var targetNodeId = parseInt(mapdata.paths[i].to);
+                var sourceNode = mapdata.allnodes[sourceNodeId];
+                var targetNode = mapdata.allnodes[targetNodeId];
+                var p1 = new LatLon(sourceNode.x, sourceNode.y);
+                var p2 = new LatLon(targetNode.x, targetNode.y);
+                var d = p1.distanceTo(p2);
+                mapdata.distances[sourceNodeId][targetNodeId] = d;
+                mapdata.distances[targetNodeId][sourceNodeId] = d;
+            };
+        };
+
+        calculateDistancesbetweennodes();
+
+        console.log('diji source' + source);
+        console.log('diji target' + target);
+        if(source<target){
+            change=source;
+        }else{change=target}
+        var results = dijkstra(source, target);
+        console.log('hadi iiiiiiiii ' +results.distance);
+        var point = {
+            x: '',
+            y: ''
+        };
+        function getpoint(name) {
+            var point = {
+                x: '',
+                y: ''
+            };
+
+            for (var i = 0; i < tram.length; i++) {
+                if (name == tram[i].name) {
+                    point.x = tram[i].x;
+                    point.y = tram[i].y;
+                    return point;
+                }
+            }
+
+
+        }
+        for (var i = 0; i < results.path.length; i++) {
+            var ds = {
+                x: '',
+                y: '',
+                name: ''
+            };
+            var diff;
+            diff=results.path[i].target-results.path[i].source;
+            var aba=0;
+            
+            aba=aba+1;
+            
+            if(diff >1){w=true;
+                
+            corr=true;}
+            if(w===true){
+                if(v9===1){
+                    var tr2 = require('./nodes7.json');
+                  
+                   
+                       
+                         
+                    var chn;
+                   
+                        for(var iw=itarget;iw>=isource;iw--){
+                            console.log(' jjjjj '+tr2[iw].id)
+                            console.log(' jjjjj '+tr2[iw].distance)
+                            dtt2=dtt2+tr2[iw].distance;
+                                
+                        }
+                        
+                    
+                   
+                         dtt2=dtt2-875;
+                         console.log('duréé with corrsp  '+dtt2);
+                        
+
+
+
+
+
+                    v9=2
+                }
+             
+
+
+
+              
+
+             
+            if(v===1){
+                q=results.path[i].source;
+                var x01 = getpoint(q).x;
+            var y01 = getpoint(q).y;
+            ds.x = x01;
+            ds.y = y01;
+            ds.name=q
+            datas[idatas] = ds;
+            idatas=idatas+1;
+            v=0;
+            }else{ 
+            
+               
+        
+           
+            var x01 = getpoint(results.path[i].source).x;
+            var y01 = getpoint(results.path[i].source).y;
+            ds.x = x01;
+            ds.y = y01;
+            ds.name=results.path[i].source;
+            
+            datas[idatas] = ds;
+            q=results.path[i].target;
+            idatas=idatas+1;
+        
+        }
+    }
+            else{
+
+                if(v8===1){
+                     var tr3 = require('./nodes7.json');
+                  
+                   
+                       
+                        
+                        for(var z=isource;z<=itarget;z++){ 
+                            dtt=dtt+tr3[z].distance;
+
+                  console.log('ssssssssss '+tr3[z].distance);}
+                         
+                         console.log('duréé without corrsp  '+dtt);
+                         v8=2
+                         
+                }
+               
+                q=results.path[i].source;
+                
+            
+            var x01 = getpoint(q).x;
+            var y01 = getpoint(q).y;
+            ds.x = x01;
+            ds.y = y01;
+            ds.name = idatas+change;
+             datas[idatas] = ds;
+            idatas = idatas + 1;
+           
+        }}
+        var x011 = getpoint(target).x;
+        console.log('point te3 '+x011);
+        var y011 = getpoint(target).y;
+        console.log('point te3 '+y011);
+        console.log('point te3 idatas '+idatas);
+        var ds11 = {
+            x: '',
+            y: '',
+            name: ''
+        };
+        ds11.x=x011;
+        ds11.y=y011;
+        ds11.name=target;
+        datas[idatas]=ds11;
+        var datass = {
+            datas: '',
+            duration:''
+        };
+       datass.datas=datas;
+       datass.duration=dtt2;
+       var duration ={
+        duration:dtt2
+       }
+       
+        
+       var d5={
+           datas: [],
+           distance:''
+       }
+       d5.datas=datas;
+       d5.distance=results.distance
+      
+        console.log(datas);
+        response.json(d5);
     });
 
 

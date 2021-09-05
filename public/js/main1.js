@@ -348,466 +348,466 @@ var dragManager = d3.behavior.drag()
     .on('dragend', dragNodeEnd());
 
 
-$('#setexample').on('change', function () {
-    var value = $(this).val();
-    if (value == 1) {
-        maps.setView(new L.LatLng(35.19971906404343, -0.6247837572740723), 14);
-        clearGraph();
-      clear();
-        gettram('stat1');
+// $('#setexample').on('change', function () {
+//     var value = $(this).val();
+//     if (value == 1) {
+//         maps.setView(new L.LatLng(35.19971906404343, -0.6247837572740723), 14);
+//         clearGraph();
+//       clear();
+//         gettram('stat1');
 
-        $.getJSON("mapdata/tram.json", function (datad) {
-            var importedData = datad;
+//         $.getJSON("mapdata/tram.json", function (datad) {
+//             var importedData = datad;
 
-            if (importedData.nodes === undefined
-                || importedData.paths === undefined
-                || Object.keys(importedData).length !== 2) {
-                console.log("** JSON format error:");
-                console.log(importedData);
-                return;
-            }
+//             if (importedData.nodes === undefined
+//                 || importedData.paths === undefined
+//                 || Object.keys(importedData).length !== 2) {
+//                 console.log("** JSON format error:");
+//                 console.log(importedData);
+//                 return;
+//             }
           
-            mapdata.allnodes = importedData.nodes;
-            mapdata.paths = importedData.paths;
-            mapdata.distances = [];
-            mapdata.getstate.selectedNode = null;
-            mapdata.getstate.fromNode = null;
-            mapdata.getstate.toNode = null;
+//             mapdata.allnodes = importedData.nodes;
+//             mapdata.paths = importedData.paths;
+//             mapdata.distances = [];
+//             mapdata.getstate.selectedNode = null;
+//             mapdata.getstate.fromNode = null;
+//             mapdata.getstate.toNode = null;
 
-            mapdata.allnodes.forEach(function (node) {
-                var b=false;
-                if (node.nomFr === undefined){b=true};
-               if(!b){
-                addNodeToSelect(node);}
-            });
+//             mapdata.allnodes.forEach(function (node) {
+//                 var b=false;
+//                 if (node.nomFr === undefined){b=true};
+//                if(!b){
+//                 addNodeToSelect(node);}
+//             });
 
-            calculateDistancesbetweennodes();
-            redrawLines();
-            redrawNodes();
-        });
-
-
+//             calculateDistancesbetweennodes();
+//             redrawLines();
+//             redrawNodes();
+//         });
 
 
 
 
-    }
-    else if (value == 2) {
+
+
+//     }
+//     else if (value == 2) {
         
- var file='stations_sba/bus/A03'
- clearGraph();
-        clear();
-        gettram(file);
-        maps.setView(new L.LatLng(35.20777265583833, -0.615674942808335), 14);
-        $.getJSON("mapdata/A03.json", function (datad) {
-            var importedData = datad;
+//  var file='stations_sba/bus/A03'
+//  clearGraph();
+//         clear();
+//         gettram(file);
+//         maps.setView(new L.LatLng(35.20777265583833, -0.615674942808335), 14);
+//         $.getJSON("mapdata/A03.json", function (datad) {
+//             var importedData = datad;
 
-            if (importedData.nodes === undefined
-                || importedData.paths === undefined
-                || Object.keys(importedData).length !== 2) {
-                console.log("** JSON format error:");
-                console.log(importedData);
-                return;
-            }
+//             if (importedData.nodes === undefined
+//                 || importedData.paths === undefined
+//                 || Object.keys(importedData).length !== 2) {
+//                 console.log("** JSON format error:");
+//                 console.log(importedData);
+//                 return;
+//             }
 
-            mapdata.allnodes = importedData.nodes;
-            mapdata.paths = importedData.paths;
-            mapdata.distances = [];
-            mapdata.getstate.selectedNode = null;
-            mapdata.getstate.fromNode = null;
-            mapdata.getstate.toNode = null;
+//             mapdata.allnodes = importedData.nodes;
+//             mapdata.paths = importedData.paths;
+//             mapdata.distances = [];
+//             mapdata.getstate.selectedNode = null;
+//             mapdata.getstate.fromNode = null;
+//             mapdata.getstate.toNode = null;
 
-            mapdata.allnodes.forEach(function (node) {
+//             mapdata.allnodes.forEach(function (node) {
                 
-                var b=false;
-                if (node.nomFr === undefined){b=true};
-               if(!b){
-                addNodeToSelect(node);}
-            });
+//                 var b=false;
+//                 if (node.nomFr === undefined){b=true};
+//                if(!b){
+//                 addNodeToSelect(node);}
+//             });
 
-            calculateDistancesbetweennodes();
-            redrawLines();
-            redrawNodes();
-        });
-    }else if(value == 3) {
-        var file='stations_sba/bus/A03bis'
-        clearGraph();
-        clear();
-        gettram(file);
+//             calculateDistancesbetweennodes();
+//             redrawLines();
+//             redrawNodes();
+//         });
+//     }else if(value == 3) {
+//         var file='stations_sba/bus/A03bis'
+//         clearGraph();
+//         clear();
+//         gettram(file);
         
  
-        maps.setView(new L.LatLng(35.202124120749275, -0.64303643623008), 14);
+//         maps.setView(new L.LatLng(35.202124120749275, -0.64303643623008), 14);
 
-        $.getJSON("mapdata/A03bis.json", function (datad) {
-            var importedData = datad;
+//         $.getJSON("mapdata/A03bis.json", function (datad) {
+//             var importedData = datad;
 
-            if (importedData.nodes === undefined
-                || importedData.paths === undefined
-                || Object.keys(importedData).length !== 2) {
-                console.log("** JSON format error:");
-                console.log(importedData);
-                return;
-            }
+//             if (importedData.nodes === undefined
+//                 || importedData.paths === undefined
+//                 || Object.keys(importedData).length !== 2) {
+//                 console.log("** JSON format error:");
+//                 console.log(importedData);
+//                 return;
+//             }
 
-            mapdata.allnodes = importedData.nodes;
-            mapdata.paths = importedData.paths;
-            mapdata.distances = [];
-            mapdata.getstate.selectedNode = null;
-            mapdata.getstate.fromNode = null;
-            mapdata.getstate.toNode = null;
+//             mapdata.allnodes = importedData.nodes;
+//             mapdata.paths = importedData.paths;
+//             mapdata.distances = [];
+//             mapdata.getstate.selectedNode = null;
+//             mapdata.getstate.fromNode = null;
+//             mapdata.getstate.toNode = null;
 
-            mapdata.allnodes.forEach(function (node) {
-                var b=false;
-                if (node.nomFr === undefined){b=true};
-               if(!b){
-                addNodeToSelect(node);}
-            });
+//             mapdata.allnodes.forEach(function (node) {
+//                 var b=false;
+//                 if (node.nomFr === undefined){b=true};
+//                if(!b){
+//                 addNodeToSelect(node);}
+//             });
 
-            calculateDistancesbetweennodes();
-            redrawLines();
-            redrawNodes();
-        });
-    }
-    else if(value == 4) {
-        var file='stations_sba/bus/A27'
-        clearGraph();
-        clear();
-        gettram(file);
+//             calculateDistancesbetweennodes();
+//             redrawLines();
+//             redrawNodes();
+//         });
+//     }
+//     else if(value == 4) {
+//         var file='stations_sba/bus/A27'
+//         clearGraph();
+//         clear();
+//         gettram(file);
  
-        maps.setView(new L.LatLng(35.15556500491665, -0.600728988647460), 13);
+//         maps.setView(new L.LatLng(35.15556500491665, -0.600728988647460), 13);
 
-        $.getJSON("mapdata/A27.json", function (datad) {
-            var importedData = datad;
+//         $.getJSON("mapdata/A27.json", function (datad) {
+//             var importedData = datad;
 
-            if (importedData.nodes === undefined
-                || importedData.paths === undefined
-                || Object.keys(importedData).length !== 2) {
-                console.log("** JSON format error:");
-                console.log(importedData);
-                return;
-            }
+//             if (importedData.nodes === undefined
+//                 || importedData.paths === undefined
+//                 || Object.keys(importedData).length !== 2) {
+//                 console.log("** JSON format error:");
+//                 console.log(importedData);
+//                 return;
+//             }
 
-            mapdata.allnodes = importedData.nodes;
-            mapdata.paths = importedData.paths;
-            mapdata.distances = [];
-            mapdata.getstate.selectedNode = null;
-            mapdata.getstate.fromNode = null;
-            mapdata.getstate.toNode = null;
+//             mapdata.allnodes = importedData.nodes;
+//             mapdata.paths = importedData.paths;
+//             mapdata.distances = [];
+//             mapdata.getstate.selectedNode = null;
+//             mapdata.getstate.fromNode = null;
+//             mapdata.getstate.toNode = null;
 
-            mapdata.allnodes.forEach(function (node) {
-                var b=false;
-                if (node.nomFr === undefined){b=true};
-               if(!b){
-                addNodeToSelect(node);}
-            });
+//             mapdata.allnodes.forEach(function (node) {
+//                 var b=false;
+//                 if (node.nomFr === undefined){b=true};
+//                if(!b){
+//                 addNodeToSelect(node);}
+//             });
 
-            calculateDistancesbetweennodes();
-            redrawLines();
-            redrawNodes();
-        });
-    }  else if(value == 5) {
-        var file='stations_sba/bus/A17'
-        clearGraph();
-        clear();
-        gettram(file);
+//             calculateDistancesbetweennodes();
+//             redrawLines();
+//             redrawNodes();
+//         });
+//     }  else if(value == 5) {
+//         var file='stations_sba/bus/A17'
+//         clearGraph();
+//         clear();
+//         gettram(file);
  
-        maps.setView(new L.LatLng(35.21001968745649, -0.6392197608988681), 14);
+//         maps.setView(new L.LatLng(35.21001968745649, -0.6392197608988681), 14);
 
-        $.getJSON("mapdata/A17.json", function (datad) {
-            var importedData = datad;
+//         $.getJSON("mapdata/A17.json", function (datad) {
+//             var importedData = datad;
 
-            if (importedData.nodes === undefined
-                || importedData.paths === undefined
-                || Object.keys(importedData).length !== 2) {
-                console.log("** JSON format error:");
-                console.log(importedData);
-                return;
-            }
+//             if (importedData.nodes === undefined
+//                 || importedData.paths === undefined
+//                 || Object.keys(importedData).length !== 2) {
+//                 console.log("** JSON format error:");
+//                 console.log(importedData);
+//                 return;
+//             }
 
-            mapdata.allnodes = importedData.nodes;
-            mapdata.paths = importedData.paths;
-            mapdata.distances = [];
-            mapdata.getstate.selectedNode = null;
-            mapdata.getstate.fromNode = null;
-            mapdata.getstate.toNode = null;
+//             mapdata.allnodes = importedData.nodes;
+//             mapdata.paths = importedData.paths;
+//             mapdata.distances = [];
+//             mapdata.getstate.selectedNode = null;
+//             mapdata.getstate.fromNode = null;
+//             mapdata.getstate.toNode = null;
 
-            mapdata.allnodes.forEach(function (node) {
-                var b=false;
-                if (node.nomFr === undefined){b=true};
-               if(!b){
-                addNodeToSelect(node);}
-            });
+//             mapdata.allnodes.forEach(function (node) {
+//                 var b=false;
+//                 if (node.nomFr === undefined){b=true};
+//                if(!b){
+//                 addNodeToSelect(node);}
+//             });
 
-            calculateDistancesbetweennodes();
-            redrawLines();
-            redrawNodes();
-        });
-    } else if(value == 6) {
-        var file='stations_sba/bus/A22'
-        clearGraph();
-        clear();
-        gettram(file);
+//             calculateDistancesbetweennodes();
+//             redrawLines();
+//             redrawNodes();
+//         });
+//     } else if(value == 6) {
+//         var file='stations_sba/bus/A22'
+//         clearGraph();
+//         clear();
+//         gettram(file);
  
-        maps.setView(new L.LatLng(35.236716325352084, -0.6007361407682765), 12);
+//         maps.setView(new L.LatLng(35.236716325352084, -0.6007361407682765), 12);
 
-        $.getJSON("mapdata/A22.json", function (datad) {
-            var importedData = datad;
+//         $.getJSON("mapdata/A22.json", function (datad) {
+//             var importedData = datad;
 
-            if (importedData.nodes === undefined
-                || importedData.paths === undefined
-                || Object.keys(importedData).length !== 2) {
-                console.log("** JSON format error:");
-                console.log(importedData);
-                return;
-            }
+//             if (importedData.nodes === undefined
+//                 || importedData.paths === undefined
+//                 || Object.keys(importedData).length !== 2) {
+//                 console.log("** JSON format error:");
+//                 console.log(importedData);
+//                 return;
+//             }
 
-            mapdata.allnodes = importedData.nodes;
-            mapdata.paths = importedData.paths;
-            mapdata.distances = [];
-            mapdata.getstate.selectedNode = null;
-            mapdata.getstate.fromNode = null;
-            mapdata.getstate.toNode = null;
+//             mapdata.allnodes = importedData.nodes;
+//             mapdata.paths = importedData.paths;
+//             mapdata.distances = [];
+//             mapdata.getstate.selectedNode = null;
+//             mapdata.getstate.fromNode = null;
+//             mapdata.getstate.toNode = null;
 
-            mapdata.allnodes.forEach(function (node) {
-                var b=false;
-                if (node.nomFr === undefined){b=true};
-               if(!b){
-                addNodeToSelect(node);}
-            });
+//             mapdata.allnodes.forEach(function (node) {
+//                 var b=false;
+//                 if (node.nomFr === undefined){b=true};
+//                if(!b){
+//                 addNodeToSelect(node);}
+//             });
 
-            calculateDistancesbetweennodes();
-            redrawLines();
-            redrawNodes();
-        });
-    } else if(value == 7) {
-        var file='stations_sba/bus/A16'
-        clearGraph();
-        clear();
-        gettram(file);
+//             calculateDistancesbetweennodes();
+//             redrawLines();
+//             redrawNodes();
+//         });
+//     } else if(value == 7) {
+//         var file='stations_sba/bus/A16'
+//         clearGraph();
+//         clear();
+//         gettram(file);
  
-        maps.setView(new L.LatLng(35.20458462765031, -0.6138194597613668), 14);
+//         maps.setView(new L.LatLng(35.20458462765031, -0.6138194597613668), 14);
 
-        $.getJSON("mapdata/A16.json", function (datad) {
-            var importedData = datad;
+//         $.getJSON("mapdata/A16.json", function (datad) {
+//             var importedData = datad;
 
-            if (importedData.nodes === undefined
-                || importedData.paths === undefined
-                || Object.keys(importedData).length !== 2) {
-                console.log("** JSON format error:");
-                console.log(importedData);
-                return;
-            }
+//             if (importedData.nodes === undefined
+//                 || importedData.paths === undefined
+//                 || Object.keys(importedData).length !== 2) {
+//                 console.log("** JSON format error:");
+//                 console.log(importedData);
+//                 return;
+//             }
 
-            mapdata.allnodes = importedData.nodes;
-            mapdata.paths = importedData.paths;
-            mapdata.distances = [];
-            mapdata.getstate.selectedNode = null;
-            mapdata.getstate.fromNode = null;
-            mapdata.getstate.toNode = null;
+//             mapdata.allnodes = importedData.nodes;
+//             mapdata.paths = importedData.paths;
+//             mapdata.distances = [];
+//             mapdata.getstate.selectedNode = null;
+//             mapdata.getstate.fromNode = null;
+//             mapdata.getstate.toNode = null;
 
-            mapdata.allnodes.forEach(function (node) {
-                var b=false;
-                if (node.nomFr === undefined){b=true};
-               if(!b){
-                addNodeToSelect(node);}
-            });
+//             mapdata.allnodes.forEach(function (node) {
+//                 var b=false;
+//                 if (node.nomFr === undefined){b=true};
+//                if(!b){
+//                 addNodeToSelect(node);}
+//             });
 
-            calculateDistancesbetweennodes();
-            redrawLines();
-            redrawNodes();
-        });
-    } else if(value == 8) {
-        var file='stations_sba/bus/A25'
-        clearGraph();
-        clear();
-        gettram(file);
+//             calculateDistancesbetweennodes();
+//             redrawLines();
+//             redrawNodes();
+//         });
+//     } else if(value == 8) {
+//         var file='stations_sba/bus/A25'
+//         clearGraph();
+//         clear();
+//         gettram(file);
  
-        maps.setView(new L.LatLng(35.18273786282256, -0.609065067133654), 13);
+//         maps.setView(new L.LatLng(35.18273786282256, -0.609065067133654), 13);
 
-        $.getJSON("mapdata/A25.json", function (datad) {
-            var importedData = datad;
+//         $.getJSON("mapdata/A25.json", function (datad) {
+//             var importedData = datad;
 
-            if (importedData.nodes === undefined
-                || importedData.paths === undefined
-                || Object.keys(importedData).length !== 2) {
-                console.log("** JSON format error:");
-                console.log(importedData);
-                return;
-            }
+//             if (importedData.nodes === undefined
+//                 || importedData.paths === undefined
+//                 || Object.keys(importedData).length !== 2) {
+//                 console.log("** JSON format error:");
+//                 console.log(importedData);
+//                 return;
+//             }
 
-            mapdata.allnodes = importedData.nodes;
-            mapdata.paths = importedData.paths;
-            mapdata.distances = [];
-            mapdata.getstate.selectedNode = null;
-            mapdata.getstate.fromNode = null;
-            mapdata.getstate.toNode = null;
+//             mapdata.allnodes = importedData.nodes;
+//             mapdata.paths = importedData.paths;
+//             mapdata.distances = [];
+//             mapdata.getstate.selectedNode = null;
+//             mapdata.getstate.fromNode = null;
+//             mapdata.getstate.toNode = null;
 
-            mapdata.allnodes.forEach(function (node) {
-                var b=false;
-                if (node.nomFr === undefined){b=true};
-               if(!b){
-                addNodeToSelect(node);}
-            });
+//             mapdata.allnodes.forEach(function (node) {
+//                 var b=false;
+//                 if (node.nomFr === undefined){b=true};
+//                if(!b){
+//                 addNodeToSelect(node);}
+//             });
 
-            calculateDistancesbetweennodes();
-            redrawLines();
-            redrawNodes();
-        });
-    } else if(value == 9) {
-        var file='stations_sba/bus/A11'
-        clearGraph();
-        clear();
-        gettram(file);
+//             calculateDistancesbetweennodes();
+//             redrawLines();
+//             redrawNodes();
+//         });
+//     } else if(value == 9) {
+//         var file='stations_sba/bus/A11'
+//         clearGraph();
+//         clear();
+//         gettram(file);
  
-        maps.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
+//         maps.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
 
-        $.getJSON("mapdata/A11.json", function (datad) {
-            var importedData = datad;
+//         $.getJSON("mapdata/A11.json", function (datad) {
+//             var importedData = datad;
 
-            if (importedData.nodes === undefined
-                || importedData.paths === undefined
-                || Object.keys(importedData).length !== 2) {
-                console.log("** JSON format error:");
-                console.log(importedData);
-                return;
-            }
+//             if (importedData.nodes === undefined
+//                 || importedData.paths === undefined
+//                 || Object.keys(importedData).length !== 2) {
+//                 console.log("** JSON format error:");
+//                 console.log(importedData);
+//                 return;
+//             }
 
-            mapdata.allnodes = importedData.nodes;
-            mapdata.paths = importedData.paths;
-            mapdata.distances = [];
-            mapdata.getstate.selectedNode = null;
-            mapdata.getstate.fromNode = null;
-            mapdata.getstate.toNode = null;
+//             mapdata.allnodes = importedData.nodes;
+//             mapdata.paths = importedData.paths;
+//             mapdata.distances = [];
+//             mapdata.getstate.selectedNode = null;
+//             mapdata.getstate.fromNode = null;
+//             mapdata.getstate.toNode = null;
 
-            mapdata.allnodes.forEach(function (node) {
-                var b=false;
-                if (node.nomFr === undefined){b=true};
-               if(!b){
-                addNodeToSelect(node);}
-            });
+//             mapdata.allnodes.forEach(function (node) {
+//                 var b=false;
+//                 if (node.nomFr === undefined){b=true};
+//                if(!b){
+//                 addNodeToSelect(node);}
+//             });
 
-            calculateDistancesbetweennodes();
-            redrawLines();
-            redrawNodes();
-        });
-    } else if(value == 10) {
-        var file='stations_sba'
-        clearGraph();
-        clear();
-        gettram(file);
+//             calculateDistancesbetweennodes();
+//             redrawLines();
+//             redrawNodes();
+//         });
+//     } else if(value == 10) {
+//         var file='stations_sba'
+//         clearGraph();
+//         clear();
+//         gettram(file);
  
-        maps.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
+//         maps.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
 
-        $.getJSON("mapdata/tes03_16.json", function (datad) {
-            var importedData = datad;
+//         $.getJSON("mapdata/tes03_16.json", function (datad) {
+//             var importedData = datad;
 
-            if (importedData.nodes === undefined
-                || importedData.paths === undefined
-                || Object.keys(importedData).length !== 2) {
-                console.log("** JSON format error:");
-                console.log(importedData);
-                return;
-            }
+//             if (importedData.nodes === undefined
+//                 || importedData.paths === undefined
+//                 || Object.keys(importedData).length !== 2) {
+//                 console.log("** JSON format error:");
+//                 console.log(importedData);
+//                 return;
+//             }
 
-            mapdata.allnodes = importedData.nodes;
-            mapdata.paths = importedData.paths;
-            mapdata.distances = [];
-            mapdata.getstate.selectedNode = null;
-            mapdata.getstate.fromNode = null;
-            mapdata.getstate.toNode = null;
+//             mapdata.allnodes = importedData.nodes;
+//             mapdata.paths = importedData.paths;
+//             mapdata.distances = [];
+//             mapdata.getstate.selectedNode = null;
+//             mapdata.getstate.fromNode = null;
+//             mapdata.getstate.toNode = null;
 
-            mapdata.allnodes.forEach(function (node) {
-                var b=false;
-                if (node.nomFr === undefined){b=true};
-               if(!b){
-                addNodeToSelect(node);}
-            });
+//             mapdata.allnodes.forEach(function (node) {
+//                 var b=false;
+//                 if (node.nomFr === undefined){b=true};
+//                if(!b){
+//                 addNodeToSelect(node);}
+//             });
 
-            calculateDistancesbetweennodes();
-            redrawLines();
-            redrawNodes();
-        });
-    }  else if(value == 11) {
-        var file='stations_sba/bus1/A03'
-        clearGraph();
-        clear();
-        gettram(file);
+//             calculateDistancesbetweennodes();
+//             redrawLines();
+//             redrawNodes();
+//         });
+//     }  else if(value == 11) {
+//         var file='stations_sba/bus1/A03'
+//         clearGraph();
+//         clear();
+//         gettram(file);
  
-        maps.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
+//         maps.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
 
-        $.getJSON("mapdata/A03_A03bis.json", function (datad) {
-            var importedData = datad;
+//         $.getJSON("mapdata/A03_A03bis.json", function (datad) {
+//             var importedData = datad;
 
-            if (importedData.nodes === undefined
-                || importedData.paths === undefined
-                || Object.keys(importedData).length !== 2) {
-                console.log("** JSON format error:");
-                console.log(importedData);
-                return;
-            }
+//             if (importedData.nodes === undefined
+//                 || importedData.paths === undefined
+//                 || Object.keys(importedData).length !== 2) {
+//                 console.log("** JSON format error:");
+//                 console.log(importedData);
+//                 return;
+//             }
 
-            mapdata.allnodes = importedData.nodes;
-            mapdata.paths = importedData.paths;
-            mapdata.distances = [];
-            mapdata.getstate.selectedNode = null;
-            mapdata.getstate.fromNode = null;
-            mapdata.getstate.toNode = null;
+//             mapdata.allnodes = importedData.nodes;
+//             mapdata.paths = importedData.paths;
+//             mapdata.distances = [];
+//             mapdata.getstate.selectedNode = null;
+//             mapdata.getstate.fromNode = null;
+//             mapdata.getstate.toNode = null;
 
-            mapdata.allnodes.forEach(function (node) {
-                var b=false;
-                if (node.nomFr === undefined){b=true};
-               if(!b){
-                addNodeToSelect(node);}
-            });
+//             mapdata.allnodes.forEach(function (node) {
+//                 var b=false;
+//                 if (node.nomFr === undefined){b=true};
+//                if(!b){
+//                 addNodeToSelect(node);}
+//             });
 
-            calculateDistancesbetweennodes();
-            redrawLines();
-            redrawNodes();
-        });
-    }
-    else if(value == 999) {
-        var file='stations_sba'
-        clearGraph();
-        clear();
-        gettram(file);
+//             calculateDistancesbetweennodes();
+//             redrawLines();
+//             redrawNodes();
+//         });
+//     }
+//     else if(value == 999) {
+//         var file='stations_sba'
+//         clearGraph();
+//         clear();
+//         gettram(file);
  
-        maps.setView(new L.LatLng(35.20118, -0.6343), 13);
+//         maps.setView(new L.LatLng(35.20118, -0.6343), 13);
 
-        $.getJSON("mapdata/all.json", function (datad) {
-            var importedData = datad;
+//         $.getJSON("mapdata/all.json", function (datad) {
+//             var importedData = datad;
 
-            if (importedData.nodes === undefined
-                || importedData.paths === undefined
-                || Object.keys(importedData).length !== 2) {
-                console.log("** JSON format error:");
-                console.log(importedData);
-                return;
-            }
+//             if (importedData.nodes === undefined
+//                 || importedData.paths === undefined
+//                 || Object.keys(importedData).length !== 2) {
+//                 console.log("** JSON format error:");
+//                 console.log(importedData);
+//                 return;
+//             }
 
-            mapdata.allnodes = importedData.nodes;
-            mapdata.paths = importedData.paths;
-            mapdata.distances = [];
-            mapdata.getstate.selectedNode = null;
-            mapdata.getstate.fromNode = null;
-            mapdata.getstate.toNode = null;
+//             mapdata.allnodes = importedData.nodes;
+//             mapdata.paths = importedData.paths;
+//             mapdata.distances = [];
+//             mapdata.getstate.selectedNode = null;
+//             mapdata.getstate.fromNode = null;
+//             mapdata.getstate.toNode = null;
 
-            mapdata.allnodes.forEach(function (node) {
-                var b=false;
-                if (node.nomFr === undefined){b=true};
-               if(!b){
-                addNodeToSelect(node);}
-            });
+//             mapdata.allnodes.forEach(function (node) {
+//                 var b=false;
+//                 if (node.nomFr === undefined){b=true};
+//                if(!b){
+//                 addNodeToSelect(node);}
+//             });
 
-            calculateDistancesbetweennodes();
-            redrawLines();
-            redrawNodes();
-        });
-    }
+//             calculateDistancesbetweennodes();
+//             redrawLines();
+//             redrawNodes();
+//         });
+//     }
    
 
 
 
-});
+// });
 
 
 
