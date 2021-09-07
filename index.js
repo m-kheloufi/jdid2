@@ -44,17 +44,22 @@ app2.use(session({
     saveUninitialized: true
 }));
 app.use('/images',express.static(__dirname+'/images'))
+app.use('/views',express.static(__dirname+'/views'))
 app2.use('/images',express.static(__dirname+'/images'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app2.use(bodyParser.urlencoded({ extended: true }));
 app2.use(bodyParser.json());
-
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', __dirname);
 app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/index3.html'));
 });
 app.get('/enter', function (request, response) {
+    // response.render(__dirname + "/views/test/index", {message:"message hiiiii"});
     response.sendFile(path.join(__dirname + '/public/test/index.html'));
+   
 });
 app2.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/index.html'));
@@ -565,8 +570,8 @@ app2.get('/lines', (request, response) => {
     lines=t.lines;
        var data= JSON.stringify(t);
         response.json(lines);
-        console.log('hado lines 111: '+ lines[0].name)
-        console.log('hado lines : '+ JSON.stringify(t).name)
+        // console.log('hado lines 111: '+ lines[0].name)
+        // console.log('hado lines : '+ JSON.stringify(t).name)
     
 })
 app.get('/lines', (request, response) => {
@@ -574,8 +579,8 @@ app.get('/lines', (request, response) => {
     lines=t.lines;
        var data= JSON.stringify(t);
         response.json(lines);
-        console.log('hado lines 111: '+ lines[0].name)
-        console.log('hado lines : '+ JSON.stringify(t).name)
+        // console.log('hado lines 111: '+ lines[0].name)
+        // console.log('hado lines : '+ JSON.stringify(t).name)
     
 })
 app2.get('/stations_sba/tramway', (request, response) => {
@@ -755,6 +760,398 @@ app2.get('/stations_sba/bus/:numero', (request, response) => {
         response.json(datas);
     });
 })
+app.get('/getbeststation2/:type/:x1/:y1/:x2/:y2', (request, response) => {
+   
+    var x1 = request.params.x1;
+    var y1 = request.params.y1;
+    var x2 = request.params.x2;
+    var y2 = request.params.y2;
+    var ida=0
+    var sourcet
+    var source,target,sourcename,targetname;
+    var sourcet
+    var ge3=[];
+    var total=[];
+    var total2=[]
+    var a=[], timess=[] , ind ,pathss=[],ge3=[];
+    var tab=[]
+    var x0,y0;
+        var d5 =[];
+        // var x2=35.19829
+        // var y2=-0.64459  
+        var ida11=0;
+        var tram,trams=[];
+        const https = require('https');
+        var t = require('./public/mapdata/tram.json');
+        tram=t.nodes;
+       mapdata.allnodes=t.nodes
+      
+       mapdata.paths = t.paths;
+       mapdata.distances = [];
+       function calculateDistancesbetweennodes() {
+        mapdata.distances = [];
+        for (var i = 0; i < mapdata.allnodes.length; i++) {
+            mapdata.distances[i] = [];
+            for (var j = 0; j < mapdata.allnodes.length; j++)
+                mapdata.distances[i][j] = 'x';
+        }
+        for (var i = 0; i < mapdata.paths.length; i++) {
+            var sourceNodeId = parseInt(mapdata.paths[i].from);
+            var targetNodeId = parseInt(mapdata.paths[i].to);
+            var sourceNode = mapdata.allnodes[sourceNodeId];
+            var targetNode = mapdata.allnodes[targetNodeId];
+            var p1 = new LatLon(sourceNode.x, sourceNode.y);
+            var p2 = new LatLon(targetNode.x, targetNode.y);
+            var d = p1.distanceTo(p2);
+            mapdata.distances[sourceNodeId][targetNodeId] = d;
+            mapdata.distances[targetNodeId][sourceNodeId] = d;
+        };
+    };
+    calculateDistancesbetweennodes();
+    for (var i=0;i<tram.length;i++){
+        
+    if(!(tram[i].nomFr===undefined)){
+    trams[ida11]=tram[i];
+ida11=ida11+1;
+}}
+console.log('point X :' +x2+' Y : '+y2)
+target=getind(x2,y2,trams);
+console.log('returnn '+target)
+ 
+for (let i = 0; i <trams.length; i++) {
+    setTimeout(function timer() {
+    rout(trams[i].x,trams[i].y,i);
+    }, i * 1);
+  } 
+        for (let i = 0; i <3; i++) {
+            setTimeout(function timer() {
+          if(i==1){
+            // console.log('hiiii 3333 '+JSON.stringify(d5))
+            // response.json(d5)
+            console.log('ge333 length : '+ge3.length)
+            for(var z=0;z<21;z++){
+               
+                talya(ge3[z].pathss,z)
+                
+        
+  
+      }
+            
+          }else if(i==2){
+            var min=Math.min.apply(null, total); 
+            for(var k=0;k<total2.length;k++){
+                if(total2[k].kd==min){
+                    console.log('talyaaaaaa miiin'+total2[k].kd )
+                    console.log('talyaaaaaa resulttt'+JSON.stringify(total2[k].resultt) )
+                    console.log('source talyaaaaaa '+total2[k].pathtram[0].source )
+                    var start=total2[k].pathtram[0].source;
+                    
+                    console.log('target talyaaaaaa '+target )
+                           var res=total2[k].resultt
+                    for(var j=start;j<=target;j++){
+                          res.coordinates.push([tram[j].y,tram[j].x])
+if(j==target){
+    for(var e=0;e<trams.length;e++){
+        if(trams[e].name==target){
+            x0=trams[e].x;
+            y0=trams[e].y
+        }
+    }
+    https.get("https://graphhopper.com/api/1/route?point="+x0+","+y0+"&point="+x2+","+y2+"&vehicle=foot&locale=de&points_encoded=false&key=72e12178-3f0f-4491-a947-b58853fe7db9", (resp) => {
+        let data = '';
+        resp.on('data', (chunk) => {
+          data += chunk;
+        });
+        resp.on('end', () => {
+            var corr =JSON.parse(data).paths[0].points
+      for(var m=0;m<corr.coordinates.length;m++){
+         
+          var uu=JSON.stringify(corr.coordinates[m])
+                                        var Y11=uu.substring(1,uu.indexOf(','))
+                                        var tabId = uu.split(",").pop(); 
+                                        var  X11=tabId.replace(']',''); 
+                                   res.coordinates.push([Y11,X11])
+                                   if(m==corr.coordinates.length-1){
+                                       
+                                    
+                                    response.json(res)}
+                                    }
+        });
+      
+      }).on("error", (err) => {
+        console.log("Error: " + err.message);
+      });
+
+
+
+}
+                    }
+                   
+                                                 
+
+                }
+
+            }
+          
+         
+          }
+            }, i * 2000);
+          }
+        
+
+
+
+
+ //------------------------------------------------------------
+          function talya(resultt,z){ 
+            for (let i = 0; i <3; i++) {
+                setTimeout(function timer() {
+                    if(i==1){
+     
+                    var o =JSON.stringify(resultt.coordinates.length)
+                console.log('oooo '+o)
+                                            var uu=JSON.stringify(resultt.coordinates[o-1])
+                                                        var Y11=uu.substring(1,uu.indexOf(','))
+                                                        var tabId = uu.split(",").pop(); 
+                                                        var  X11=tabId.replace(']',''); 
+                                                        getind1()
+                                                  async function getind1(){
+                                                    console.log('point222 X :' +X11+' Y : '+Y11)  
+                                                 
+                                                     sourcet=getind(X11,Y11,trams)
+                                                    console.log('sourceeeee '+sourcet)
+                                                    console.log('targettttt '+target)
+                                                    var resultsa = dijkstra(sourcet, target);  
+                                                    // console.log('resulta '+JSON.stringify(resultsa))           
+                                                    var kd=resultsa.time+ge3[z].timess;
+                                                    // console.log('la some kd '+kd)
+                                                    // console.log('dijikstra distance '+resultsa.distance)
+                                                    // console.log('api distance'+ge3[z].distance)
+                                                    if(source==target){kd=9999999;
+                                                       }
+                                                           total.push(kd);
+                                                          total2.push({"kd":kd,"resultt":resultt,"pathtram":resultsa.path});  
+                                                        //   console.log('total2 '+JSON.stringify(total2)  )                                                                                                            
+                                                    
+                                                  }
+                                                        
+                                                             
+                                                }          
+                                                              
+                                                                   }, i * 1000);
+          }
+    
+        }
+
+                                                    
+                                                                            
+                                                        
+                                                           
+                                                                        
+                                                                       
+                                                                     
+                                                        
+                                                                    
+                                                                
+                                                            
+                                                                                                              
+                                                                            
+        
+                    
+      
+//----------------------------------------------------
+
+
+        //   curl= "https://graphhopper.com/api/1/route?point="+x1+","+y1+"&point="+x2+","+y2+"&vehicle=foot&locale=de&calc_points=false&key=72e12178-3f0f-4491-a947-b58853fe7db9"
+
+
+          function rout(x22,y22,z){
+              var hat;
+            https.get("https://graphhopper.com/api/1/route?point="+x1+","+y1+"&point="+x22+","+y22+"&vehicle=foot&locale=de&points_encoded=false&key=72e12178-3f0f-4491-a947-b58853fe7db9", (resp) => {
+              let data = '';
+              resp.on('data', (chunk) => {
+                data += chunk;
+              });
+              resp.on('end', () => {
+                // console.log(JSON.parse(data).explanation);
+                // console.log('hiiiiii '+JSON.stringify(JSON.parse(data).features[0].geometry))
+                // console.log('dataaaaa '+JSON.stringify(JSON.parse(data).paths[0].points))
+                var corr =JSON.parse(data).paths[0].points
+                // // console.log('hi 222222 '+corr)
+                tab[z]=corr
+                hat=corr;
+                var path=JSON.parse(data).paths[0];
+                     var time =JSON.parse(data).paths[0].time/1000
+                     var distance =JSON.parse(data).paths[0].distance
+                     pathss.push(corr);
+                     timess.push(time);
+                     a.push(distance);  
+                     ge3.push({"pathss":path.points,"timess":path.time/1000,"distance":path.distance}) 
+                   d5={
+                      path: '',
+                      time :'',
+                      distance:''
+                  }
+                  d5.path=pathss;
+                  d5.time=timess;
+                  d5.distance=a;
+                 
+                   
+                  
+              });
+            
+            }).on("error", (err) => {
+              console.log("Error: " + err.message);
+            });
+            
+           
+        }
+    
+    
+})
+
+
+app.get('/getbeststation1/:type/:x1/:y1/', (request, response) => {
+    var tram ,ida11=0;
+    
+    var trams=[];
+    var a=[], timess=[] , ida=0, ind ,pathss=[],ge3=[];
+    var host;// = "http://localhost:9000/api/1";
+    var defaultKey = "72e12178-3f0f-4491-a947-b58853fe7db9";
+    var profile = "foot";
+    var GraphHopperRouting = require('graphhopper-js-api-client/src/GraphHopperRouting');
+    var ghRouting = new GraphHopper.Routing({key: defaultKey, host: host, vehicle: profile, elevation: false});
+  
+    var t = require('./public/mapdata/tram.json');
+    tram=t.nodes;
+for (var i=0;i<tram.length;i++){
+if(!(tram[i].nomFr===undefined)){
+trams[ida11]=tram[i];
+     
+ghRouting.clearPoints();
+ghRouting.addPoint(new GHInput(JSON.stringify(trams[ida11].x),JSON.stringify(trams[ida11].y)));
+   ghRouting.addPoint(new GHInput(p[0].lat,p[0].lng));
+   
+   ghRouting.doRequest()
+       .then(function (json) {  
+           var path = json.paths[0]; 
+            a[ida]=path.distance; 
+            pathss.push(path.points);
+           ind=a.indexOf(Math.min.apply(null, a));   
+            timess[ida]=path.time/60000;
+          ge3.push({"pathss":path.points,"timess":path.time/1000,"distance":path.distance})
+         //    console.log('chasraaaaaa : '+ ge3)
+            ida=ida+1;    
+         //  var outHtml = 'Distance in meter:'+a[m]+'<br/>Times in seconds:'+times[m] / 1000 ;
+         //   $("#limiter").html(outHtml);
+       })
+       .catch(function (err) {
+     
+       });
+ida11=ida11+1;
+}
+}
+
+
+
+
+})
+// app.get('/getbeststation/:type/:x1/:y1/', (request, response) => {
+//     var host;// = "http://localhost:9000/api/1";
+//     var x1 = request.params.x1;
+//     var y1 = request.params.y1;
+//     var x2=35.19829
+//     var y2=-0.64459
+//     var pathss=[];
+//     var timess=[]
+//     var a=[];
+//     var type = request.params.x1;
+    
+//      request = require('request');
+//     var tram ,ida11=0;
+//     var trams=[];
+//     var tab=[]
+//     var d55 =[];
+    
+      
+//           var t = require('./public/mapdata/tram.json');
+//           tram=t.nodes;
+//   console.log('tram '+tram.length);
+//   for (var i=0;i<tram.length;i++){
+//      if(!(tram[i].nomFr===undefined)){
+//     trams[ida11]=tram[i];
+//     // rout(trams[ida11].x,trams[ida11].y,ida11)
+//     // console.log('tramss   : ' +trams[ida11])
+//     ida11=ida11+1;
+//      }
+//   }
+  
+// rout(x2,y2,0)
+
+//     function rout(x2,y2,z){
+        
+//         var d5
+//         request({
+//         method: 'GET',
+//         url: 'https://api.openrouteservice.org/v2/directions/foot-walking?api_key=5b3ce3597851110001cf62486717a883d8fc4b21a9e17154eaafe74e&start='+y1+','+x1+'&end='+y2+','+x2+'',
+//         // headers: {
+//         //   'Accept': 'application/json, application/geo+json ; charset=utf-8'
+//         // }
+//     }, function (error, response1, body) {
+
+     
+//        var corr =JSON.parse(body).features[0].geometry;
+//     //    console.log('ki kanet '+ JSON.stringify(corr))
+//        var time =JSON.parse(body).features[0].properties.segments[0].duration;
+//        var distance =JSON.parse(body).features[0].properties.segments[0].distance;
+//        pathss.push(corr);
+//        timess.push(time);
+//        a.push(distance);
+  
+  
+//      d5={
+//         path: '',
+//         time :'',
+//         distance:''
+//     }
+//     d5.path=pathss;
+//     d5.time=timess;
+//     d5.distance=a;
+//  tab[z]=d5
+
+//  d55.push(d5)
+// //  console.log('hatchooooo '+d5)
+ 
+ 
+//       }
+      
+      
+//       );
+
+   
+    
+//     }
+      
+      
+//       for (let i = 0; i <2; i++) {
+//         setTimeout(function timer() {
+//             if(i==1){
+                
+//             console.log('length of times'+ tab)
+//             response.json(tab[0]);
+        
+//         }
+           
+//         }, i *1000);
+//       }
+
+
+//     // var k=rout(35.19829,-0.64459);
+//     // response.json(k);
+
+     
+
+// });
 app.get('/result/:type/:x1/:x2/:x3/:x4', (request, response) => {
     var x1 = request.params.x1;
     var x2 = request.params.x2;
@@ -1133,17 +1530,15 @@ var source;
 
         }
     }
-    // console.log('array ' + a);
-    // console.log('min ' + Math.min.apply(null, a));
+  
     for (var i = 0; i < tram.length; i++) {
         if (!(tram[i].nomFr === undefined)) {
             var d = distance(x1, x2, tram[i].x, tram[i].y);
             if (d == Math.min.apply(null, a)) {
-                // console.log('source ' + tram[i].nomFr);
+             
                 source = i;
                 sourcename=tram[i].nomFr;
-                console.log('source' + source);
-                console.log('point '+x1+' '+x2)
+             
 
             }
         }
@@ -1636,7 +2031,8 @@ function dijkstra(start, end) {
             path: newPath,
             source: start,
             target: end,
-            distance: totalDistance
+            distance: totalDistance,
+            time:totalDistance/5.5
         };
     } else {
         return {
@@ -1683,3 +2079,32 @@ LatLon.prototype.distanceTo = function (point, radius) {
     var d = R * c;
     return d;
 };
+
+
+function getind(x,y,trams){
+    var a=[];
+    var ida=0;
+    var ind;
+    for (var i = 0; i < trams.length; i++) {
+   
+        var d = distance(x, y, trams[i].x, trams[i].y);
+        a[ida] = d;
+        ida = ida + 1;
+
+    
+}
+
+for (var i = 0; i < trams.length; i++) {
+    
+        var d = distance(x, y, trams[i].x, trams[i].y);
+        if (d == Math.min.apply(null, a)) {
+          
+         
+           ind=trams[i].name
+          
+         
+
+        }
+    
+} return ind
+}

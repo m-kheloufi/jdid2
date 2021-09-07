@@ -1,4 +1,6 @@
-
+function hello(){
+    console.log('hello word')
+}
 var p=[]
 var tab=[]
 var dissource=[]
@@ -140,9 +142,6 @@ $(document).ready(function (e) {
 
 
 function setupRoutingAPI(map, ghRouting,x,y,lo,la) {
-
-
-   
   var tram ,ida11=0;
   var trams=[];
   var ft,dis
@@ -158,10 +157,9 @@ for (var i=0;i<tram.length;i++){
    }
 }})
 
-var message = "<%= message %>";
-console.log('hi bb'+message);
 
-console.log('matrix ya gada38888'+matrix)
+
+console.log('matrix ya gada3 '+matrix)
 
 
     map.on('click', function (e) {
@@ -395,37 +393,12 @@ $("#cleartram").click(function () {
   
 });
 $("#start05").click(function () {
-
-var tt;
-    getindice(p[0].lat,p[0].lng,p[1].lat,p[1].lng);
-
-
-
-    async function getindice(X1,Y1,X2,Y2){
-    const response = await fetch('/getbeststation2/tram/'+X1+'/'+Y1+'/'+X2+'/'+Y2);
+    async function getindice(X1,Y1){
+    const response = await fetch('/getbeststation/tram/'+X1+'/'+Y1);
                             const     data = await response.json();
-                            console.log('data : '+JSON.stringify(data))
-                            // console.log('data server path lawla : '+JSON.stringify(data.path[0]));
-                            // console.log('data server path zawja : '+JSON.stringify(data.path[1]))
-                            // var tt=data.path[0];
-                            // console.log('data server time : '+JSON.stringify(data.time));
-                            // console.log('length data server time : '+JSON.stringify(data.time.length));
-                            // console.log('data distance : '+JSON.stringify(data.distance));
-                           var testtt1 = L.geoJson().addTo(map);
-testtt1.options = {
-    style: {color: "#FFAE42", "weight": 5, "opacity": 1}
- 
-};
-// for(var i=0;i<data.path.length;i++){
-    testtt1.addData({
-        "type": "Feature",
-        "geometry":data
-        });
+                            console.log('data server : '+data)}
+                            getindice(p[0].lat,p[0].lng);
 
-// }
-}                       
-
-                          
 
 })
 $("#start02").click(function () {
