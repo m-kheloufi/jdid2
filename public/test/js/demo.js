@@ -140,7 +140,7 @@ $(document).ready(function (e) {
 
 
 function setupRoutingAPI(map, ghRouting,x,y,lo,la) {
-
+    
 
    
   var tram ,ida11=0;
@@ -153,7 +153,7 @@ console.log('tram '+tram.length);
 for (var i=0;i<tram.length;i++){
    if(!(tram[i].nomFr===undefined)){
   trams[ida11]=tram[i];
-  console.log('tramss   : ' +trams[ida11])
+//   console.log('tramss   : ' +trams[ida11])
   ida11=ida11+1;
    }
 }})
@@ -395,14 +395,15 @@ $("#cleartram").click(function () {
   
 });
 $("#start05").click(function () {
-
+    var type = $("#setexample option:selected").text();
+    console.log('hi'+type);
 var tt;
     getindice(p[0].lat,p[0].lng,p[1].lat,p[1].lng);
 
 
 
     async function getindice(X1,Y1,X2,Y2){
-    const response = await fetch('/getbeststation2/tram/'+X1+'/'+Y1+'/'+X2+'/'+Y2);
+    const response = await fetch('/getbeststation2/'+type+'/'+X1+'/'+Y1+'/'+X2+'/'+Y2);
                             const     data = await response.json();
                             console.log('data : '+JSON.stringify(data))
                             // console.log('data server path lawla : '+JSON.stringify(data.path[0]));

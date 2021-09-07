@@ -766,7 +766,10 @@ app.get('/getbeststation2/:type/:x1/:y1/:x2/:y2', (request, response) => {
     var y1 = request.params.y1;
     var x2 = request.params.x2;
     var y2 = request.params.y2;
+    var bdl,bo=false;
+    var type = request.params.type;
     var ida=0
+    var hatcho;
     var sourcet
     var source,target,sourcename,targetname;
     var sourcet
@@ -782,7 +785,8 @@ app.get('/getbeststation2/:type/:x1/:y1/:x2/:y2', (request, response) => {
         var ida11=0;
         var tram,trams=[];
         const https = require('https');
-        var t = require('./public/mapdata/tram.json');
+        // console.log('type '+type)
+        var t = require('./public/mapdata/'+type+'.json');
         tram=t.nodes;
        mapdata.allnodes=t.nodes
       
@@ -814,9 +818,9 @@ app.get('/getbeststation2/:type/:x1/:y1/:x2/:y2', (request, response) => {
     trams[ida11]=tram[i];
 ida11=ida11+1;
 }}
-console.log('point X :' +x2+' Y : '+y2)
+// console.log('point X :' +x2+' Y : '+y2)
 target=getind(x2,y2,trams);
-console.log('returnn '+target)
+// console.log('returnn '+target)
  
 for (let i = 0; i <trams.length; i++) {
     setTimeout(function timer() {
@@ -829,7 +833,7 @@ for (let i = 0; i <trams.length; i++) {
             // console.log('hiiii 3333 '+JSON.stringify(d5))
             // response.json(d5)
             console.log('ge333 length : '+ge3.length)
-            for(var z=0;z<21;z++){
+            for(var z=0;z<ge3.length;z++){
                
                 talya(ge3[z].pathss,z)
                 
@@ -841,13 +845,20 @@ for (let i = 0; i <trams.length; i++) {
             var min=Math.min.apply(null, total); 
             for(var k=0;k<total2.length;k++){
                 if(total2[k].kd==min){
-                    console.log('talyaaaaaa miiin'+total2[k].kd )
-                    console.log('talyaaaaaa resulttt'+JSON.stringify(total2[k].resultt) )
+                    // console.log('talyaaaaaa miiin'+total2[k].kd )
+                    // console.log('talyaaaaaa resulttt'+JSON.stringify(total2[k].resultt) )
                     console.log('source talyaaaaaa '+total2[k].pathtram[0].source )
                     var start=total2[k].pathtram[0].source;
-                    
+                     bdl;
+                    if(start>target){
+                        bo=true;
+                        bdl=start;
+                        start=target;
+                        target=bdl;
+                    }
                     console.log('target talyaaaaaa '+target )
                            var res=total2[k].resultt
+                           if(bo==false){
                     for(var j=start;j<=target;j++){
                           res.coordinates.push([tram[j].y,tram[j].x])
 if(j==target){
@@ -884,7 +895,47 @@ if(j==target){
 
 
 
-}
+}}
+                    }else if(bo==true){
+                        for(var j=target;j>=start;j--){
+                            res.coordinates.push([tram[j].y,tram[j].x])
+  if(j==target){
+      for(var e=0;e<trams.length;e++){
+          if(trams[e].name==start){
+              x0=trams[e].x;
+              y0=trams[e].y
+          }
+      }
+      https.get("https://graphhopper.com/api/1/route?point="+x0+","+y0+"&point="+x2+","+y2+"&vehicle=foot&locale=de&points_encoded=false&key=72e12178-3f0f-4491-a947-b58853fe7db9", (resp) => {
+          let data = '';
+          resp.on('data', (chunk) => {
+            data += chunk;
+          });
+          resp.on('end', () => {
+              var corr =JSON.parse(data).paths[0].points
+        for(var m=0;m<corr.coordinates.length;m++){
+           
+            var uu=JSON.stringify(corr.coordinates[m])
+                                          var Y11=uu.substring(1,uu.indexOf(','))
+                                          var tabId = uu.split(",").pop(); 
+                                          var  X11=tabId.replace(']',''); 
+                                     res.coordinates.push([Y11,X11])
+                                     if(m==corr.coordinates.length-1){
+                                         
+                                      
+                                      response.json(res)}
+                                      }
+          });
+        
+        }).on("error", (err) => {
+          console.log("Error: " + err.message);
+        });
+  
+  
+  
+  }
+                      }
+
                     }
                    
                                                  
@@ -895,7 +946,7 @@ if(j==target){
           
          
           }
-            }, i * 2000);
+            }, i * 1500);
           }
         
 
@@ -909,18 +960,18 @@ if(j==target){
                     if(i==1){
      
                     var o =JSON.stringify(resultt.coordinates.length)
-                console.log('oooo '+o)
+               
                                             var uu=JSON.stringify(resultt.coordinates[o-1])
                                                         var Y11=uu.substring(1,uu.indexOf(','))
                                                         var tabId = uu.split(",").pop(); 
                                                         var  X11=tabId.replace(']',''); 
                                                         getind1()
                                                   async function getind1(){
-                                                    console.log('point222 X :' +X11+' Y : '+Y11)  
+                                                    // console.log('point222 X :' +X11+' Y : '+Y11)  
                                                  
                                                      sourcet=getind(X11,Y11,trams)
-                                                    console.log('sourceeeee '+sourcet)
-                                                    console.log('targettttt '+target)
+                                                    // console.log('sourceeeee '+sourcet)
+                                                    // console.log('targettttt '+target)
                                                     var resultsa = dijkstra(sourcet, target);  
                                                     // console.log('resulta '+JSON.stringify(resultsa))           
                                                     var kd=resultsa.time+ge3[z].timess;
