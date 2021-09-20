@@ -147,17 +147,20 @@ function setupRoutingAPI(map, ghRouting,x,y,lo,la) {
   var trams=[];
   var ft,dis
   var matrix=[ft,dis];
-    $.getJSON("mapdata/tram.json", function (datad) {
-        tram = datad.nodes;
-console.log('tram '+tram.length);
+    $.getJSON("mapdata/A03.json", function (datad) {
+       tram=datad.nodes
+// console.log('tram '+trams[0].nomFr);
 for (var i=0;i<tram.length;i++){
    if(!(tram[i].nomFr===undefined)){
   trams[ida11]=tram[i];
-//   console.log('tramss   : ' +trams[ida11])
+//   console.log('tramss   : ' +trams[0])
   ida11=ida11+1;
    }
-}})
-
+}
+})
+// for (var i = arr.length - 1; i >= 0; i--) {
+//     console.log(arr[i]);
+// }
 var message = "<%= message %>";
 console.log('hi bb'+message);
 
@@ -394,6 +397,19 @@ $("#cleartram").click(function () {
     
   
 });
+$("#delete").click(function () {
+    const optionsPost = {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: ''
+                            };
+                            
+                            var kl='/stations_sba/delete/Aissat Idir 1';
+                         
+                            const response = fetch(kl, optionsPost);
+})
 $("#start05").click(function () {
     var type = $("#setexample option:selected").text();
     console.log('hi'+type);
@@ -424,9 +440,289 @@ testtt1.options = {
         });
 
 // }
-}                       
+}      
 
                           
+
+})
+$("#start11").click(function () {
+
+    
+var tabs=[]
+var fg;
+   
+    //   for (var j=0;j<trams.length-1;j++){
+    //     fg=j+1;
+    //       var l,l1
+    //       var js 
+    //       d=dijkstra(trams[j].name+i,trams[fg].name)
+    //     //   if(!(i==j)){
+    //       if(!(d.path==null)){
+    //         // console.log('distance  : '+JSON.stringify(d.distance))
+    //       if(j<10){
+    //            l='A03_0'+j;
+    //            l1='A03_0'+fg
+    //       }else {l='A03_'+j+'';
+    //              l1='A03_'+fg+''
+    //             }
+    //         js= {"nomFrdepart":trams[j].nomFr,"nomFrarrive":trams[fg].nomFr , "numerodepart": l,"numeroarrive": l1, "duration":d.distance/5.5 }
+    //         tabs.push(js)
+    //       }
+        
+    //     }
+    
+    //       console.log('tabs'+JSON.stringify(tabs))
+
+    // var type = $("#setexample option:selected").text();
+    // console.log('hi'+type);
+var tt;
+    getindice(p[0].lat,p[0].lng,p[1].lat,p[1].lng);
+
+
+
+    async function getindice(X1,Y1,X2,Y2){
+    const response = await fetch('/getbeststation4/'+X1+'/'+Y1+'/'+X2+'/'+Y2);
+                            const     data = await response.json();
+                            console.log('datas '+data)
+                            console.log('data : '+JSON.stringify(data))
+                            // console.log('data server path lawla : '+JSON.stringify(data.path[0]));
+                            // console.log('data server path zawja : '+JSON.stringify(data.path[1]))
+                            // var tt=data.path[0];
+                            // console.log('data server time : '+JSON.stringify(data.time));
+                            // console.log('length data server time : '+JSON.stringify(data.time.length));
+                            // console.log('data distance : '+JSON.stringify(data.distance));
+                           var testtt1 = L.geoJson().addTo(map);
+testtt1.options = {
+    style: {color: "#FFAE42", "weight": 5, "opacity": 1}
+ 
+};
+// for(var i=0;i<data.path.length;i++){
+    testtt1.addData({
+        "type": "Feature",
+        "geometry":data
+        });
+
+// }
+}      
+
+                          
+
+})
+
+
+                 
+$("#start08").click(function () {
+    
+   
+    getstation();
+async function getstation(){
+    SelectELM = document.getElementById("setexample")
+        const responsee = await fetch('/stations_sba');
+            const data0 = await responsee.json();
+            console.log('ch7al ......'+data0.length)
+            console.log('ch7al ......'+mapdata.allnodes.length)
+            console.log("x bla json.... "+mapdata.allnodes[0].x)
+            console.log("latitid bla json.... "+data0[0].latitude)
+console.log("x.... "+JSON.stringify(mapdata.allnodes[0].x))
+console.log("y.... "+JSON.stringify(mapdata.allnodes[0].y))
+console.log("long... " +JSON.stringify(data0[0].longitude))
+console.log("la... "+JSON.stringify(data0[0].latitude))
+var dk= distance(mapdata.allnodes[0].x,mapdata.allnodes[0].y,data0[0].latitude,data0[0].longitude)
+console.log('chawa da  .... '+ dk)
+var ko=[];
+for(var j=0;j<data0.length;j++){
+    dis(j)
+}
+
+// dis(0);
+function dis(zp){
+    for(var i=0;i<mapdata.allnodes.length;i++){
+                
+    var d= distance(mapdata.allnodes[i].x,mapdata.allnodes[i].y,data0[zp].latitude,data0[zp].longitude)
+console.log('distance ....'+d)
+ko[i]=d;
+
+// }
+    
+
+}
+console.log('min fl tableau ...... '+Math.min.apply(Math, ko))
+for(var i=0;i<mapdata.allnodes.length;i++){
+                // for(var j=0;j<data0.length;j++){
+    var d= distance(mapdata.allnodes[i].x,mapdata.allnodes[i].y,data0[zp].latitude,data0[zp].longitude)
+
+
+if(d==Math.min.apply(Math, ko)) {
+    console.log('hadi min   .... '+JSON.stringify(mapdata.allnodes[i]));
+    mapdata.allnodes[i].nomFr=data0[zp].nomFr
+    console.log('men mora  .... '+JSON.stringify(mapdata.allnodes[i]));
+    
+    
+}
+// }
+    
+
+}
+
+}
+         
+        }
+
+})
+
+$("#start07").click(function () {
+  
+    var source,target;
+    var sourcet
+    var ge3=[];
+    var total=[];
+    var total2=[]
+    var pp=[];
+    // var X1=p[1].lat;
+    // var Y1=p[1].lng;
+    var ind1;
+    // getindice(X1,Y1);
+    // async function getindice(X1,Y1){
+                    
+    //                         //  uu1=JSON.stringify(resultt.coordinates[resultt.coordinates.length-1])
+                         
+    //                         const response = await fetch('/indice/all/'+X1+'/'+Y1);
+    //                              target = await response.json();
+                         
+    //                        console.log('targeeeeeeet :' + target)
+                           
+                                  
+                               
+    //                         }
+    var a=[], timess=[] , ida=0, ind ,pathss=[],resultt,stations=[]
+    var b=[];
+    var s=[];
+    var chaba=[]
+    var mm=0;
+    var ss=0;
+    var results ;
+   var cont=0;
+   var boo=false;
+   var ml=1;
+   var ln=1;
+   ghRouting.clearPoints();
+   console.log('tramssss   : ' +trams[0])
+    for (var j=0;j<trams.length;j++){
+        setTimeout(function timer() {
+       if(cont<trams.length){
+    //    console.log('from '+trams[0].nomFr+' to '+trams[cont].nomFr)
+            
+            if(cont==114){boo=true}
+        
+   
+   console.log('count : '+cont)
+   
+      ghRouting.addPoint(new GHInput(JSON.stringify(trams[cont].x),JSON.stringify(trams[cont].y)));
+      ghRouting.addPoint(new GHInput(JSON.stringify(trams[0].x),JSON.stringify(trams[0].y)));
+    //   console.log('ghrouting '+JSON.stringify(ghRouting.points))
+      ghRouting.doRequest()
+          .then(function (json) {  
+              var path = json.paths[0]; 
+               a[ida]=path.distance; 
+               pathss.push(path.points);
+               results=path.points
+               if(!(results==undefined)){
+                   chaba.push({"resultt":results,"start":trams[0].nomFr,"end":trams[cont].nomFr})
+               }
+             
+               stations.push(trams[cont].nomFr)
+              ind=a.indexOf(Math.min.apply(null, a));   
+               timess[ida]=path.time/60000;
+             ge3.push({"pathss":path.points,"timess":path.time/1000,"distance":path.distance})
+            //    console.log('chasraaaaaa : '+ ge3)
+               ida=ida+1;    
+            //  var outHtml = 'Distance in meter:'+a[m]+'<br/>Times in seconds:'+times[m] / 1000 ;
+            //   $("#limiter").html(outHtml);
+            cont=cont+1;})
+          .catch(function (err) {
+        
+          });
+          ghRouting.clearPoints();
+     
+          ml=ml+1;
+      }  }, j * 300);
+
+    }
+    for (let i = 0; i <2; i++) {
+        if(i==1){
+           
+        setTimeout(function timer() {
+            for (let i = 0; i <chaba.length; i++) {
+                setTimeout(function timer() {
+             
+               
+                    if(!(chaba[ss].resultt==undefined)){
+        orsom(mapdata.allnodes.length,chaba[ss].resultt,chaba[ss].end,chaba[0].start);
+    
+    } ss=ss+1;
+       console.log('part :  '+ss)
+     
+
+
+}, i *250);
+
+
+}
+        }, i *32000); 
+    } }
+   
+    function orsom(k,resultt,end,start){  for(var j=0;j<resultt.coordinates.length;j++){
+     
+        var jj=j+1;
+        var uu=JSON.stringify(resultt.coordinates[j])
+        var Y1=uu.substring(1,uu.indexOf(','))
+        var tabId = uu.split(",").pop(); 
+        var  X1=tabId.replace(']','');
+        mapdata.allnodes.push({"name":k+j,"x":X1,"y":Y1});
+        if(jj<resultt.coordinates.length){
+        mapdata.paths.push({"id":k+1+j,"from":k+j,"to":k+jj})}
+        if(j==0){
+            if(mapdata.allnodes.length>1){
+               
+                mapdata.allnodes[k+j].nomFr=start;
+            mapdata.allnodes[k+j].nomFra=end}
+        }
+        if(k==1){
+            mapdata.allnodes[0].nomFra=start;
+            mapdata.paths.push({"id":k+100000000+j,"from":0,"to":19})
+
+        }
+if(j==resultt.coordinates.length-1){
+    if(mapdata.allnodes.length>1){
+        mapdata.allnodes[mapdata.allnodes.length-1].nomFr=end
+       }
+    //    if(k==1){
+    //     mapdata.allnodes[mapdata.allnodes.length-1].nomFra=end;
+
+    // }
+}
+    }
+  
+    console.log('la tay after ' + mapdata.allnodes.length)
+}
+
+})
+
+$("#start10").click(function () {
+    console.log('hi');
+    var tab=[]
+    for(var i=0;i<mapdata.allnodes.length;i++){
+        if(mapdata.allnodes[i].nomFr==='Wiam'){
+            tab.push(mapdata.allnodes[i].name);
+           
+console.log('name : '+tab)
+// console.log('lnnnnnn : '+ln)
+
+        }
+    }
+    for(var j=1;j<tab.length;j++){
+        mapdata.paths.push({"id":j+100000,"from":tab[j]-1,"to":0,})
+    }
 
 })
 $("#start02").click(function () {

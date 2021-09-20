@@ -91,7 +91,10 @@
         <button style="margin-bottom:5px" type="button" id="startcar" class="btn btn-success" > car</button>
       </div>
       <div class="col-auto">
-        <button style="margin-bottom:5px" type="button" id="start01" class="btn btn-success" > Start tram </button>
+        <button style="margin-bottom:5px" type="button" id="start07" class="btn btn-success" > Start tram </button>
+      </div>
+      <div class="col-auto">
+        <button style="margin-bottom:5px" type="button" id="start10" class="btn btn-success" > prepare tram </button>
       </div>
       <div class="col-auto">
         <span class="label label-default" style="font-size: larger;"for="inlineFormCustomSelect" >Choose one</span>
@@ -115,6 +118,9 @@
         <button style="margin-bottom:5px" type="button" id="start05" class="btn btn-success" > Test server </button>
       </div>
       <div class="col-auto">
+        <button style="margin-bottom:5px" type="button" id="start11" class="btn btn-success" > Test Merge  </button>
+      </div>
+      <div class="col-auto">
         <button style="margin-bottom:5px" type="button" id="clearnav"  class="btn btn-danger"  > Clear walk </button>
       </div>
       <div class="col-auto">
@@ -122,6 +128,10 @@
       </div>
       <div class="col-auto">
         <button style="margin-bottom:5px" type="button" id="clearmap"  class="btn btn-danger"  > Clear Map</button>
+      </div>
+    </div>
+    <div class="col-auto">
+        <button style="margin-bottom:5px" type="button" id="delete"  class="btn btn-danger"  > Delete station</button>
       </div>
     </div>
     
@@ -1155,49 +1165,49 @@ var dragManager = d3.behavior.drag()
 //             redrawNodes();
 //         });
 //     }
-//     else if(value == 999) {
-//         var file='stations_sba'
-//         clearGraph();
-//         clear();
-//         gettram(file);
+    // if(value == 999) {
+    //     var file='stations_sba'
+    //     clearGraph();
+    //     clear();
+    //     gettram(file);
  
-//         maps.setView(new L.LatLng(35.20118, -0.6343), 13);
+    //     maps.setView(new L.LatLng(35.20118, -0.6343), 13);
 
-//         $.getJSON("mapdata/all.json", function (datad) {
-//             var importedData = datad;
+    //     $.getJSON("mapdata/all.json", function (datad) {
+    //         var importedData = datad;
 
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
+    //         if (importedData.nodes === undefined
+    //             || importedData.paths === undefined
+    //             || Object.keys(importedData).length !== 2) {
+    //             console.log("** JSON format error:");
+    //             console.log(importedData);
+    //             return;
+    //         }
 
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
+    //         mapdata.allnodes = importedData.nodes;
+    //         mapdata.paths = importedData.paths;
+    //         mapdata.distances = [];
+    //         mapdata.getstate.selectedNode = null;
+    //         mapdata.getstate.fromNode = null;
+    //         mapdata.getstate.toNode = null;
 
-//             mapdata.allnodes.forEach(function (node) {
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
+    //         mapdata.allnodes.forEach(function (node) {
+    //             var b=false;
+    //             if (node.nomFr === undefined){b=true};
+    //            if(!b){
+    //             addNodeToSelect(node);}
+    //         });
 
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-//     }
+    //         calculateDistancesbetweennodes();
+    //         redrawLines();
+    //         redrawNodes();
+    //     });
+    // }
    
 
 
 
-// });
+
 
 
 
@@ -1307,7 +1317,7 @@ $('#getshortestroute').on('click', function () {
     console.log('chahyaaaaa '+targetNode);
     console.log(targetNode);
     var results = dijkstra(sourceNode, targetNode);
-    console.log('result : '+JSON.stringify(results))
+    // console.log('result : '+JSON.stringify(results))
     console.log('result : '+JSON.stringify(results.distance))
     if (results.path) {
         results.path.forEach(function (step) {
@@ -1328,11 +1338,11 @@ $('#getshortestroute1').on('click', function () {
     calculateDistancesbetweennodes();
     if (!$(mapdata.getui.htmlSelectStartingNode).val() || !$(mapdata.getui.htmlSelectEndNode).val()) return;
     var sourceNode = $(mapdata.getui.htmlSelectStartingNode).val();
-    console.log(sourceNode);
+    // console.log(sourceNode);
     var targetNode = $(mapdata.getui.htmlSelectEndNode).val();
-    console.log(targetNode);
+    // console.log(targetNode);
     var results = dijkstra(sourceNode, targetNode);
-    console.log(results);
+    // console.log(results);
     if (results.path) {
         results.path.forEach(function (step) {
 
@@ -1469,7 +1479,9 @@ function calculateDistancesbetweennodes() {
         var d = p1.distanceTo(p2);
         mapdata.distances[sourceNodeId][targetNodeId] = d;
         mapdata.distances[targetNodeId][sourceNodeId] = d;
+       
     };
+    // console.log('matrix dis '+mapdata.distances)
 };
 
 function dijkstra(start, end) {
@@ -1539,8 +1551,8 @@ function dijkstra(start, end) {
                 };
             }
         }
-console.log('start'+start)
-console.log('end'+end)
+// console.log('start'+start)
+// console.log('end'+end)
 var count=0;
         totalDistance = shortestPath[end];
         var start1,end1;
@@ -1899,7 +1911,17 @@ markers.addTo(maps);
     }
     else {file='stations_sba/bus/'+nameline;
 
+    } if(nameline=='ALL'){
+        nameline='all01'
+         file='stations_sba'
+
     }
+    if(nameline=='all1'){
+         nameline='lines/tram/13_Wiam';
+        file='stations_sba';
+
+   }
+   
         gettram(file);
 
         $.getJSON("mapdata/"+nameline+".json", function (datad) {
@@ -1925,6 +1947,7 @@ markers.addTo(maps);
                 if (node.nomFr === undefined){b=true};
                if(!b){
                 addNodeToSelect(node);}
+                // addNodeToSelect(node);
             });
 
             calculateDistancesbetweennodes();

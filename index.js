@@ -43,7 +43,14 @@ app2.use(session({
     resave: true,
     saveUninitialized: true
 }));
+app.use(express.static('marker-shadow.png'));
+app2.use(express.static('marker-shadow.png'));
+app.use(express.static('files'));
+app.use('marker-shadow',express.static(__dirname+'marker-shadow'))
+app2.use('marker-shadow',express.static(__dirname+'marker-shadow'))
 app.use('/images',express.static(__dirname+'/images'))
+app2.use('/js',express.static(__dirname+'/js'))
+app.use('/js',express.static(__dirname+'/js'))
 app.use('/views',express.static(__dirname+'/views'))
 app2.use('/images',express.static(__dirname+'/images'))
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -152,6 +159,7 @@ app2.listen(3000, () => {
 
 const Datastore = require('nedb');
 const { type } = require('os');
+const { Console } = require('console');
 
 
 app.use(express.static('public'));
@@ -189,6 +197,64 @@ app.post('/stations_sba', (request, response) => {
         latitude: data.lat,
         longitude: data.lon
     })
+});
+app.delete( "/delete/:name", function ( req, res ) {
+    var name = request.params.name;
+    stations_sba.find({}).sort({ type: 1 }).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        } for(var i=0;i<data.length;i++){
+            if(name==data[i].nomFr){
+                customerDB.remove( {
+                    _id: data[i]._id
+                  }, function ( err, numRemoved ) {
+                    if ( err ) res.status( 500 ).send( err );
+                    else res.sendStatus( 200 );
+                  } );
+                console.log('delete khadmet ')
+            }
+        }
+     });
+     
+
+   
+  } );
+  app2.delete( "/delete/:name", function ( req, res ) {
+    var name = request.params.name;
+    stations_sba.find({}).sort({ type: 1 }).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        } for(var i=0;i<data.length;i++){
+            if(name==data[i].nomFr){
+                customerDB.remove( {
+                    _id: data[i]._id
+                  }, function ( err, numRemoved ) {
+                    if ( err ) res.status( 500 ).send( err );
+                    else res.sendStatus( 200 );
+                  } );
+                console.log('delete khadmet ')
+            }
+        }
+     });
+     
+
+   
+  } );
+app2.delete('/stations_sba/delete/:name', (request, response) => {
+    var name = request.params.name;
+    
+    stations_sba.find({}).sort({ type: 1 }).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        } for(var i=0;i<data.length;i++){
+            if(name.includes(data[i].nomFr)){
+                stations_sba.remove({_id: data[i]._id});
+            }
+        }
+     });
 });
 app2.post('/addline/:name', (request, response) => {
     var name = request.params.name;
@@ -759,6 +825,356 @@ app2.get('/stations_sba/bus/:numero', (request, response) => {
        
         response.json(datas);
     });
+})
+app.get('/getbeststation4/:x1/:y1/:x2/:y2', (request, response) => {
+    var x1 = request.params.x1;
+    var y1 = request.params.y1;
+    var x2 = request.params.x2;
+    var y2 = request.params.y2;
+    var all = require('./public/mapdata/all01.json');
+    var tts=all.nodes
+    var trams=[]
+    var t = require('./Matrixdb.json');
+    var tr=[]
+    var a3=[]
+    var result;
+    var ida11=0
+    var alls=[]
+    var tabs=[]
+    const fs = require('fs');
+    var x=0;
+    var re;
+    var source,target;
+    const Graph = require('dijkstra-short-path');
+    const route = new Graph();
+    const Datastore = require('nedb');
+    var datt; var lp=0;
+    var myLines = [{
+        "type": "LineString",
+        "coordinates": []
+    }];
+
+    for (var i=0;i<tts.length;i++){
+        if(!(tts[i].nomFr===undefined)){
+       trams[ida11]=tts[i];
+     //   console.log('tramss   : ' +trams[0])
+       ida11=ida11+1;
+        }
+     }
+
+    const stations_sba = new Datastore('stations_sba');
+    stations_sba.loadDatabase();
+    stations_sba.find({}).sort({ type: 1 }).exec(function (err, data) {
+        if (err) {
+          
+            response.end();
+            return;
+        }
+        datt=data
+source=getind11(x1,y1,datt)
+target=getind11(x2,y2,datt)
+// console.log('source : '+source)
+// console.log('target : '+target)
+//    console.log('ttttttttt : '+JSON.stringify(t[0]))
+    for(var i=0;i<datt.length;i++){
+        setTimeout(function timer() {
+            var n=datt[x].nomFr+'&'+datt[x].numero
+            re=hatcho(n)
+            tabs.push(re)
+            // console.log('lawlaaaa : '+JSON.stringify(tabs[0]))
+        for (var j=0;j<t.length;j++){
+            if(re.name==t[j].nomFrarrive+t[j].numeroarrive){
+                re.tab.push([t[j].nomFrdepart+t[j].numerodepart,t[j].duration])
+            }
+        }
+            route.addNode(re.name, new Map(re.tab));
+            if(x==112){
+        result=route.path(source,target)
+        console.log(result)
+            }
+        
+            x=x+1;
+            }, i * 1);
+       
+    }
+
+    function hatcho(name){
+        var tab=[]
+        var numd;
+        var numa;
+        var n ,op
+    for (var i=0;i<t.length;i++){
+        n=t[i].nomFrdepart+t[i].numerodepart
+       
+        if(name==n){
+            op=i
+            numa=t[i].numeroarrive
+      tt=[t[i].nomFrarrive+numa,t[i].duration]
+          tab.push(tt)
+        
+          
+        }
+      
+      
+    }
+    
+    return {"name":name,"tab":tab}
+    
+    }
+   
+    console.log('hiiiiii')
+    for(var j=1;j<2;j++){
+       
+    setTimeout(function timer() {
+    for(var i=0;i<result.path.length;i++){
+        var uu=JSON.stringify(result.path[i])
+        var Y11=uu.substring(1,uu.indexOf('&'))
+        var tabId = uu.split("&").pop(); 
+        var ka=Y11+'&'
+        var  X11=tabId.replace(ka,"");
+      
+        if(X11.length==3){
+            tr.push({"name":Y11,'numero':parseInt(X11,10)})
+              
+        } else{ if(Y11.includes("A03")){
+         a3.pus(Y11)
+        }
+        }
+        
+        
+
+    }
+    console.log('tr '+JSON.stringify(tr))
+ 
+    for(var i=0;i<tr.length-1;i++){
+        var src =getn(tr[i].name)
+        var trt=getn(tr[i+1].name)
+        console.log('station src '+tr[i].name +' name '+ src)
+        console.log('station trt '+tr[i+1].name +' name '+ trt)
+      for (var j=src;j<=trt;j++){
+          myLines[0].coordinates.push([tts[j].y,tts[j].x])
+
+      }
+    }
+ 
+    
+ 
+    function getn(name){
+   
+        var sour
+        for(var j=0;j<trams.length;j++){
+         
+                if(name===trams[j].nomFr){ 
+                   sour=trams[j].name
+                   return sour;
+                }
+
+            }
+        
+        }
+    
+    
+}, j*800);}
+
+for(var j=1;j<2;j++){
+       
+    setTimeout(function timer() {
+        console.log(' my lines'+JSON.stringify(myLines))
+        response.json(myLines[0])
+    }, j*1000);}
+
+
+
+
+// --------------------------------------------------------------------------------------
+// for(var j=1;j<2;j++){
+// setTimeout(function timer() {
+
+//     for(var i=0;i<tr.length-1;i++){
+//         setTimeout(function timer() {
+//         var bdl
+//       var sourcee =getname(tr[lp])
+//       var targett=getname(tr[lp+1])
+//       console.log('length all '+tts.length)
+//       console.log('src '+sourcee+' name '+tr[lp])
+//       console.log('trt '+targett+' name '+tr[lp+1])
+//       if(sourcee>=targett){
+//           bdl=targett
+//           targett=sourcee
+//           sourcee=bdl
+//       }
+//       for(var j=sourcee;j<=targett;j++){
+//        myLines.coordinates.push([tts[j].x,tts[j].y])
+//       }
+//     }, i*500);  
+// lp=lp+1;
+//     }
+//     console.log(' my lines'+JSON.stringify(myLines))
+//     response.json(myLines)
+// }, j*500);
+// }
+// -----------
+// function getname(name){
+//     console.log('yess '+name)
+//     console.log('name te3 all '+ trams[12].nomFr)
+//     var n
+// for(var i=0;i<trams.length;i++){
+//     // console.log('nameee '+name+' name te3 all '+ trams[i].nomFr)
+//     if(name===trams[i].nomFr){
+//         n=trams[i].name;
+//         console.log('yess name 1111111111111111111 '+name+' te3 all'+trams[i].name)
+//     }
+//     return n
+// }
+
+// }
+// ---------
+    // ---------------------------
+    function getind11(x,y,trams){
+        var a=[];
+        var ida=0;
+        var ind;
+        for (var i = 0; i < trams.length; i++) {
+       
+            var d = distance(x, y, trams[i].latitude, trams[i].longitude);
+            a[ida] = d;
+            ida = ida + 1;
+    
+        
+    }
+    
+    for (var i = 0; i < trams.length; i++) {
+        
+            var d = distance(x, y, trams[i].latitude, trams[i].longitude);
+            if (d == Math.min.apply(null, a)) {
+              
+             
+               ind=trams[i].nomFr+'&'+trams[i].numero
+              
+             
+    
+            }
+        
+    } return ind
+    }
+    // ----------------------
+    
+    })
+    
+      
+    
+
+})
+app.get('/getbeststation3/:x1/:y1/:x2/:y2', (request, response) => {
+    var x1 = request.params.x1;
+    var y1 = request.params.y1;
+    var x2 = request.params.x2;
+    var y2 = request.params.y2;
+   var all;
+   var tabt=[];
+   var ret_source=[]
+   var ret_target=[]
+   var ida11=0;
+   var alls=[]
+    var t = require('./public/mapdata/all01.json');
+    all=t.nodes; 
+    for (var i=0;i<all.length;i++){
+        
+        if(!(all[i].nomFr===undefined)){
+        alls[ida11]=all[i];
+    ida11=ida11+1;
+    }}
+   
+
+
+ret_target=getind1(x2,y2,alls);
+ret_source=getind1(x1,y1,alls);
+console.log('name source  '+ ret_source[0])
+console.log('indice source '+ret_source[1])
+console.log('name source '+ret_source[2])
+console.log('line source  '+ret_source[3])
+console.log('name target  '+ ret_target[0])
+console.log('indice target '+ret_target[1])
+console.log('name target '+ret_target[2])
+console.log('line target '+ret_target[3])
+
+var s_source = require('./public/mapdata/lines/'+ret_source[3]+'/'+'_'+ret_source[0]+'.json');
+var s_target = require('./public/mapdata/lines/'+ret_target[3]+'/'+'_'+ret_target[0]+'.json');
+for (var i=0;i<alls.length;i++){
+if(alls[i].line=='tram'){
+
+    tabt.push(alls[i].name)
+}
+}
+for (var i=0;i<tabt.length;i++){
+
+
+}
+
+
+
+
+
+
+    function getind1(x,y,trams){
+        var a=[];
+        var ab=[];
+        var ida=0;
+        var ind;
+        for (var i = 0; i < trams.length; i++) {
+       
+            var d = distance(x, y, trams[i].x, trams[i].y);
+            a[ida] = d;
+            ida = ida + 1;
+    
+        
+    }
+    
+    for (var i = 0; i < trams.length; i++) {
+        
+            var d = distance(x, y, trams[i].x, trams[i].y);
+            if (d == Math.min.apply(null, a)) {
+              
+             
+               ind=trams[i].nomFr
+              ab.push(ind);
+              ab.push(i)
+              ab.push(trams[i].name)
+              ab.push(trams[i].line)
+             
+    
+            }
+        
+    } return ab
+    }
+
+
+    // ----- function rout1------------
+    function rout1(x22,y22,z){
+        var hat;
+      https.get("https://graphhopper.com/api/1/route?point="+x1+","+y1+"&point="+x22+","+y22+"&vehicle=foot&locale=de&points_encoded=false&key=72e12178-3f0f-4491-a947-b58853fe7db9", (resp) => {
+        let data = '';
+        resp.on('data', (chunk) => {
+          data += chunk;
+        });
+        resp.on('end', () => {
+          var corr =JSON.parse(data).paths[0].points
+          tab[z]=corr
+          hat=corr;
+          var path=JSON.parse(data).paths[0];
+               var time =JSON.parse(data).paths[0].time/1000
+               var distance =JSON.parse(data).paths[0].distance
+               pathss.push(corr);
+               timess.push(time);
+               a.push(distance);  
+               ge3.push({"pathss":path.points,"timess":path.time/1000,"distance":path.distance})      
+        });
+      
+      }).on("error", (err) => {
+        console.log("Error: " + err.message);
+      });   
+  }
+    // -------------------------
 })
 app.get('/getbeststation2/:type/:x1/:y1/:x2/:y2', (request, response) => {
    
@@ -1936,6 +2352,15 @@ else if (type.includes('A27')){
 })
 
 app.get('/stations_sba', (request, response) => {
+    stations_sba.find({}).sort({ type: 1 }).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+        response.json(data);
+    });
+})
+app2.get('/stations_sba', (request, response) => {
     stations_sba.find({}).sort({ type: 1 }).exec(function (err, data) {
         if (err) {
             response.end();

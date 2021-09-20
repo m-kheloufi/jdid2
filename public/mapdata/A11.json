@@ -2,7 +2,7 @@
       "nodes": [
             {
                   "name": 0,
-                  "nomFr": "StationAmirAbdelkader",
+                  "nomFr": "Station Amir Abdelkader",
                   "x": 35.199210573913696,
                   "y": -0.631016492843628
             },
@@ -136,7 +136,7 @@
             },
             {
                   "name": 26,
-                  "nomFr": "FacdeMédecine",
+                  "nomFr": "Fac de Médecine",
                   "x": 35.178596509540554,
                   "y": -0.6449103355407716
             },
@@ -158,7 +158,7 @@
             },
             {
                   "name": 30,
-                  "nomFr": "DirectionDesServicesAgricoles",
+                  "nomFr": "Direction Des Services Agricoles",
                   "x": 35.178754357206884,
                   "y": -0.6504356861114503
             },
@@ -174,7 +174,7 @@
             },
             {
                   "name": 33,
-                  "nomFr": "SakiaElHamra",
+                  "nomFr": "Sakia El Hamra",
                   "x": 35.18462958006876,
                   "y": -0.6518518924713136
             },
@@ -364,7 +364,7 @@
             },
             {
                   "name": 70,
-                  "nomFr": "SidiLahcene2",
+                  "nomFr": "Sidi Lahcene 2",
                   "x": 35.16242426901981,
                   "y": -0.6945526599884034
             },
@@ -375,7 +375,7 @@
             },
             {
                   "name": 72,
-                  "nomFr": "SidiLahcene,TerminusA11",
+                  "nomFr": "Sidi Lahcene, Terminus A11",
                   "x": 35.160038503629714,
                   "y": -0.696333646774292
             }

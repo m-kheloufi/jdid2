@@ -21,7 +21,7 @@
         },
         {
             "name": 4,
-            "nomFr": "Lescascades",
+            "nomFr": "LesCascades",
             "x": 35.20900721599752,
             "y": -0.6163130083833512
         },
@@ -102,7 +102,7 @@
         },
         {
             "name": 20,
-            "nomFr": "GareRoutièreEst",
+            "nomFr": "Gare routière Est, Ghalmi",
             "x": 35.2132498691402,
             "y": -0.6157922744750977
         },
@@ -989,7 +989,7 @@
         },
         {
             "name": 195,
-            "nomFr": "La Daira",
+            "nomFr": "Daira",
             "x": 35.20599727740149,
             "y": -0.626524826440471
         },
@@ -1091,7 +1091,7 @@
         },
         {
             "name": 215,
-            "nomFr": "La Radio",
+            "nomFr": "Radio",
             "x": 35.1963806304334,
             "y": -0.6209317278438231
         },
@@ -1147,7 +1147,7 @@
         },
         {
             "name": 226,
-            "nomFr": " La Maternité",
+            "nomFr": "Maternité",
             "x": 35.19251254739156,
             "y": -0.6191780910132549
         },
@@ -1337,7 +1337,7 @@
         },
         {
             "name": 263,
-            "nomFr": "Gare Routière Sud",
+            "nomFr": "Gare routière Sud",
             "x": 35.185264680007194,
             "y": -0.6506811010178472
         },

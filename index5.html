@@ -6,44 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>22-NAVIGATOR</title>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
-  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
-    <title>22-NAVIGATOR</title>
-  
-    
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
-      crossorigin="anonymous">
-      <link 
-      rel="stylesheet" 
-      href="https://cdn.jsdelivr.net/npm/leaflet@0.7.7/dist/leaflet.css"
-      />
-    <!-- Custom styles for this template -->
+    <title>22-NAVIGATOR</title>  
     <link href="style/justified-nav.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-
-
-
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+    <link type="image/png" rel="icon" href="/images/nv.png"/>
+    <script src="js/leaflet1.js"
+       ></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.14/leaflet.draw.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.14/leaflet.draw.js"></script>
       <!-- Bootstrap core CSS -->
@@ -58,7 +30,90 @@
 </head>
 <!-- https://router.hereapi.com/v8/routes?transportMode=pedestrian&return=summary&origin=35.20650,-0.61903&destination=35.2275,-0.6271&apiKey=wZKh2gt07q2EsQoCHRUIkGP6bQfgdq577hRfEIJITOc -->
 
-<body>
+<body> <div style="display: none;" id="limiter"class="limiter">
+    <div class="container-login100" style="background-image: url('c/images/sba.jpg');">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form">
+               <br>
+
+                <span class="login100-form-title p-b-34 p-t-27">
+                  Delete Station 
+                </span>
+                
+                    <div class="wrap-input100 validate-input" data-validate = "Enter username">
+                        <input type="name" class="form-control" id="namestation" aria-describedby="name" placeholder="name station">
+                    </div>
+                 
+
+                
+
+              
+
+            
+
+                    <div class="container-login100-form-btn">
+                        <a id ="delete1" class="login100-form-btn" >
+                           delete
+                        </a>
+                    </div>     <br>
+                <div class="container-login100-form-btn">
+                    <a id ="hide" class="login100-form-btn" >
+                        Exit
+                    </a>
+                </div>
+                
+            </form>
+        </div>
+        
+    </div>
+</div>
+<div style="display: none;" id="limiter1"class="limiter">
+  <div class="container-login100" style="background-image: url('c/images/sba.jpg');">
+      <div class="wrap-login100">
+          <form class="login100-form validate-form">
+             <br>
+
+              <span class="login100-form-title p-b-34 p-t-27">
+                Update Station 
+              </span>
+              
+                  <div class="wrap-input100 validate-input" >
+                      <input type="name" class="form-control" id="namestation" aria-describedby="name" placeholder="name station">
+                  </div>
+                  <div class="wrap-input100 validate-input" >
+                    <input type="name" class="form-control" id="longitude" aria-describedby="name" placeholder="longitude">
+                </div>
+                <div class="wrap-input100 validate-input" >
+                  <input type="name" class="form-control" id="latitude" aria-describedby="name" placeholder="latitude">
+              </div>
+               
+
+              
+
+            
+
+          
+
+                  <div class="container-login100-form-btn">
+                      <a id ="delete1" class="login100-form-btn" >
+                         Update
+                      </a>
+                  </div>
+                  <br>
+              <div class="container-login100-form-btn">
+                  <a id ="hide1" class="login100-form-btn" >
+                      Exit
+                  </a>
+              </div>
+              
+          </form>
+      </div>
+      
+  </div>
+</div>
+
+</div>
+    
     <div id="divv">  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
           <a class="navbar-brand" href="#">22-NAVIGATOR</a>
@@ -106,6 +161,9 @@
               <div class="col-auto">
                 <button type="button" id="clearmap"  class="btn btn-danger"  > Clear Map</button>
               </div>
+              <div class="col-auto">  <button type="button"  id="deletestation"  class="btn btn-danger"  > delete station</button> </div>
+            
+           
              
        
              
@@ -222,6 +280,589 @@
     </button> -->
     <!-- <script type="module" src="http://127.0.0.1:8887/leaflet.js"></script> -->
     <script>
+        $("#delete1").click(function () {
+            var namest= document.getElementById("namestation");
+  var name =namest.value 
+            
+            console.log('nameee : '+name)
+    const optionsPost = {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: ''
+                            };
+                            
+                           
+                         
+                            const response = fetch('/stations_sba/delete/'+name+'', optionsPost);
+                           
+})
+    </script>
+    <style>
+        .limiter {
+  width: 100%;
+  margin: 0 auto;
+  
+}
+
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+}
+
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ RESTYLE TAG ]*/
+
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+
+body, html {
+	height: 100%;
+	font-family: Poppins-Regular, sans-serif;
+}
+
+/*---------------------------------------------*/
+a {
+	font-family: Poppins-Regular;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666666;
+	margin: 0px;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+
+a:focus {
+	outline: none !important;
+}
+
+a:hover {
+	text-decoration: none;
+  color: #fff;
+}
+
+/*---------------------------------------------*/
+h1,h2,h3,h4,h5,h6 {
+	margin: 0px;
+}
+
+p {
+	font-family: Poppins-Regular;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666666;
+	margin: 0px;
+}
+
+ul, li {
+	margin: 0px;
+	list-style-type: none;
+}
+
+
+/*---------------------------------------------*/
+input {
+	outline: none;
+	border: none;
+}
+
+textarea {
+  outline: none;
+  border: none;
+}
+
+textarea:focus, input:focus {
+  border-color: transparent !important;
+}
+
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; }
+input:focus::-moz-placeholder { color:transparent; }
+input:focus:-ms-input-placeholder { color:transparent; }
+
+textarea:focus::-webkit-input-placeholder { color:transparent; }
+textarea:focus:-moz-placeholder { color:transparent; }
+textarea:focus::-moz-placeholder { color:transparent; }
+textarea:focus:-ms-input-placeholder { color:transparent; }
+
+input::-webkit-input-placeholder { color: #fff;}
+input:-moz-placeholder { color: #fff;}
+input::-moz-placeholder { color: #fff;}
+input:-ms-input-placeholder { color: #fff;}
+
+textarea::-webkit-input-placeholder { color: #fff;}
+textarea:-moz-placeholder { color: #fff;}
+textarea::-moz-placeholder { color: #fff;}
+textarea:-ms-input-placeholder { color: #fff;}
+
+label {
+  margin: 0;
+  display: block;
+}
+
+/*---------------------------------------------*/
+button {
+	outline: none !important;
+	border: none;
+	background: transparent;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+iframe {
+	border: none !important;
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Utility ]*/
+.txt1 {
+  font-family: Poppins-Regular;
+  font-size: 13px;
+  color: #e5e5e5;
+  line-height: 1.5;
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ login ]*/
+
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container-login100 {
+  width: 100%;  
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 1;  
+}
+
+.container-login100::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(255,255,255,0.9);
+}
+
+.wrap-login100 {
+  width: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 55px 55px 37px 55px;
+
+  background: #9152f8;
+  background: -webkit-linear-gradient(top, #7579ff, #b224ef);
+  background: -o-linear-gradient(top, #7579ff, #b224ef);
+  background: -moz-linear-gradient(top, #7579ff, #b224ef);
+  background: linear-gradient(top, #7579ff, #b224ef);
+}
+
+
+/*------------------------------------------------------------------
+[ Form ]*/
+
+.login100-form {
+  width: 100%;
+}
+
+.login100-form-logo {
+  font-size: 60px; 
+  color: #333333;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+.login100-form-title {
+  font-family: Poppins-Medium;
+  font-size: 30px;
+  color: #fff;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+
+  display: block;
+}
+
+
+/*------------------------------------------------------------------
+[ Input ]*/
+
+.wrap-input100 {
+  width: 100%;
+  position: relative;
+  border-bottom: 2px solid rgba(255,255,255,0.24);
+  margin-bottom: 30px;
+}
+
+.input100 {
+  font-family: Poppins-Regular;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.2;
+
+  display: block;
+  width: 100%;
+  height: 45px;
+  background: transparent;
+  padding: 0 5px 0 38px;
+}
+
+/*---------------------------------------------*/ 
+.focus-input100 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.focus-input100::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+
+  background: #fff;
+}
+
+.focus-input100::after {
+  font-family: Material-Design-Iconic-Font;
+  font-size: 22px;
+  color: #fff;
+
+  content: attr(data-placeholder);
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 6px;
+  left: 0px;
+  padding-left: 5px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.input100:focus {
+  padding-left: 5px;
+}
+
+.input100:focus + .focus-input100::after {
+  top: -22px;
+  font-size: 18px;
+}
+
+.input100:focus + .focus-input100::before {
+  width: 100%;
+}
+
+.has-val.input100 + .focus-input100::after {
+  top: -22px;
+  font-size: 18px;
+}
+
+.has-val.input100 + .focus-input100::before {
+  width: 100%;
+}
+
+.has-val.input100 {
+  padding-left: 5px;
+}
+
+
+/*==================================================================
+[ Restyle Checkbox ]*/
+
+.contact100-form-checkbox {
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 35px;
+}
+
+.input-checkbox100 {
+  display: none;
+}
+
+.label-checkbox100 {
+  font-family: Poppins-Regular;
+  font-size: 13px;
+  color: #fff;
+  line-height: 1.2;
+
+  display: block;
+  position: relative;
+  padding-left: 26px;
+  cursor: pointer;
+}
+
+.label-checkbox100::before {
+  content: "\f26b";
+  font-family: Material-Design-Iconic-Font;
+  font-size: 13px;
+  color: transparent;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  background: #fff;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.input-checkbox100:checked + .label-checkbox100::before {
+  color: #555555;
+}
+
+
+/*------------------------------------------------------------------
+[ Button ]*/
+.container-login100-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.login100-form-btn {
+  font-family: Poppins-Medium;
+  font-size: 16px;
+  color: #555555;
+  line-height: 1.2;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  min-width: 120px;
+  height: 50px;
+  border-radius: 25px;
+
+  background: #9152f8;
+  background: -webkit-linear-gradient(bottom, #7579ff, #b224ef);
+  background: -o-linear-gradient(bottom, #7579ff, #b224ef);
+  background: -moz-linear-gradient(bottom, #7579ff, #b224ef);
+  background: linear-gradient(bottom, #7579ff, #b224ef);
+  position: relative;
+  z-index: 1;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.login100-form-btn::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  opacity: 1;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.login100-form-btn:hover {
+  color: #fff;
+}
+
+.login100-form-btn:hover:before {
+  opacity: 0;
+}
+
+
+/*------------------------------------------------------------------
+[ Responsive ]*/
+
+@media (max-width: 576px) {
+  .wrap-login100 {
+    padding: 55px 15px 37px 15px;
+  }
+}
+
+
+
+/*------------------------------------------------------------------
+[ Alert validate ]*/
+
+.validate-input {
+  position: relative;
+}
+
+.alert-validate::before {
+  content: attr(data-validate);
+  position: absolute;
+  max-width: 70%;
+  background-color: #fff;
+  border: 1px solid #c80000;
+  border-radius: 2px;
+  padding: 4px 25px 4px 10px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  right: 0px;
+  pointer-events: none;
+
+  font-family: Poppins-Regular;
+  color: #c80000;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: left;
+
+  visibility: hidden;
+  opacity: 0;
+
+  -webkit-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+}
+
+.alert-validate::after {
+  content: "\f12a";
+  font-family: FontAwesome;
+  font-size: 16px;
+  color: #c80000;
+
+  display: block;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  right: 5px;
+}
+
+.alert-validate:hover:before {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 992px) {
+  .alert-validate::before {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+
+
+
+    </style>
+    <script> 
+//      var x = document.getElementById("hide");
+   
+//    x.style.display = "none";
+    </script>
+    <script>
         getlines()
         async function getlines(){
             SelectELM = document.getElementById("setexample")
@@ -230,7 +871,7 @@
     
       
       for (var i = 0; i < data.length; i++) {
-          console.log('names : --------' +data[i].name)
+        //   console.log('names : --------' +data[i].name)
           myOption = document.createElement("option");
           myOption.text = data[i].name;
             myOption.value =data[i].value
@@ -241,12 +882,21 @@
         
 function getmapdata(nameline){
     $('#setexample').on('change', function () {
-    var value = $(this).val();
+  refr(nameline);
+    
+
+}
+
+    )
+};
+function refr(nameline){
+    // var value = $(this).val();
     var file;
     if ($("#setexample option:selected").text() == nameline) {
         map.setView(new L.LatLng(35.19971906404343, -0.6247837572740723), 14);
         clearGraph();
       clear();
+     
       if(nameline=='tram'){
        file='stations_sba/tramway'
     }else if (nameline=='A03_A03bis'){
@@ -293,11 +943,8 @@ function getmapdata(nameline){
 
 
     }
-    
+ } 
 
-}
-
-    )};
 
    async function getLines(){
     const response = await fetch('/lines');
@@ -325,17 +972,31 @@ function getmapdata(nameline){
         }
           var map;
         var chemin = L.layerGroup();
-        var markers = L.layerGroup();
+      
         var sequence = 1;
         var id = 0;
-         map =  L.map('svg-map').setView([35.20118, -0.6343], 14);
+      
+       
+map =  L.map('svg-map',{drawControl: true}).setView([35.20118, -0.6343], 14);
  mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
   attribution: '&copy; '+mapLink+ 'contributors'
 }).addTo(map);
 
+
         let lat, lon;
         var featureGroup = L.featureGroup().addTo(map);
+        var selector = L.control({
+    position: 'topright'
+  });
+selector.onAdd = function(map) {
+    //create div container
+    var div = L.DomUtil.create('div', 'mySelector');
+    //create select element within container (with id, so it can be populated later)
+    div.innerHTML = '<select id="marker_select"><option value="init">(select station)</option></select>';
+    return div;
+  };
+  selector.addTo(map);
 
         var drawControl = new L.Control.Draw({
             position: 'topright',
@@ -350,10 +1011,10 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             }
         }).addTo(map);
 
-        map.on('draw:created', function (e) {
-            featureGroup.addLayer(e.layer);
-        }
-        );
+        // map.on('draw:created', function (e) {
+        //     featureGroup.addLayer(e.layer);
+        // }
+        // );
 
         function getLatLngs(layer) {
             var lng, lat, chemin = [];
@@ -414,6 +1075,9 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                             body: data
                         };
                         const response = fetch('/stations_sba', optionsPost);
+                        var namef= $("#setexample option:selected").text()
+  
+  refr(namef);
                         return "{\"latitude\": " + layer.getLatLng().lat + ", " + "\"longitude\" :" + layer.getLatLng().lng + "}";
                     } else if (type === 'bus') {
                         var nomligne = prompt("Saisir le numéro de la ligne", "A27");
@@ -427,12 +1091,16 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                             body: data
                         };
                         const response = fetch('/stations_sba', optionsPost);
+                        var namef= $("#setexample option:selected").text()
+  
+  refr(namef);
                         return "{\"latitude\": " + layer.getLatLng().lat + ", " + "\"longitude\" :" + layer.getLatLng().lng + "}";
                     }
                 }
 
                 return "{\"latitude\": " + layer.getLatLng().lat + ", " + "\"longitude\" :" + layer.getLatLng().lng + "}";
             }
+      
         }
         ;
 
@@ -442,219 +1110,13 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         });
 
 
-        async function addSubwayStations() {
-            const response = await fetch('/stations_sba/tramway');
-            const data = await response.json();
-            var subway_station = L.icon({
-                iconUrl: 'pin_subway.png',
-                iconSize: [35, 35], // size of the icon
-                iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-            });
+      
 
-            for (item of data) {
-                var station = L.marker([item.latitude, item.longitude], { icon: subway_station }).bindPopup(
-                    "<b>" + item.nomFr + "</b>"
-                ).addTo(markers);
-                markers.addTo(map);
-            }
+      
 
-        }
+       
 
-        async function addBusStations() {
-            const response = await fetch('/stations_sba/bus');
-            const data = await response.json();
-            var bus_stop_icon = L.icon({
-                iconUrl: 'pin_bus.png',
-
-
-                iconSize: [35, 35], // size of the icon
-                iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-            });
-
-            for (item of data) {
-                var station = L.marker([item.latitude, item.longitude], { icon: bus_stop_icon }).bindPopup(
-                    "<b>" + item.nomFr + "</b>" + "<br>" + " <b> " + item.numero + "</b>"
-                ).addTo(markers);
-                markers.addTo(map)
-            }
-
-        }
-
-        async function addBusStationsByNumero(numero) {
-            console.log("add stations by bus number");
-            const response = await fetch('/stations_sba/bus/' + numero);
-            const data = await response.json();
-            if (numero === 'A03' || numero === 'A03 bis') {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_3.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            } else if (numero === 'A11') {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_11.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            }
-            else if (numero === 'A16') {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_16.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            }
-            else if (numero === 'A17') {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_17.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            }
-            else if (numero === 'A22') {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_22.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            }
-            else if (numero === 'A25') {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_25.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            }
-            else if (numero === 'A27') {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_27.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            }
-
-            for (item of data) {
-                var station = L.marker([item.latitude, item.longitude], { icon: bus_stop_icon }).bindPopup(
-                    "<b>" + item.nomFr + "</b>" + "<br>" + " <b> " + item.numero + "</b>"
-                ).addTo(markers);
-                markers.addTo(map)
-            }
-
-        }
-
-        async function addBusRoute(numero) {
-            const response = await fetch('/bus/' + numero);
-            const data = await response.json();
-            for (var i = 0; i < data.length; i += 1) {
-                if ((i + 1) == data.length) {
-                } else {
-                    var pointA = new L.LatLng(data[i].latitude, data[i].longitude)
-                    var pointB = new L.LatLng(data[i + 1].latitude, data[i + 1].longitude)
-                    var pointList = [pointA, pointB];
-                    // console.log("|" + pointList + "|")
-                    if (numero === "A03") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'red',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A03 bis") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'red',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A11") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'black',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A16") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'blue',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A17") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'green',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "1,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A25") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'rgb(255,0,255)',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A27") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'rgb(0,255,255)',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A22") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'rgb(6, 170, 108)',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    }
-                }
-                ;
-                chemin.addTo(map);
-                // console.log("last :"+i);
-            }
-
-        }
+     
 
         async function addSubway() {
             const response = await fetch('/subway');
@@ -681,31 +1143,7 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             chemin.addTo(map);
         }
 
-        addCorrespondance();
-        async function addCorrespondance() {
-            const response = await fetch('/correspondance');
-            const data = await response.json();
-            for (var i = 0; i < data.length; i += 1) {
-                if ((i + 1) == data.length) {
-                } else {
-                    var pointA = new L.LatLng(data[i].latitude, data[i].longitude)
-                    var pointB = new L.LatLng(data[i + 1].latitude, data[i + 1].longitude)
-                    var pointList = [pointA, pointB];
-                    // console.log("|" + pointList + "|")
-                    var firstpolyline = new L.Polyline(pointList, {
-                        color: 'orange',
-                        weight: 5,
-                        opacity: 1,
-                        dashArray: "2,5",
-                        smoothFactor: 1
-                    });
-                    firstpolyline.addTo(chemin)
-                }
-                ;
-                // console.log("last :"+i);
-            }
-            chemin.addTo(map);
-        }
+     
        
 
     </script>
@@ -718,6 +1156,12 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         
 var graphmap, svg, g;
 var markers = L.layerGroup();
+var iconObject = L.icon({
+    iconUrl: '/images/marker-icon-green.png',
+    shadowSize: [50, 64],
+    shadowAnchor: [4, 62],
+    iconAnchor: [12, 40]
+});
 var mapdata = {
     allnodes: [],
     paths: [],
@@ -733,10 +1177,7 @@ var mapdata = {
     }
 };
  
- mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; '+mapLink+ 'contributors'
-}).addTo(map);
+ 
 
 svg=L.svg().addTo(map);
 
@@ -758,17 +1199,7 @@ function redrawmapwhenviewchanges() {
 
 
 
-var selector = L.control({
-    position: 'topright'
-  });
-selector.onAdd = function(map) {
-    //create div container
-    var div = L.DomUtil.create('div', 'mySelector');
-    //create select element within container (with id, so it can be populated later)
-    div.innerHTML = '<select id="marker_select"><option value="init">(select station)</option></select>';
-    return div;
-  };
-  selector.addTo(map);
+
   
 
 
@@ -828,24 +1259,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     if (unit=="N") { dist = dist * 0.8684 }
     return dist
 }
-// map.on('click', function (e) {
 
-
-// var nodeName = mapdata.allnodes.length;
-// console.log(e.latlng.lat + ", " + e.latlng.lng);
-
-// mapdata.allnodes.push({
-//     name: nodeName, x: e.latlng.lat, y: e.latlng.lng
-// });
-// redrawNodes();
-// addNodeToSelect(nodeName);
-
-
-
-
-
-
-// });
 
 function redrawNodes() {
 
@@ -960,606 +1374,15 @@ LatLon.prototype.distanceTo = function (point, radius) {
 
 
 
-$('#exampleModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var recipient = button.data('whatever')
-    var modal = $(this)
-    modal.find('.modal-title').text('New message to ' + recipient)
-    modal.find('.modal-body input').val("")
-
-});
-
-$("#submit").click(function () {
-    var email = $("#sender-email").val();
-    var messeage = $("#message-text").val();
-    var dataString = 'Name=' + " " + '&Mail=' + email + '&Comment=' + messeage;
-    if (email == '' || messeage == '') {
-        alert("Please Fill All Fields");
-    }
-    else {
-        $.ajax({
-            type: 'POST',
-            url: 'http://www.senniksoft.com/senniksoft-email/mail.php',
-            data: dataString,
-            success: function (responseData, textStatus, jqXHR) {
-                alert(responseData);
-            },
-            error: function (responseData, textStatus, errorThrown) {
-                alert('POST failed. Please Email Me :)');
-            }
-        });
 
 
 
-
-
-    }
-});
 
 
 var dragManager = d3.behavior.drag()
     .on('dragstart', dragNodeStart())
     .on('drag', dragNode())
     .on('dragend', dragNodeEnd());
-
-
-// $('#setexample').on('change', function () {
-//     var value = $(this).val();
-//     if (value == 1) {
-//         map.setView(new L.LatLng(35.19971906404343, -0.6247837572740723), 14);
-//         clearGraph();
-//       clear();
-//       var file='stations_sba/tramway'
-//         gettram(file);
-
-//         $.getJSON("mapdata/tram.json", function (datad) {
-//             var importedData = datad;
-
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
-          
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
-
-//             mapdata.allnodes.forEach(function (node) {
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
-
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-
-
-
-
-
-
-//     }
-//     else if (value == 2) {
-        
-//  var file='stations_sba/bus/A03'
-//  clearGraph();
-//         clear();
-//         gettram(file);
-//         map.setView(new L.LatLng(35.20777265583833, -0.615674942808335), 14);
-//         $.getJSON("mapdata/A03.json", function (datad) {
-//             var importedData = datad;
-
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
-
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
-
-//             mapdata.allnodes.forEach(function (node) {
-                
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
-
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-//     }else if(value == 3) {
-//         var file='stations_sba/bus/A03bis'
-//         clearGraph();
-//         clear();
-//         gettram(file);
-        
- 
-//         map.setView(new L.LatLng(35.202124120749275, -0.64303643623008), 14);
-
-//         $.getJSON("mapdata/A03bis.json", function (datad) {
-//             var importedData = datad;
-
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
-
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
-
-//             mapdata.allnodes.forEach(function (node) {
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
-
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-//     }
-//     else if(value == 4) {
-//         var file='stations_sba/bus/A27'
-//         clearGraph();
-//         clear();
-//         gettram(file);
- 
-//         map.setView(new L.LatLng(35.15556500491665, -0.600728988647460), 13);
-
-//         $.getJSON("mapdata/A27.json", function (datad) {
-//             var importedData = datad;
-
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
-
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
-
-//             mapdata.allnodes.forEach(function (node) {
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
-
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-//     }  else if(value == 5) {
-//         var file='stations_sba/bus/A17'
-//         clearGraph();
-//         clear();
-//         gettram(file);
- 
-//         map.setView(new L.LatLng(35.21001968745649, -0.6392197608988681), 14);
-
-//         $.getJSON("mapdata/A17.json", function (datad) {
-//             var importedData = datad;
-
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
-
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
-
-//             mapdata.allnodes.forEach(function (node) {
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
-
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-//     } else if(value == 6) {
-//         var file='stations_sba/bus/A22'
-//         clearGraph();
-//         clear();
-//         gettram(file);
- 
-//         map.setView(new L.LatLng(35.236716325352084, -0.6007361407682765), 12);
-
-//         $.getJSON("mapdata/A22.json", function (datad) {
-//             var importedData = datad;
-
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
-
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
-
-//             mapdata.allnodes.forEach(function (node) {
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
-
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-//     } else if(value == 7) {
-//         var file='stations_sba/bus/A16'
-//         clearGraph();
-//         clear();
-//         gettram(file);
- 
-//         map.setView(new L.LatLng(35.20458462765031, -0.6138194597613668), 14);
-
-//         $.getJSON("mapdata/A16.json", function (datad) {
-//             var importedData = datad;
-
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
-
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
-
-//             mapdata.allnodes.forEach(function (node) {
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
-
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-//     } else if(value == 8) {
-//         var file='stations_sba/bus/A25'
-//         clearGraph();
-//         clear();
-//         gettram(file);
- 
-//         map.setView(new L.LatLng(35.18273786282256, -0.609065067133654), 13);
-
-//         $.getJSON("mapdata/A25.json", function (datad) {
-//             var importedData = datad;
-
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
-
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
-
-//             mapdata.allnodes.forEach(function (node) {
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
-
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-//     } else if(value == 9) {
-//         var file='stations_sba/bus/A11'
-//         clearGraph();
-//         clear();
-//         gettram(file);
- 
-//         map.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
-
-//         $.getJSON("mapdata/A11.json", function (datad) {
-//             var importedData = datad;
-
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
-
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
-
-//             mapdata.allnodes.forEach(function (node) {
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
-
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-//     } else if(value == 10) {
-//         var file='stations_sba'
-//         clearGraph();
-//         clear();
-//         gettram(file);
- 
-//         map.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
-
-//         $.getJSON("mapdata/tes03_16.json", function (datad) {
-//             var importedData = datad;
-
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
-
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
-
-//             mapdata.allnodes.forEach(function (node) {
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
-
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-//     }  else if(value == 11) {
-//         var file='stations_sba/bus1/A03'
-//         clearGraph();
-//         clear();
-//         gettram(file);
- 
-//         map.setView(new L.LatLng(35.18164817676656, -0.6591367721557618), 14);
-
-//         $.getJSON("mapdata/A03_A03bis.json", function (datad) {
-//             var importedData = datad;
-
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
-
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
-
-//             mapdata.allnodes.forEach(function (node) {
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
-
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-//     }
-//     else if(value == 999) {
-//         var file='stations_sba'
-//         clearGraph();
-//         clear();
-//         gettram(file);
- 
-//         map.setView(new L.LatLng(35.20118, -0.6343), 13);
-
-//         $.getJSON("mapdata/all.json", function (datad) {
-//             var importedData = datad;
-
-//             if (importedData.nodes === undefined
-//                 || importedData.paths === undefined
-//                 || Object.keys(importedData).length !== 2) {
-//                 console.log("** JSON format error:");
-//                 console.log(importedData);
-//                 return;
-//             }
-
-//             mapdata.allnodes = importedData.nodes;
-//             mapdata.paths = importedData.paths;
-//             mapdata.distances = [];
-//             mapdata.getstate.selectedNode = null;
-//             mapdata.getstate.fromNode = null;
-//             mapdata.getstate.toNode = null;
-
-//             mapdata.allnodes.forEach(function (node) {
-//                 var b=false;
-//                 if (node.nomFr === undefined){b=true};
-//                if(!b){
-//                 addNodeToSelect(node);}
-//             });
-
-//             calculateDistancesbetweennodes();
-//             redrawLines();
-//             redrawNodes();
-//         });
-//     }
-   
-
-
-
-// });
-
-
-
-$("#data-export").click(function (e) {
-
-    e.stopPropagation()
-
-    var exportData = JSON.stringify({
-        nodes: mapdata.allnodes,
-        paths: mapdata.paths
-    });
-
-    var target = $(this);
-
-    var link = $("<a></a>")
-        .addClass("exportLink")
-        .click(function (e) { e.stopPropagation(); })
-        .attr('target', '_self')
-        .attr("download", "nodesandpaths.json")
-        .attr("href", "data:application/json," + exportData)
-
-    link.appendTo(target).get(0).click();
-
-    $(".exportLink").remove();
-
-});
-
-$("#getmethere").on('click',function () {
-   
-    var valuelat = $("#latitude").val();
-    var valuelong = $("#longitude").val();
-    clearGraph();
-
-    if (valuelat == '' || valuelong == '' ){
-      alert("Please Enter Lat. and Long.");  
-    }
-    else {
-        map.setView(new L.LatLng(valuelat, valuelong), 10);
-    }
-    
-
-
-
-
-
-
-
-
-
-});
-
-
-
-
-
-$("#data-import").change(function (e) {
-    e.stopPropagation();
-    var files = e.target.files;
-    var file = files[0];
-    if (file === undefined) return;
-    var reader = new FileReader();
-    reader.onload = function () {
-        try {
-            var importedData = JSON.parse(this.result);
-        }
-        catch (exception) {
-            console.log("** Error importing JSON: %s", exception);
-            return;
-        }
-        if (importedData.nodes === undefined
-            || importedData.paths === undefined
-            || Object.keys(importedData).length !== 2) {
-            console.log("** JSON format error:");
-            console.log(importedData);
-            return;
-        }
-
-
-        mapdata.allnodes = importedData.nodes;
-        mapdata.paths = importedData.paths;
-        mapdata.distances = [];
-        mapdata.getstate.selectedNode = null;
-        mapdata.getstate.fromNode = null;
-        mapdata.getstate.toNode = null;
-
-        mapdata.allnodes.forEach(function (node) {
-            addNodeToSelect(node);
-        });
-
-        calculateDistancesbetweennodes();
-        redrawLines();
-        redrawNodes();
-    }
-    reader.readAsText(file);
-});
-
 
 
 
@@ -1587,35 +1410,53 @@ $('#getshortestroute').on('click', function () {
     }
 
 });
-$('#getshortestroute1').on('click', function () {
-    d3.selectAll("line").classed({ "shortest": false });
-    calculateDistancesbetweennodes();
-    if (!$(mapdata.getui.htmlSelectStartingNode).val() || !$(mapdata.getui.htmlSelectEndNode).val()) return;
-    var sourceNode = $(mapdata.getui.htmlSelectStartingNode).val();
-    console.log(sourceNode);
-    var targetNode = $(mapdata.getui.htmlSelectEndNode).val();
-    console.log(targetNode);
-    var results = dijkstra(sourceNode, targetNode);
-    console.log(results);
-    if (results.path) {
-        results.path.forEach(function (step) {
 
-            var dist = mapdata.distances[step.source][step.target]
-            stepLine = d3.select(
-                "line.from" + step.source + "to" + step.target + ","
-                + "line.from" + step.target + "to" + step.source
-            );
-            stepLine.classed({ "shortest": true });
-
-        });
-    }
-
-});
 $('#clearmap').on('click', function () {
     clear();
     clearGraph();
 
 });
+$('#hide').on('click', function () {
+    var x = document.getElementById("limiter");
+    x.style.display = "none";
+    var namef= $("#setexample option:selected").text()
+  
+ refr(namef);
+
+});
+$('#hide1').on('click', function () {
+    var x = document.getElementById("limiter1");
+    x.style.display = "none";
+    var namef= $("#setexample option:selected").text()
+  
+ refr(namef);
+
+});
+$('#deletestation').on('click', function () {
+    var x = document.getElementById("limiter");
+    x.style.display = "block"
+    
+
+});
+$('#updatestation').on('click', function () {
+    var x = document.getElementById("limiter1");
+    x.style.display = "block"
+    
+
+});
+function myFunction99() {
+    var x = document.getElementById("limiter");
+    x.style.display = "block"
+    
+  
+}
+function myFunction991() {
+    var x = document.getElementById("limiter1");
+    x.style.display = "block"
+    
+  
+}
+
 
 
 
@@ -1832,276 +1673,128 @@ function dijkstra(start, end) {
 };
 
 
-var chemin = L.layerGroup();
-        var markers = L.layerGroup();
 
-async function addBusRoute(numero) {
-            const response = await fetch('/bus/' + numero);
-            const data = await response.json();
-            for (var i = 0; i < data.length; i += 1) {
-                if ((i + 1) == data.length) {
-                } else {
-                    var pointA = new L.LatLng(data[i].latitude, data[i].longitude)
-                    var pointB = new L.LatLng(data[i + 1].latitude, data[i + 1].longitude)
-                    var pointList = [pointA, pointB];
-                    // console.log("|" + pointList + "|")
-                    if (numero === "A03") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'red',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A03 bis") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'red',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A11") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'black',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A16") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'blue',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A17") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'green',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "1,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A25") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'rgb(255,0,255)',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A27") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'rgb(0,255,255)',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    } else if (numero === "A22") {
-                        var firstpolyline = new L.Polyline(pointList, {
-                            color: 'rgb(6, 170, 108)',
-                            weight: 5,
-                            opacity: 0.8,
-                            dashArray: "2,5",
-                            smoothFactor: 1
-                        });
-                        firstpolyline.addTo(chemin)
-                    }
-                }
-                ;
-             
-                // console.log("last :"+i);
-            }
 
-        }
-        async function addBusStationsByNumero(numero) {
-            console.log("add stations by bus number");
-            console.log(numero);
-            
-            const response = await fetch('/stations_sba/bus/' + numero);
-            const data = await response.json();
+     
+
+      
           
-            if (numero === 'A03' ) {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_3.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-                $.each(data, function(i, f) {
-          if(!f.numero.includes('bis')){
-              var data = {
-                  "latitude":f.latitude,
-              "longitude":f.longitude,
-              "nomFr":f.nomFr,
-              "type":f.type,
-              "numero":f.numero,
-              "_id":f._id}
-          }
-        
-            });
-                
-            }
-            else if (numero === 'A03bis' ) {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_3.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            } else if (numero === 'A11') {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_11.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            }
-            else if (numero === 'A16') {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_16.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            }
-            else if (numero==='A17')  {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_17.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            }
-            else if (numero==='A22')  {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_22.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            }
-            else if (numero==='A25')  {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_25.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            }
-            else if (numero==='A27')  {
-                var bus_stop_icon = L.icon({
-                    iconUrl: 'pin_bus_27.png',
-
-
-                    iconSize: [35, 35], // size of the icon
-                    iconAnchor: [17.5, 35], // point of the icon which will correspond to marker's location
-                    popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
-                });
-            }
            
-            for (item of data) {
-                var station = L.marker([item.latitude, item.longitude], { icon: bus_stop_icon }).bindPopup(
-                    "<b>" + item.nomFr + "</b>" + "<br>" + " <b> " + item.numero + "</b>"
-                ).addTo(markers);
-                markers.addTo(map)
-            } 
-
-        }
-
-      
-          
-       function gettram(file){
+        function gettram(file){
        
-    //create Leaflet control for selector
-    $.getJSON(file, function(data) {
-        $.each(data, function(i, f) {
-         var stations = {
-   "type": "FeatureCollection",
-   "features": [{
-     "type": "Feature",
-     "properties": {
-       "STATION": f.nomFr,
-       "NUMERO": f.numero,
-     },
-     "geometry": {
-       "type": "Point",
-       "coordinates": [f.longitude, f.latitude]
-     }
-   }]} 
-
-
-   var markerLayer = L.geoJson(stations, {
-    onEachFeature: function (feature, layer)
-    {
-        layer.bindPopup("<b>" + feature.properties.STATION + "</b><br>" +
-    "Station Code: " + feature.properties.NUMERO);
-    }
-}).addTo(markers);
-markers.addTo(map);
-
-
-
-      
-      
-      
-      markerLayer.eachLayer(function(layer) {
-        //create option in selector element
-        //with content set to city name
-        //and value set to the layer's internal ID
-        var optionElement = document.createElement("option");
-        optionElement.innerHTML = layer.feature.properties.STATION;
-        optionElement.value = layer._leaflet_id;
-        L.DomUtil.get("marker_select").appendChild(optionElement);
-      });
-             
-      var marker_select = L.DomUtil.get("marker_select");
-      L.DomEvent.addListener(marker_select, 'click', function(e) {
-        L.DomEvent.stopPropagation(e);
-        
-      });
-      
-      L.DomEvent.addListener(marker_select, 'change', changeHandler);
-      
-      function changeHandler(e) {
-        if (e.target.value == "init") {
-          map.closePopup();
-        } else {
-          markerLayer.getLayer(e.target.value).openPopup();
-          
+       //create Leaflet control for selector
+       $.getJSON(file, function(data) {
+           $.each(data, function(i, f) {
+            var stations = {
+      "type": "FeatureCollection",
+      "features": [{
+        "type": "Feature",
+        "properties": {
+          "STATION": f.nomFr,
+          "NUMERO": f.numero,
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [f.longitude, f.latitude]
         }
-      }
+      }]} 
+   
       
-          });
+      var markerLayer1 = L.geoJson(stations, {
+       onEachFeature: function (feature, layer)
+       {
+           layer.bindPopup('<div class="col-auto">  <button type="button" onclick="myFunction991()" id="updatestation"  class="btn btn-success"  > Update station</button> </div><br><div class="col-auto">  <button type="button" onclick="myFunction99()" id="deletestation"  class="btn btn-danger"  > delete station</button> </div>'+"<br>"+"<b>" + feature.properties.STATION + "</b><br>" +
+       "Station Code: " + feature.properties.NUMERO);
+       layer== L.icon({
+        iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+    shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+
+    iconSize:     [38, 95], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+       }
+   })
+  
+   markerLayer1.addTo(markers)
+   
+
+   markers.addTo(map);
+   
+   
+   
+   markerLayer1.on("click", function (event) {
+       
+     var name= event.layer.feature.properties.STATION;
+     var code =event.layer.feature.properties.NUMERO;
+    console.log('name ',name)
+    console.log('code ',code)
+    var namest= document.getElementById("namestation");
+  namest.value = name
+       
+      
+       
+   });
+
+   map.on("click", function (e) {
+       console.log('hiii click '+e)
+   
+       
+      
+       
+   });
+   
+   
+   
+   
+   
+   
+         
+         
+         
+         markerLayer1.eachLayer(function(layer) {
+           //create option in selector element
+           //with content set to city name
+           //and value set to the layer's internal ID
+           var optionElement = document.createElement("option");
+           optionElement.innerHTML = layer.feature.properties.STATION;
+           optionElement.value = layer._leaflet_id;
+           L.DomUtil.get("marker_select").appendChild(optionElement);
+         });
+                
+         var marker_select = L.DomUtil.get("marker_select");
+         L.DomEvent.addListener(marker_select, 'click', function(e) {
+           L.DomEvent.stopPropagation(e);
+           
+         });
+         
+         L.DomEvent.addListener(marker_select, 'change', changeHandler);
+         
+         function changeHandler(e) {
+           if (e.target.value == "init") {
+            console.log('pop hiiiii 111  '+JSON.stringify(e))
+             map.closePopup();
+           } else {
+            //    console.log('pop hiiiii 22 '+JSON.stringify(e.target.value))
+            //    markerLayer1.getLayer(e.target.value).openPopup();
+            markerLayer1.eachLayer(function(layer) {
           
+         
+          if(e.target.value==layer._leaflet_id){
+              layer.openPopup();
+
+          }
+         });
+           }
+         }
+         
              });
-          
-       }  
+             
+                });
+             
+          }  
 
 
        function clear (){
@@ -2117,6 +1810,8 @@ markers.addTo(map);
        
     }
     map.on('zoom', function() {
+        var namee = $("#marker_select option:selected").text();
+            getmapdata(namee);
         redrawNodes();
     redrawLines();
 
@@ -2212,9 +1907,9 @@ markers.addTo(map);
       </style>
       
 </body>
+<script>
+    
+</script>
 
-<script src="https://cdn.jsdelivr.net/npm/d3@3.3.0/d3.min.js"></script>
-<script type="text/javascript" src="js/d3.v3.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 </html>

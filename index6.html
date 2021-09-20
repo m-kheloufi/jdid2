@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
   <title>22-NAVIGATOR</title>
-
+  <link type="image/png" rel="icon" href="/images/nv.png"/>
   
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
@@ -348,25 +348,25 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     if (unit=="N") { dist = dist * 0.8684 }
     return dist
 }
-maps.on('click', function (e) {
+// maps.on('click', function (e) {
 
    
-    var nodeName = mapdata.allnodes.length;
-    console.log(e.latlng.lat + ", " + e.latlng.lng);
+//     var nodeName = mapdata.allnodes.length;
+//     console.log(e.latlng.lat + ", " + e.latlng.lng);
     
 
-    mapdata.allnodes.push({
-        name: nodeName, x: e.latlng.lat, y: e.latlng.lng
-    });
-    redrawNodes();
-    addNodeToSelect(nodeName);
+//     mapdata.allnodes.push({
+//         name: nodeName, x: e.latlng.lat, y: e.latlng.lng
+//     });
+//     redrawNodes();
+//     addNodeToSelect(nodeName);
 
 
 
 
 
 
-});
+// });
 
 // maps.on('click', function (e) {
 //     var a=[];
@@ -451,7 +451,7 @@ function redrawNodes() {
 
     nodesEnter.append("circle")
         .attr("nodeId", function (d, i) { return i; })
-        .attr("r", '24')
+        .attr("p", '24')
         .attr("class", "node")
         .style("cursor", "pointer")
         .on('click', nodeClick)
@@ -460,15 +460,15 @@ function redrawNodes() {
         .on('contextmenu', function (d, i) { startEndPath(i); })
         .call(dragManager)
 
-        nodesEnter
-        .append("text")
-        .attr("nodeLabelId", function (d, i) { return i; })
-        .attr("dx", "-7")
-        .attr("dy", "7")
-        .attr("class", "label")
-        .on('contextmenu', function (d, i) { startEndPath(i); })
-        .call(dragManager)
-        .text(function (d, i) { return d.name });
+        // nodesEnter
+        // .append("text")
+        // .attr("nodeLabelId", function (d, i) { return i; })
+        // .attr("dx", "-7")
+        // .attr("dy", "7")
+        // .attr("class", "label")
+        // .on('contextmenu', function (d, i) { startEndPath(i); })
+        // .call(dragManager)
+        // .text(function (d, i) { return d.name });
     
 
     elements.exit().remove();
@@ -594,6 +594,7 @@ function getmapdata(nameline){
         maps.setView(new L.LatLng(35.19971906404343, -0.6247837572740723), 14);
         clearGraph();
       clear();
+    
       if(nameline=='tram'){
        file='stations_sba/tramway'
     }else if (nameline=='A03_A03bis'){
@@ -602,6 +603,11 @@ function getmapdata(nameline){
     else {file='stations_sba/bus/'+nameline;
 
     }
+    if(nameline=='all1'){
+         nameline='lines/tram/lescascades';
+        file='stations_sba';
+
+   }
         gettram(file);
 
         $.getJSON("mapdata/"+nameline+".json", function (datad) {
@@ -1204,7 +1210,7 @@ $('#getshortestroute').on('click', function () {
     var targetNode = $(mapdata.getui.htmlSelectEndNode).val();
     console.log(targetNode);
     var results = dijkstra(sourceNode, targetNode);
-    
+    console.log(results)
     if (results.path) {
         results.path.forEach(function (step) {
 
@@ -1304,10 +1310,15 @@ function deg2rad(deg) {
 }
 $("#prepare").on('click',function (e) {
     var type=$("#setexample option:selected").text();
+    var urLL='/stations_sba/bus/'
+    if(type=='all1'){
+        urLL='/stations_sba';
+        type='';
+    }
     getstation();
 async function getstation(){
     SelectELM = document.getElementById("setexample")
-        const responsee = await fetch('/stations_sba/bus/'+type);
+        const responsee = await fetch(urLL+type);
             const data0 = await responsee.json();
             console.log('ch7al ......'+data0.length)
             console.log('ch7al ......'+mapdata.allnodes.length)
@@ -1315,7 +1326,7 @@ console.log("x.... "+JSON.stringify(mapdata.allnodes[0].x))
 console.log("y.... "+JSON.stringify(mapdata.allnodes[0].y))
 console.log("long... " +JSON.stringify(data0[0].longitude))
 console.log("la... "+JSON.stringify(data0[0].latitude))
-var dk= getDistanceFromLatLonInKm(JSON.stringify(mapdata.allnodes[0].y),JSON.stringify(mapdata.allnodes[0].x),JSON.stringify(data0[0].latitude),JSON.stringify(data0[0].longitude))
+var dk= getDistanceFromLatLonInKm(JSON.stringify(mapdata.allnodes[0].x),JSON.stringify(mapdata.allnodes[0].y),JSON.stringify(data0[0].latitude),JSON.stringify(data0[0].longitude))
 console.log('chawa da  .... '+ dk)
 var ko=[];
 for(var j=0;j<data0.length;j++){
