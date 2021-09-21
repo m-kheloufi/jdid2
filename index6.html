@@ -451,7 +451,7 @@ function redrawNodes() {
 
     nodesEnter.append("circle")
         .attr("nodeId", function (d, i) { return i; })
-        .attr("p", '24')
+        .attr("r", '24')
         .attr("class", "node")
         .style("cursor", "pointer")
         .on('click', nodeClick)
@@ -460,15 +460,15 @@ function redrawNodes() {
         .on('contextmenu', function (d, i) { startEndPath(i); })
         .call(dragManager)
 
-        // nodesEnter
-        // .append("text")
-        // .attr("nodeLabelId", function (d, i) { return i; })
-        // .attr("dx", "-7")
-        // .attr("dy", "7")
-        // .attr("class", "label")
-        // .on('contextmenu', function (d, i) { startEndPath(i); })
-        // .call(dragManager)
-        // .text(function (d, i) { return d.name });
+        nodesEnter
+        .append("text")
+        .attr("nodeLabelId", function (d, i) { return i; })
+        .attr("dx", "-7")
+        .attr("dy", "7")
+        .attr("class", "label")
+        .on('contextmenu', function (d, i) { startEndPath(i); })
+        .call(dragManager)
+        .text(function (d, i) { return d.name });
     
 
     elements.exit().remove();
@@ -604,7 +604,7 @@ function getmapdata(nameline){
 
     }
     if(nameline=='all1'){
-         nameline='lines/tram/lescascades';
+         nameline='all01';
         file='stations_sba';
 
    }

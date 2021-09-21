@@ -826,33 +826,43 @@ app2.get('/stations_sba/bus/:numero', (request, response) => {
         response.json(datas);
     });
 })
-app.get('/getbeststation4/:x1/:y1/:x2/:y2', (request, response) => {
+app.get('/getbeststation4/:type/:x1/:y1/:x2/:y2', (request, response) => {
     var x1 = request.params.x1;
     var y1 = request.params.y1;
     var x2 = request.params.x2;
     var y2 = request.params.y2;
+    var type = request.params.type;
     var all = require('./public/mapdata/all01.json');
     var tts=all.nodes
     var trams=[]
     var t = require('./Matrixdb.json');
     var tr=[]
-    var a3=[]
+    var a3bis=[]
+    var a17=[]
+    var a22=[]
+    var a25=[]
+    var a16=[]
+    var a11=[]
+    var a13=[]
     var result;
     var ida11=0
     var alls=[]
     var tabs=[]
     const fs = require('fs');
     var x=0;
+  
     var re;
+    var tal=[]
     var source,target;
     const Graph = require('dijkstra-short-path');
     const route = new Graph();
     const Datastore = require('nedb');
     var datt; var lp=0;
-    var myLines = [{
-        "type": "LineString",
-        "coordinates": []
-    }];
+    const https = require('https');
+    // var myLines = [{
+    //     "type": "LineString",
+    //     "coordinates": []
+    // }];
 
     for (var i=0;i<tts.length;i++){
         if(!(tts[i].nomFr===undefined)){
@@ -884,7 +894,10 @@ target=getind11(x2,y2,datt)
             // console.log('lawlaaaa : '+JSON.stringify(tabs[0]))
         for (var j=0;j<t.length;j++){
             if(re.name==t[j].nomFrarrive+t[j].numeroarrive){
-                re.tab.push([t[j].nomFrdepart+t[j].numerodepart,t[j].duration])
+                if(type=='distance'){ re.tab.push([t[j].nomFrdepart+t[j].numerodepart,t[j].distance])}
+                else if(type=='duration') {
+                    re.tab.push([t[j].nomFrdepart+t[j].numerodepart,t[j].duration])
+                  }
             }
         }
             route.addNode(re.name, new Map(re.tab));
@@ -909,7 +922,11 @@ target=getind11(x2,y2,datt)
         if(name==n){
             op=i
             numa=t[i].numeroarrive
-      tt=[t[i].nomFrarrive+numa,t[i].duration]
+            if(type=='distance'){
+      tt=[t[i].nomFrarrive+numa,t[i].distance]}
+      else if(type=='duration') {
+        tt=[t[i].nomFrarrive+numa,t[i].duration]
+      }
           tab.push(tt)
         
           
@@ -932,30 +949,90 @@ target=getind11(x2,y2,datt)
         var tabId = uu.split("&").pop(); 
         var ka=Y11+'&'
         var  X11=tabId.replace(ka,"");
-      
+      console.log('numero y11 : '+X11.replace('_',""))
         if(X11.length==3){
             tr.push({"name":Y11,'numero':parseInt(X11,10)})
               
-        } else{ if(Y11.includes("A03")){
-         a3.pus(Y11)
+        }  if(X11.includes("A03bis")){
+        
+         a3bis.push({"name":Y11,'numero':parseInt(X11.replace('A03bis_',""),10)})
         }
-        }
+
+        
+         if(X11.includes("A17")){
+        
+            a17.push({"name":Y11,'numero':parseInt(X11.replace('A17_',""),10)})
+           }
+           if(X11.includes("A22")){
+        
+            a22.push({"name":Y11,'numero':parseInt(X11.replace('A22_',""),10)})
+           }
+           if(X11.includes("A25")){
+        
+            a25.push({"name":Y11,'numero':parseInt(X11.replace('A25_',""),10)})
+           }
+           if(X11.includes("A11")){
+        
+            a11.push({"name":Y11,'numero':parseInt(X11.replace('A11_',""),10)})
+           }
+           if(X11.includes("A16")){
+        
+            a16.push({"name":Y11,'numero':parseInt(X11.replace('A16_',""),10)})
+           }
         
         
 
     }
-    console.log('tr '+JSON.stringify(tr))
- 
+    // console.log('a3 '+JSON.stringify(a3bis))
+    trac(tr,'tram');
+    // console.log('a3bis : '+a3bis[0].name)
+    // trac(a3bis,'A03bis');
+    trac(a17,'A17') 
+    trac(a22,'A22')
+    trac(a25,'A25')
+    trac(a11,'A11')
+    console.log('a3 '+JSON.stringify(a11))
+    trac(a16,'A16')
+ function trac(tr,type){
+     var lh=0;
     for(var i=0;i<tr.length-1;i++){
-        var src =getn(tr[i].name)
-        var trt=getn(tr[i+1].name)
-        console.log('station src '+tr[i].name +' name '+ src)
-        console.log('station trt '+tr[i+1].name +' name '+ trt)
-      for (var j=src;j<=trt;j++){
-          myLines[0].coordinates.push([tts[j].y,tts[j].x])
 
-      }
+        setTimeout(function timer() {
+       
+       
+   if(tr.length>=2){
+        var src =getn(tr[lh].name)
+        var trt=getn(tr[lh+1].name)
+       
+        var request = require('request');
+        request("http://localhost:3002/result/"+type+"/"+src.x+"/"+src.y+"/"+trt.x+"/"+trt.y+"", function (error, response, body) {
+            if (!error && response.statusCode === 200) { 
+                var dattt=JSON.parse(body)
+                 tal.push(JSON.stringify(dattt[0]))
+
+             }
+        })
+        // var hat=getpol(tty,tr[i].name,tr[i+1].name);
+        // tal.push(hat)
+        // "http://localhost:3002/result/tram/"+src.x+"/"+src.y+"/"+trt.x+"/"+trt.y+""
+    //     if(src>trt){
+    //         // bdl=src 
+    //         // src=trt 
+    //         // trt=bdl
+    //         for (var i = src ; i >= trt; i--) {
+    //             myLines[0].coordinates.push([tts[i].y,tts[i].x])
+    //         }
+    //     }else { for (var j=src;j<=trt;j++){
+    //       myLines[0].coordinates.push([tts[j].y,tts[j].x])
+
+    //   } }
+        // console.log('station src '+tr[i].name +' name '+ src)
+        // console.log('station trt '+tr[i+1].name +' name '+ trt)
+     lh=lh+1;
+     } }, i*100);
     }
+
+}
  
     
  
@@ -966,7 +1043,8 @@ target=getind11(x2,y2,datt)
          
                 if(name===trams[j].nomFr){ 
                    sour=trams[j].name
-                   return sour;
+                   var tt={"x":trams[j].x,"y":trams[j].y}
+                   return tt;
                 }
 
             }
@@ -979,9 +1057,9 @@ target=getind11(x2,y2,datt)
 for(var j=1;j<2;j++){
        
     setTimeout(function timer() {
-        console.log(' my lines'+JSON.stringify(myLines))
-        response.json(myLines[0])
-    }, j*1000);}
+        // console.log(' my lines'+JSON.stringify(tal))
+        response.json(tal)
+    }, j*1500);}
 
 
 
@@ -1652,6 +1730,11 @@ app.get('/result/:type/:x1/:x2/:x3/:x4', (request, response) => {
     var test1=0;
     var bb=true;
     var bb1=true;
+    var poly=[]
+    var myLines = [{
+        "type": "LineString",
+        "coordinates": []
+    }]; 
     var isource,itarget;
    var t
 
@@ -1706,7 +1789,6 @@ else if (type.includes('A27')){
                 }
             }
         }
-
         for (var i = 0; i < tram.length; i++) {
             if (!(tram[i].nomFr === undefined)) {
                 var d = distance(x3, x4, tram[i].x, tram[i].y);
@@ -1865,7 +1947,8 @@ else if (type.includes('A27')){
             var y01 = getpoint(q).y;
             ds.x = x01;
             ds.y = y01;
-            ds.name=q
+            ds.name=q;
+            myLines[0].coordinates.push([y01,x01])
             datas[idatas] = ds;
             idatas=idatas+1;
             v=0;
@@ -1879,7 +1962,7 @@ else if (type.includes('A27')){
             ds.x = x01;
             ds.y = y01;
             ds.name=results.path[i].source;
-            
+            myLines[0].coordinates.push([y01,x01])
             datas[idatas] = ds;
             q=results.path[i].target;
             idatas=idatas+1;
@@ -1912,6 +1995,7 @@ else if (type.includes('A27')){
             ds.x = x01;
             ds.y = y01;
             ds.name = idatas+change;
+            myLines[0].coordinates.push([y01,x01])
              datas[idatas] = ds;
             idatas = idatas + 1;
            
@@ -1929,6 +2013,7 @@ else if (type.includes('A27')){
         ds11.x=x011;
         ds11.y=y011;
         ds11.name=target;
+        myLines[0].coordinates.push([y011,x011])
         datas[idatas]=ds11;
         var datass = {
             datas: '',
@@ -1947,8 +2032,9 @@ else if (type.includes('A27')){
        }
        d5.datas=datas;
       
-        console.log(datas);
-        response.json(datas);
+        console.log('datas : '+datas);
+        console.log('myLines : '+JSON.stringify(myLines));
+        response.json(myLines);
     });
 
 
@@ -2584,3 +2670,298 @@ for (var i = 0; i < trams.length; i++) {
     
 } return ind
 }
+
+
+
+function getpol(type,src,trt){
+    
+   
+    var datas = [],
+ 
+    source,
+    target,
+   
+    idatas = 0,
+    w=false,
+    v=1,
+    q=0,
+    change;
+    var dtt=0;
+    var dtt2=0
+    var v8=1
+    var v9=1 
+    var targetname;
+    var sourcename;
+    var isource,itarget;
+   var t
+    var times=[105, 94, 98, 224, 100, 100, 95, 200, 120, 110, 150, 145, 120, 122, 85, 103, 78, 87, 110, 130, 130]
+
+    Result.find({}).exec(function (err, data) {
+        if (err) {
+            response.end();
+            return;
+        }
+if(type==='tram'){
+         t = require('./public/mapdata/tram.json');
+}else if (type.includes('A03')){
+         t = require('./public/mapdata/A03.json');
+}else if (type.includes('A03bis')){
+    t = require('./public/mapdata/A03bis.json');
+}else if (type.includes('A11')){
+    t = require('./public/mapdata/A11.json');
+}else if (type.includes('A16')){
+    t = require('./public/mapdata/A16.json');
+}else if (type.includes('A17')){
+    t = require('./public/mapdata/A17.json');
+}else if (type.includes('A22')){
+    t = require('./public/mapdata/A22.json');
+}else if (type.includes('A25')){
+    t = require('./public/mapdata/A25.json');
+}
+else if (type.includes('A27')){
+    t = require('./public/mapdata/A27.json');
+}
+
+        var tram = t.nodes;
+        console.log('length 99999 : '+tram.length)
+        
+        for (var i = 0; i < tram.length; i++) {
+            if ((tram[i].nomFr === src)) {
+            
+          
+                    source = i;
+                    sourcename=tram[i].nomFr;
+                    console.log('source' + source);
+
+                
+            }
+        }
+        for (var i = 0; i < tram.length; i++) {
+            if ((tram[i].nomFr === trt)) {
+            
+             
+                
+                    targetname=tram[i].nomFr;
+                    target = i;
+                    console.log('target' + target);
+
+                
+            }
+        }
+
+        var nd6 = require('./nodes6.json');
+        for (var i=0;i<nd6.length;i++){
+            if(nd6[i].nomFr===targetname){
+                itarget=nd6[i].numero-1;
+               
+            }
+           
+        }
+      
+
+        for (var i=0;i<nd6.length;i++){
+            if(nd6[i].nomFr===sourcename){
+                isource=nd6[i].numero;
+            }
+        }
+        console.log('indice source  '+isource);
+        console.log('indice target  '+itarget);
+        
+        mapdata.allnodes = t.nodes;
+        mapdata.paths = t.paths;
+        mapdata.distances = [];
+        mapdata.getstate.selectedNode = null;
+        mapdata.getstate.fromNode = null;
+        mapdata.getstate.toNode = null;
+        function calculateDistancesbetweennodes() {
+            mapdata.distances = [];
+            for (var i = 0; i < mapdata.allnodes.length; i++) {
+                mapdata.distances[i] = [];
+                for (var j = 0; j < mapdata.allnodes.length; j++)
+                    mapdata.distances[i][j] = 'x';
+            }
+            for (var i = 0; i < mapdata.paths.length; i++) {
+                var sourceNodeId = parseInt(mapdata.paths[i].from);
+                var targetNodeId = parseInt(mapdata.paths[i].to);
+                var sourceNode = mapdata.allnodes[sourceNodeId];
+                var targetNode = mapdata.allnodes[targetNodeId];
+                var p1 = new LatLon(sourceNode.x, sourceNode.y);
+                var p2 = new LatLon(targetNode.x, targetNode.y);
+                var d = p1.distanceTo(p2);
+                mapdata.distances[sourceNodeId][targetNodeId] = d;
+                mapdata.distances[targetNodeId][sourceNodeId] = d;
+            };
+        };
+
+        calculateDistancesbetweennodes();
+
+        console.log('diji source' + source);
+        console.log('diji target' + target);
+        if(source<target){
+            change=source;
+        }else{change=target}
+        var results = dijkstra(source, target);
+        console.log(results);
+        var point = {
+            x: '',
+            y: ''
+        };
+        function getpoint(name) {
+            var point = {
+                x: '',
+                y: ''
+            };
+
+            for (var i = 0; i < tram.length; i++) {
+                if (name == tram[i].name) {
+                    point.x = tram[i].x;
+                    point.y = tram[i].y;
+                    return point;
+                }
+            }
+
+
+        }
+        for (var i = 0; i < results.path.length; i++) {
+            var ds = {
+                x: '',
+                y: '',
+                name: ''
+            };
+            var diff;
+            diff=results.path[i].target-results.path[i].source;
+            var aba=0;
+            
+            aba=aba+1;
+            
+            if(diff >1){w=true;
+                
+            corr=true;}
+            if(w===true){
+                if(v9===1){
+                    var tr2 = require('./nodes7.json');
+                  
+                   
+                       
+                         
+                    var chn;
+                   
+                        for(var iw=itarget;iw>=isource;iw--){
+                            console.log(' jjjjj '+tr2[iw].id)
+                            console.log(' jjjjj '+tr2[iw].distance)
+                            dtt2=dtt2+tr2[iw].distance;
+                                
+                        }
+                        
+                    
+                   
+                         dtt2=dtt2-875;
+                         console.log('duréé with corrsp  '+dtt2);
+                        
+
+
+
+
+
+                    v9=2
+                }
+             
+
+
+
+              
+
+             
+            if(v===1){
+                q=results.path[i].source;
+                var x01 = getpoint(q).x;
+            var y01 = getpoint(q).y;
+            ds.x = x01;
+            ds.y = y01;
+            ds.name=q
+            datas[idatas] = ds;
+            idatas=idatas+1;
+            v=0;
+            }else{ 
+            
+               
+        
+           
+            var x01 = getpoint(results.path[i].source).x;
+            var y01 = getpoint(results.path[i].source).y;
+            ds.x = x01;
+            ds.y = y01;
+            ds.name=results.path[i].source;
+            
+            datas[idatas] = ds;
+            q=results.path[i].target;
+            idatas=idatas+1;
+        
+        }
+    }
+            else{
+
+                if(v8===1){
+                     var tr3 = require('./nodes7.json');
+                  
+                   
+                       
+                        
+                        for(var z=isource;z<=itarget;z++){ 
+                            dtt=dtt+tr3[z].distance;
+
+                  console.log('ssssssssss '+tr3[z].distance);}
+                         
+                         console.log('duréé without corrsp  '+dtt);
+                         v8=2
+                         
+                }
+               
+                q=results.path[i].source;
+                
+            
+            var x01 = getpoint(q).x;
+            var y01 = getpoint(q).y;
+            ds.x = x01;
+            ds.y = y01;
+            ds.name = idatas+change;
+             datas[idatas] = ds;
+            idatas = idatas + 1;
+           
+        }}
+        var x011 = getpoint(target).x;
+        console.log('point te3 '+x011);
+        var y011 = getpoint(target).y;
+        console.log('point te3 '+y011);
+        console.log('point te3 idatas '+idatas);
+        var ds11 = {
+            x: '',
+            y: '',
+            name: ''
+        };
+        ds11.x=x011;
+        ds11.y=y011;
+        ds11.name=target;
+        datas[idatas]=ds11;
+        var datass = {
+            datas: '',
+            duration:''
+        };
+       datass.datas=datas;
+       datass.duration=dtt2;
+       var duration ={
+        duration:dtt2
+       }
+       
+        
+       var d5={
+           datas: [],
+           duration
+       }
+       d5.datas=datas;
+      
+        console.log(datas);
+    
+        return datas
+    });
+    }

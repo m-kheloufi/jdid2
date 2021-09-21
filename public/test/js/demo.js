@@ -481,10 +481,10 @@ var tt;
 
 
     async function getindice(X1,Y1,X2,Y2){
-    const response = await fetch('/getbeststation4/'+X1+'/'+Y1+'/'+X2+'/'+Y2);
+    const response = await fetch('/getbeststation4/duration/'+X1+'/'+Y1+'/'+X2+'/'+Y2);
                             const     data = await response.json();
-                            console.log('datas '+data)
-                            console.log('data : '+JSON.stringify(data))
+                            console.log('datas bla json '+data[0])
+                            // console.log('datas : '+JSON.stringify(data))
                             // console.log('data server path lawla : '+JSON.stringify(data.path[0]));
                             // console.log('data server path zawja : '+JSON.stringify(data.path[1]))
                             // var tt=data.path[0];
@@ -493,16 +493,16 @@ var tt;
                             // console.log('data distance : '+JSON.stringify(data.distance));
                            var testtt1 = L.geoJson().addTo(map);
 testtt1.options = {
-    style: {color: "#FFAE42", "weight": 5, "opacity": 1}
+    style: {color: "BLACK", "weight": 5, "opacity": 1}
  
 };
-// for(var i=0;i<data.path.length;i++){
+for(var i=0;i<data.length;i++){
     testtt1.addData({
         "type": "Feature",
-        "geometry":data
+        "geometry":JSON.parse(data[i])
         });
 
-// }
+}
 }      
 
                           
