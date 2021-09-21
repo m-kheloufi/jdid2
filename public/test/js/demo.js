@@ -483,7 +483,7 @@ var tt;
     async function getindice(X1,Y1,X2,Y2){
     const response = await fetch('/getbeststation4/duration/'+X1+'/'+Y1+'/'+X2+'/'+Y2);
                             const     data = await response.json();
-                            console.log('datas bla json '+data[0])
+                            console.log('datas bla json '+data)
                             // console.log('datas : '+JSON.stringify(data))
                             // console.log('data server path lawla : '+JSON.stringify(data.path[0]));
                             // console.log('data server path zawja : '+JSON.stringify(data.path[1]))

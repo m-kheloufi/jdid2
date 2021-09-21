@@ -844,14 +844,17 @@ app.get('/getbeststation4/:type/:x1/:y1/:x2/:y2', (request, response) => {
     var a16=[]
     var a11=[]
     var a13=[]
+    var a3=[]
+    var a27=[]
     var result;
     var ida11=0
     var alls=[]
     var tabs=[]
     const fs = require('fs');
     var x=0;
-  
+  var bo=false
     var re;
+    var la=0;
     var tal=[]
     var source,target;
     const Graph = require('dijkstra-short-path');
@@ -944,65 +947,151 @@ target=getind11(x2,y2,datt)
        
     setTimeout(function timer() {
     for(var i=0;i<result.path.length;i++){
-        var uu=JSON.stringify(result.path[i])
+        setTimeout(function timer() {
+        var uu=JSON.stringify(result.path[la])
         var Y11=uu.substring(1,uu.indexOf('&'))
         var tabId = uu.split("&").pop(); 
         var ka=Y11+'&'
         var  X11=tabId.replace(ka,"");
-      console.log('numero y11 : '+X11.replace('_',""))
+      console.log('numero y11 : '+X11)
         if(X11.length==3){
             tr.push({"name":Y11,'numero':parseInt(X11,10)})
-              
+            if(tr.length>=2){
+                for(var i=0;i<tr.length-1;i++){
+                    if((tr[i].numero-tr[i+1].numero)==1||(tr[i].numero-tr[i+1].numero)==-1){
+                        trac(tr[i].name,tr[i+1].name,'tram');
+                    }
+                }
+            
+            } 
         }  if(X11.includes("A03bis")){
         
          a3bis.push({"name":Y11,'numero':parseInt(X11.replace('A03bis_',""),10)})
-        }
-
+         if(a3bis.length>=2){
+            console.log('a3bis------------- '+JSON.stringify(a3bis))
+            for(var i=0;i<a3bis.length-1;i++){
+                if((a3bis[i].numero-a3bis[i+1].numero)==1||(a3bis[i].numero-a3bis[i+1].numero)==-1){
+                    trac(a3bis[i].name,a3bis[i+1].name,'A03bis');
+                }
+            }
         
+        }
+       
+        } 
+        if(X11.includes("A03_")){
+        
+            a3.push({"name":Y11,'numero':parseInt(X11.replace('A03_',""),10)})
+            if(a3.length>=2){
+                console.log('a3------------- '+JSON.stringify(a3))
+               for(var i=0;i<a3.length-1;i++){
+                   if((a3[i].numero-a3[i+1].numero)==1||(a3[i].numero-a3[i+1].numero)==-1){
+                       trac(a3[i].name,a3[i+1].name,'A03');
+                   }
+               }
+           
+           }
+       
+            
+           }
          if(X11.includes("A17")){
         
             a17.push({"name":Y11,'numero':parseInt(X11.replace('A17_',""),10)})
+            if(a17.length>=2){
+                for(var i=0;i<a17.length-1;i++){
+                    if((a17[i].numero-a17[i+1].numero)==1||(a17[i].numero-a17[i+1].numero)==-1){
+                        trac(a17[i].name,a17[i+1].name,'A17');
+                    }
+                }
+            
+            }
            }
            if(X11.includes("A22")){
         
             a22.push({"name":Y11,'numero':parseInt(X11.replace('A22_',""),10)})
+            if(a22.length>=2){
+                for(var i=0;i<a22.length-1;i++){
+                    if((a22[i].numero-a22[i+1].numero)==1||(a22[i].numero-a22[i+1].numero)==-1){
+                        trac(a22[i].name,a22[i+1].name,'A22');
+                    }
+                }
+            
+            }
+           
            }
            if(X11.includes("A25")){
         
             a25.push({"name":Y11,'numero':parseInt(X11.replace('A25_',""),10)})
+            if(a25.length>=2){
+                for(var i=0;i<a25.length-1;i++){
+                    if((a25[i].numero-a25[i+1].numero)==1||(a25[i].numero-a25[i+1].numero)==-1){
+                        trac(a25[i].name,a25[i+1].name,'A25');
+                    }
+                }
+    
+            }
            }
            if(X11.includes("A11")){
+               
         
             a11.push({"name":Y11,'numero':parseInt(X11.replace('A11_',""),10)})
+            if(a11.length>=2){
+                for(var i=0;i<a11.length-1;i++){
+                    if((a11[i].numero-a11[i+1].numero)==1||(a11[i].numero-a11[i+1].numero)==-1){
+                        trac(a11[i].name,a11[i+1].name,'A11');
+                    }
+                }
+    
+            }
            }
            if(X11.includes("A16")){
         
             a16.push({"name":Y11,'numero':parseInt(X11.replace('A16_',""),10)})
+            if(a16.length>=2){
+                for(var i=0;i<a16.length-1;i++){
+                    if((a16[i].numero-a16[i+1].numero)==1||(a16[i].numero-a16[i+1].numero)==-1){
+                        trac(a16[i].name,a16[i+1].name,'A16');
+                    }
+                }
+    
+            }
+           }
+           if(X11.includes("A27")){
+        
+            a27.push({"name":Y11,'numero':parseInt(X11.replace('A27_',""),10)})
+            if(a27.length>=2){
+                for(var i=0;i<a27.length-1;i++){
+                    if((a27[i].numero-a27[i+1].numero)==1||(a27[i].numero-a27[i+1].numero)==-1){
+                        trac(a27[i].name,a27[i+1].name,'A27');
+                    }
+                }
+    
+            }
            }
         
-        
-
+           la=la+1;
+        }, i*10);
+      
     }
     // console.log('a3 '+JSON.stringify(a3bis))
-    trac(tr,'tram');
-    // console.log('a3bis : '+a3bis[0].name)
-    // trac(a3bis,'A03bis');
-    trac(a17,'A17') 
-    trac(a22,'A22')
-    trac(a25,'A25')
-    trac(a11,'A11')
-    console.log('a3 '+JSON.stringify(a11))
-    trac(a16,'A16')
- function trac(tr,type){
+    // trac(tr,'tram');
+    // // console.log('a3bis : '+a3bis[0].name)
+    // // trac(a3bis,'A03bis');
+    // trac(a17,'A17') 
+    // trac(a22,'A22')
+    // trac(a25,'A25')
+    
+    // console.log('a3 '+JSON.stringify(a11))
+    // trac(a16,'A16')
+ function trac(tr1,tr2,type){
      var lh=0;
-    for(var i=0;i<tr.length-1;i++){
+    // for(var i=0;i<tr.length-1;i++){
 
-        setTimeout(function timer() {
+    //     setTimeout(function timer() {
        
        
-   if(tr.length>=2){
-        var src =getn(tr[lh].name)
-        var trt=getn(tr[lh+1].name)
+//    if(tr.length>=2){
+        var src =getn(tr1,type)
+        var trt=getn(tr2,type)
        
         var request = require('request');
         request("http://localhost:3002/result/"+type+"/"+src.x+"/"+src.y+"/"+trt.x+"/"+trt.y+"", function (error, response, body) {
@@ -1029,15 +1118,16 @@ target=getind11(x2,y2,datt)
         // console.log('station src '+tr[i].name +' name '+ src)
         // console.log('station trt '+tr[i+1].name +' name '+ trt)
      lh=lh+1;
-     } }, i*100);
-    }
+    //  } 
+    // }, i*1);}
 
 }
  
     
  
-    function getn(name){
-   
+    function getn(name,type){
+   var       t = require('./public/mapdata/'+type+'.json');
+   var trams=t.nodes
         var sour
         for(var j=0;j<trams.length;j++){
          
@@ -1057,9 +1147,9 @@ target=getind11(x2,y2,datt)
 for(var j=1;j<2;j++){
        
     setTimeout(function timer() {
-        // console.log(' my lines'+JSON.stringify(tal))
+        console.log('  steps'+JSON.stringify(result))
         response.json(tal)
-    }, j*1500);}
+    }, j*6000);}
 
 
 
@@ -1747,9 +1837,9 @@ app.get('/result/:type/:x1/:x2/:x3/:x4', (request, response) => {
         }
 if(type==='tram'){
          t = require('./public/mapdata/tram.json');
-}else if (type.includes('A03')){
+}else if (type.includes('A03_')){
          t = require('./public/mapdata/A03.json');
-}else if (type.includes('A03bis')){
+}else if (type.includes('bis')){
     t = require('./public/mapdata/A03bis.json');
 }else if (type.includes('A11')){
     t = require('./public/mapdata/A11.json');
